@@ -14,7 +14,6 @@ statistical-rigor requirements. Pure NumPy — no SciPy dependency.
 
 from __future__ import annotations
 
-import itertools
 from typing import Callable, Dict, List, Tuple
 
 import numpy as np
@@ -135,7 +134,7 @@ def paired_bootstrap_values(
 def paired_permutation_p(
     values_a: List[float],
     values_b: List[float],
-    max_exact_n: int = 18,
+    max_exact_n: int = 28,
     n_resamples: int = 100000,
     seed: int = 0,
 ) -> float:
@@ -146,9 +145,9 @@ def paired_permutation_p(
     the two conditions are perfectly separated (every paired difference shares a
     sign), reporting an implausibly tiny p. The sign-flip permutation test is
     the correct small-sample instrument: under H0 the paired differences are
-    symmetric about 0, so each difference's sign is exchangeable. We enumerate
-    all ``2**n`` sign assignments exactly when ``n <= max_exact_n`` and sample
-    otherwise. Deterministic for a fixed ``seed``.
+    symmetric about 0, so each difference's sign is exchangeable. We compute
+    the exact test when the number of non-zero paired differences is small
+    enough and sample otherwise. Deterministic for a fixed ``seed``.
     """
     if len(values_a) != len(values_b):
         raise ValueError(
@@ -156,22 +155,42 @@ def paired_permutation_p(
             f"got {len(values_a)} vs {len(values_b)}"
         )
     diffs = np.asarray(values_a, dtype=float) - np.asarray(values_b, dtype=float)
-    n = diffs.shape[0]
+    if diffs.shape[0] == 0:
+        return 1.0
+    nz = diffs[diffs != 0.0]
+    n = int(nz.size)
     if n == 0:
         return 1.0
-    obs = abs(float(diffs.mean()))
-    nz = diffs[diffs != 0.0]
-    if nz.size and (np.all(nz > 0.0) or np.all(nz < 0.0)):
+    obs = abs(float(nz.sum()))
+    if obs == 0.0:
+        return 1.0
+    if np.all(nz > 0.0) or np.all(nz < 0.0):
         # Fully separated: |mean| is maximal, so only the all-+ and all-- sign
         # assignments reach it -> exact two-sided p = 2 / 2**(#nonzero pairs).
-        return float(min(1.0, 2.0 / 2.0 ** nz.size))
+        return float(min(1.0, 2.0 / 2.0 ** n))
     if n <= max_exact_n:
-        signs = np.array(list(itertools.product((1.0, -1.0), repeat=n)))
+        split = n // 2
+        left, right = nz[:split], nz[split:]
+
+        def _signed_sums(chunk: np.ndarray) -> np.ndarray:
+            sums = np.array([0.0], dtype=float)
+            for value in chunk:
+                sums = np.concatenate((sums + value, sums - value))
+            return sums
+
+        left_sums = _signed_sums(left)
+        right_sums = np.sort(_signed_sums(right))
+        count = 0
+        for left_sum in left_sums:
+            lo = np.searchsorted(right_sums, -obs - left_sum + 1e-12, side="right")
+            hi = np.searchsorted(right_sums, obs - left_sum - 1e-12, side="left")
+            count += lo + (right_sums.size - hi)
+        return float(count / (2 ** n))
     else:
         rng = np.random.default_rng(seed)
         signs = rng.choice((-1.0, 1.0), size=(n_resamples, n))
-    perm_means = np.abs((signs * diffs).mean(axis=1))
-    return float(np.mean(perm_means >= obs - 1e-12))
+        perm_sums = np.abs((signs * nz).sum(axis=1))
+        return float(np.mean(perm_sums >= obs - 1e-12))
 
 
 def paired_bootstrap_test(

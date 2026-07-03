@@ -9,6 +9,7 @@ from orchestratebench.statistics import (
     metric_ci,
     paired_bootstrap_test,
     paired_bootstrap_values,
+    paired_permutation_p,
 )
 
 import pytest
@@ -93,6 +94,26 @@ def test_paired_bootstrap_values_clear_difference_is_significant() -> None:
 def test_paired_bootstrap_values_length_mismatch_raises() -> None:
     with pytest.raises(ValueError, match="equal-length"):
         paired_bootstrap_values([1.0], [1.0, 2.0])
+
+
+def test_paired_permutation_p_identical_lists_returns_one() -> None:
+    assert paired_permutation_p([1.0, 2.0, 3.0], [1.0, 2.0, 3.0]) == pytest.approx(1.0)
+
+
+def test_paired_permutation_p_all_same_sign_is_exact() -> None:
+    exact = paired_permutation_p([1.0] * 20, [0.0] * 20)
+    assert exact == pytest.approx(2.0 / (2.0 ** 20))
+
+
+def test_paired_permutation_p_ignores_zero_pairs_when_exact() -> None:
+    left = [1.0] * 15 + [-1.0] + [0.0] * 8
+    right = [0.0] * 24
+    assert paired_permutation_p(left, right) == pytest.approx(34 / 65536)
+
+
+def test_paired_permutation_p_length_mismatch_raises() -> None:
+    with pytest.raises(ValueError, match="equal-length"):
+        paired_permutation_p([1.0], [1.0, 2.0])
 
 
 def test_paired_identical_traces_no_difference() -> None:
