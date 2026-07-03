@@ -336,7 +336,7 @@ Data: `data/measured/exp2_policy_real.csv` + `exp3_policy_real.csv`; regenerate 
 the trusted upstream value — a possible information leak (flagged in review). We re-ran Exp 2 with an
 `llm_noupstream` policy: the *same* self-correction prompt but **without** the trusted-upstream hint.
 Latent recovery **collapses from 0.67 [0.46, 0.83] (llm) to 0.08 [0.00, 0.21] (llm_noupstream)** — down to
-the baseline level — a paired drop of **0.58 [0.33, 0.79], p = 4.8×10⁻⁴** (exact sign-flip permutation, n=24 pairs).
+the baseline level — a paired drop of **0.58 [0.33, 0.79], p = 5.19×10⁻⁴** (exact sign-flip permutation, n=24 pairs).
 (This ablation is an independent N=180 sweep, so its LLM estimate 0.67 is a separate sample from the policy
 table's N=75 value 0.83.) So the LLM policy's containment
 is **mostly the trusted-upstream signal, not autonomous fault detection**: a blind LLM self-check recovers

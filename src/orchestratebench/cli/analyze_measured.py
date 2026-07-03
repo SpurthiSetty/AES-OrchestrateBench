@@ -171,7 +171,8 @@ def analyze_ablation(rows: list[dict], seed: int) -> None:
     """5.5 ablation: does the LLM policy's latent recovery survive WITHOUT the
     trusted-upstream hint? Pair llm vs llm_noupstream by (workflow, mode, run) on
     the latent modes. We report the exact sign-flip permutation p: the paired
-    samples are separated, so the percentile-bootstrap p is anti-conservative."""
+    sample is small and zero-heavy, so the percentile-bootstrap p is
+    anti-conservative."""
     print(f"\n### Exp 2 -- ablation: llm vs llm_noupstream latent recovery  (N={len(rows)})")
 
     def keyed(policy: str) -> dict:
