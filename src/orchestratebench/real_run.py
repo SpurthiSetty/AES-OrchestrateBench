@@ -199,6 +199,19 @@ HARD_MODES = (
 )
 
 
+def _is_transient_api_error(exc: Exception) -> bool:
+    """Return whether a Claude API error is worth retrying."""
+    status = getattr(exc, "status_code", None)
+    if status is not None:
+        return status in (429, 500, 502, 503, 529)
+
+    name = type(exc).__name__
+    return any(
+        token in name
+        for token in ("Overloaded", "RateLimit", "InternalServer", "APIConnection", "APITimeout")
+    )
+
+
 def _call_claude(client, prompt: str, max_retries: int = 6) -> Tuple[Optional[int], float]:
     """One agent turn. Transient API errors (rate-limit / overload / 5xx / connection)
     are retried with exponential backoff so a long measured run survives a blip."""
@@ -213,13 +226,7 @@ def _call_claude(client, prompt: str, max_retries: int = 6) -> Tuple[Optional[in
             text = "".join(b.text for b in resp.content if getattr(b, "type", "") == "text")
             return _parse(text), (time.time() - t0) * 1000.0
         except Exception as exc:  # noqa: BLE001 -- retry only transient API errors
-            status = getattr(exc, "status_code", None)
-            name = type(exc).__name__
-            transient = status in (429, 500, 502, 503, 529) or any(
-                k in name for k in ("Overloaded", "RateLimit", "InternalServer",
-                                    "APIConnection", "APITimeout", "APIStatus")
-            )
-            if not transient or attempt == max_retries - 1:
+            if not _is_transient_api_error(exc) or attempt == max_retries - 1:
                 raise
             time.sleep(min(2 ** attempt, 30))
 
