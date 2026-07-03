@@ -86,7 +86,7 @@ def fig3_policy_cascade() -> None:
     plt.figure(figsize=(5, 3.2))
     plt.plot(depths, cas({"fixed", "heuristic", "retry(heuristic)"}), "o-", color="#B03A2E",
              label="baseline (fixed/heuristic/retry)")
-    plt.plot(depths, cas({"llm"}), "s-", color="#2874A6", label="LLM-as-router")
+    plt.plot(depths, cas({"llm"}), "s-", color="#2874A6", label="LLM-as-router (trusted upstream)")
     plt.plot(depths, cas({"oracle"}), "^-", color="#1E8449", label="Oracle (ceiling)")
     plt.xlabel("pipeline depth"); plt.ylabel("mean cascade radius (latent)")
     plt.title(f"Cascade containment is policy-conditioned\n(real Claude, N={len(rows)})", fontsize=10)
@@ -94,12 +94,45 @@ def fig3_policy_cascade() -> None:
     plt.savefig(OUT / "exp3_policy_cascade.png", dpi=150); plt.close()
 
 
+def fig4_routing_ladder() -> None:
+    """Exp 1 mid-strength baseline: accuracy vs how much the router reads."""
+    rows = {r["policy"]: r for r in load(DATA / "exp1_baselines.csv")}
+    order = ["fixed", "heuristic_flags", "tfidf_description", "llm"]
+    labels = ["Fixed\n(no signal)", "Heuristic\n(surface flags)",
+              "TF-IDF\n(reads description)", "LLM\n(reads intent)"]
+    ali = [float(rows["fixed"]["aligned"]), float(rows["heuristic_flags"]["aligned"]),
+           float(rows["tfidf_description"]["aligned"]), 1.00]
+    adv = [float(rows["fixed"]["adversarial"]), float(rows["heuristic_flags"]["adversarial"]),
+           float(rows["tfidf_description"]["adversarial"]), 1.00]
+    x, w = np.arange(len(order)), 0.38
+    fig, ax = plt.subplots(figsize=(5.8, 3.4))
+    b1 = ax.bar(x - w / 2, ali, w, label="aligned cases", color="#5B8DB8")
+    b2 = ax.bar(x + w / 2, adv, w, label="adversarial cases", color="#B03A2E")
+    ax.set_xticks(x); ax.set_xticklabels(labels, fontsize=8)
+    ax.set_ylabel("routing accuracy"); ax.set_ylim(0, 1.15)
+    ax.set_title("Routing accuracy climbs with how much the router reads\n"
+                 "(26-case gold diagnostic; adversarial = flags decoupled from intent)", fontsize=9)
+    ax.legend(fontsize=8, loc="upper left", ncol=2, framealpha=0.9)
+    ax.grid(axis="y", alpha=0.3)
+    for bars in (b1, b2):
+        for b in bars:
+            ax.annotate(f"{b.get_height():.2f}", (b.get_x() + b.get_width() / 2, b.get_height()),
+                        ha="center", va="bottom", fontsize=7)
+    fig.tight_layout()
+    fig.savefig(OUT / "exp1_routing_ladder.png", dpi=150); plt.close(fig)
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     fig1_cascade_by_depth()
     fig2_arith_vs_domain()
     fig3_policy_cascade()
-    print(f"wrote 3 figures to {OUT}/ (exp3_cascade_by_depth, exp2_arith_vs_domain, exp3_policy_cascade)")
+    if (DATA / "exp1_baselines.csv").exists():
+        fig4_routing_ladder()
+        print(f"wrote 4 figures to {OUT}/ (exp3_cascade_by_depth, exp2_arith_vs_domain, "
+              "exp3_policy_cascade, exp1_routing_ladder)")
+    else:
+        print(f"wrote 3 figures to {OUT}/ (exp3_cascade_by_depth, exp2_arith_vs_domain, exp3_policy_cascade)")
 
 
 if __name__ == "__main__":

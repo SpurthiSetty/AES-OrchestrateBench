@@ -32,5 +32,6 @@ the content, including any errors.
 The authors' affiliation is stated in the OpenReview form. The system under test in
 this paper is Anthropic's Claude (`claude-sonnet-4-6`), and Anthropic/OpenAI tools
 were also used as writing/coding assistants above; the authors have no financial
-relationship with Anthropic or OpenAI beyond ordinary metered API usage. `[Authors
-to confirm/complete any additional COI in the form.]`
+relationship with Anthropic or OpenAI beyond ordinary metered API usage. Any
+additional conflicts, if applicable, should be disclosed separately in the
+OpenReview COI form.

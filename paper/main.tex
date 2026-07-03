@@ -47,21 +47,25 @@ production rule-based routers --- scores \textbf{0\% on adversarial cases}
 over intent scores \textbf{100\%}, matching the oracle on this diagnostic.
 This indicates that the heuristic's blind spot is a property of the routing
 \emph{mechanism}, not the diagnostic's inherent difficulty. Two further
-experiments, run
-with a real Claude agent over a \textbf{verifiable arithmetic dependency chain}
-as a controlled mechanism probe, quantify a reliability axis existing benchmarks
-leave undermeasured: across five MAST failure modes, failure handling splits into
-three tiers --- a tool fault is fully recovered (\textbf{1.0}), ambiguous
-delegation is \emph{partially} recovered (\textbf{0.30}), and three
-latent/semantic modes never recover (\textbf{0.0}) --- and \textbf{retry does not
-repair the latent modes}, extending a corrupted trace rather than containing it;
-and cascade radius \textbf{grows monotonically with pipeline depth} (mean 0.9 to
-4.7 across depths 3--7) --- the stages-traversed signature MAS-FIRE leaves
-unquantified. A policy-conditioned probe asks whether trusted-state repair can contain these
-cascades; an ablation shows its apparent gain is largely the trusted-state
-signal rather than autonomous detection, so we report it as a trusted-state probe, not
-a deployable routing result. We frame these as controlled-chain mechanism probes, not
-domain-workload claims (\S\ref{sec:limitations}).
+experiments, run with a real Claude agent over a \textbf{verifiable arithmetic
+dependency chain} as a controlled mechanism probe, isolate a reliability axis
+existing benchmarks leave undermeasured. Across five MAST failure modes, failure
+handling splits into \textbf{three tiers} --- a tool fault is fully recovered
+(\textbf{1.0}), ambiguous delegation is \emph{partially} recovered
+(\textbf{0.30}), and three latent/semantic modes never recover (\textbf{0.0}).
+Two behaviors make this a property of the model rather than of the construct:
+the tier \textbf{ordering survives reframing} the identical computation as a
+loan-approval workflow while absolute rates shift with context (tool
+$1.0\rightarrow0.7$, ambiguous $0.30\rightarrow0.40$), and \textbf{retry does not
+repair the latent modes} --- it reproduces the fault and only lengthens
+time-to-detection, so detection/attribution, not blind retry, is the necessary
+containment mechanism. As a corroborating structural signature, cascade radius
+grows with pipeline depth (mean 0.9 to 4.7 across depths 3--7). A
+policy-conditioned probe asks whether trusted-state repair can contain these
+cascades; an ablation shows its apparent gain is largely the trusted-state signal
+rather than autonomous detection, so we report it as a trusted-state probe, not a
+deployable routing result. We frame these as controlled-chain mechanism probes,
+not domain-workload claims (\S\ref{sec:limitations}).
 \end{abstract}
 
 \ccsdesc[500]{Computing methodologies~Multi-agent systems}
@@ -100,6 +104,18 @@ orchestration framework on \emph{reliability} rather than ergonomics.
   (Exp 1); the graded ``when does routing pay off'' comparison on larger
   workflow suites is future work.
 \end{enumerate}
+
+\paragraph{What we find.} On a controlled arithmetic chain, orchestration
+failure handling splits into three tiers by fault type (tool faults recovered,
+ambiguous delegation partially, three latent/semantic modes never). The result we
+read as central is not the split itself but its \emph{robustness}: the tier
+ordering survives reframing the identical computation as a business
+loan-approval workflow while absolute rates move with context, and \emph{retry
+does not repair the latent modes} --- evidence that failure handling is model
+behavior under context, not an artifact of the construct. Cascade radius growing
+with pipeline depth (0.9 to 4.7 across depths 3--7) corroborates this on the same
+chain but is partly structural by construction, so we report it as a supporting
+signature rather than a headline (\S\ref{sec:limitations}).
 
 \paragraph{Research questions.}
 \begin{itemize}
@@ -196,7 +212,7 @@ and our response:
   MAS-FIRE does not quantify cascade depth as a stages-traversed metric and does
   not vary routing policy; its axes are topology (MetaGPT / Table-Critic /
   CAMEL), fault-type (15), and model. Our per-routing-policy containment is a
-  probe rather than a headline (the \S5.5 ablation shows the LLM policy's gain is
+  probe rather than a headline (the \S\ref{sec:policyprobe} ablation shows the LLM policy's gain is
   largely the trusted-state signal). OrchestraBench therefore complements
   MAS-FIRE by adding a behavioral, depth-resolved view of the same failure
   taxonomy.
@@ -281,6 +297,7 @@ domain framings) carry informative CIs (\S\ref{sec:limitations}).
 \section{Results}
 \label{sec:results}
 \subsection{Experiment 1 --- Routing Policy Comparison (measured)}
+\label{sec:exp1}
 We isolate the routing-mechanism question on a focused diagnostic of
 \textbf{26 expert-labelled gold cases} covering all four routing decisions: 16
 \emph{aligned} (surface flags match intent) and 10 \emph{adversarial} (flags
@@ -298,8 +315,9 @@ the gold label.
 \toprule
 \textbf{Policy} & \textbf{Overall} & \textbf{Aligned} & \textbf{Adversarial} \\
 \midrule
-Fixed & 23\% & 25\% & 20\% \\
+Fixed (no signal) & 23\% & 25\% & 20\% \\
 Heuristic (keyword/flags) & 62\% & \textbf{100\%} & \textbf{0\%} \\
+TF-IDF (reads description) & 92\% & 88\% & \textbf{100\%} \\
 LLM-as-Router (Sonnet 4.6) & \textbf{100\%} & 100\% & \textbf{100\%} \\
 Oracle (ceiling) & 100\% & 100\% & 100\% \\
 \bottomrule
@@ -309,12 +327,34 @@ Oracle (ceiling) & 100\% & 100\% & 100\% \\
 \textbf{Finding.} The heuristic is perfect on aligned cases but collapses to
 \textbf{0\%} on adversarial ones; the model-driven router recovers \textbf{all} of
 them (0\% $\to$ 100\%; Wilson 95\% CI on the 10 adversarial cases $[0.00, 0.28]$
-vs.\ $[0.72, 1.00]$), matching the oracle on this diagnostic. Because the same
-tasks are solved by an intent-reasoning router, the heuristic's adversarial
-failure is best explained by the routing \textbf{mechanism} (keyword/flag
-matching vs.\ reasoning over intent), not by inherent task difficulty. Larger
-workflow-suite evaluation is the intended setting for a graded comparison once
-the diagnostic no longer saturates.
+vs.\ $[0.72, 1.00]$), matching the oracle on this diagnostic. The contrast is not
+merely keyword-versus-LLM: a \textbf{mid-strength TF-IDF router} that simply reads
+the task \emph{description} against fixed per-route prototypes --- no model, no
+learned weights --- already recovers every adversarial case (100\%), while giving
+back a few aligned cases where the surface flags were in fact the cleaner signal
+(88\%). The takeaway is not a smooth ``more reading is better'' gradient:
+surface-flag matching actually scores \emph{below} the no-signal baseline on
+adversarial cases (0\% vs.\ 20\%), since misleading flags are worse than none. The
+sharp line is \emph{what} the router reads --- any router that reads the task
+\emph{description} clears the adversarial set (TF-IDF and LLM both 100\%), while
+flag-matching alone collapses to 0\% (Fig.~\ref{fig:exp1ladder}). Because a shallow text router already clears
+the adversarial set, the heuristic's collapse is a property of the routing
+\textbf{mechanism} --- matching surface flags that, by construction, decouple from
+intent --- not of inherent task difficulty. The adversarial set is deliberately a
+worst case for surface-flag matching; we read Exp 1 as isolating \emph{when}
+keyword routing fails (flags decoupled from intent), not as a general
+difficulty-graded benchmark. Larger workflow-suite evaluation is the intended
+setting for a graded comparison once the diagnostic no longer saturates.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{exp1_routing_ladder.png}
+\caption{Routing accuracy on the 26-case diagnostic climbs with how much of the
+task the router reads. The flag heuristic's aligned/adversarial cliff (100\%/0\%)
+is flattened by a description-reading TF-IDF router (88\%/100\%) with no model,
+isolating the heuristic's blind spot as a mechanism property.}
+\label{fig:exp1ladder}
+\end{figure}
 
 \subsection{Experiment 2 --- Failure Injection and Recovery (real Claude
 measured run; core)}
@@ -487,6 +527,7 @@ orchestration this is exactly the point: a monolithic agent can be \emph{right}
 yet produce nothing a planner can delegate, audit, or recover from.
 
 \subsection{Policy-conditioned containment probe (real Claude, $N{=}75 + N{=}225$)}
+\label{sec:policyprobe}
 Experiments 2--3 pool over baseline policies; we add \textbf{LLM-as-router} and
 \textbf{Oracle} policies to ask whether the routing policy itself can govern
 containment. \textbf{The LLM-policy semantics are an explicit modelling
@@ -576,8 +617,14 @@ domain-workflow validation is the next step.
   work for the larger suite.
   \item Workflows are synthetically generated; real-world pipeline validation is
   future work.
-  \item Single model family reported for the LLM router; a cross-model sweep is
-  future work.
+  \item \textbf{Single model reported} (Claude Sonnet 4.6); every measured
+  number is capped by this. The harness is model-agnostic --- model id is an
+  environment variable and \texttt{scripts/run\_exp2\_crossmodel.py} re-runs the
+  five-mode probe on any set of models into a pooled comparison --- so the
+  expectation the design targets is that the three-tier \emph{ordering} (tool
+  recovered $>$ ambiguous partial $>$ latent never) is model-invariant while
+  absolute rates move, mirroring the domain-reframing result; a full cross-model
+  sweep is future work.
   \item \textbf{Modest samples.} Per-mode aggregates are $n{=}30$ (Exp 2) and
   $n{=}120$/depth (Exp 3); the fully-deterministic cells still yield zero-width
   CIs by construction (a corrupted latent state always fails the final task),
@@ -608,7 +655,7 @@ domain-workflow validation is the next step.
   self-correction probe, not yet as a deployable routing estimate. To isolate whether
   the LLM gain reflects the model detecting the fault versus being handed the trusted
   upstream, we ran an ablation policy (\texttt{llm\_noupstream}) that drops the
-  trusted-upstream hint: latent recovery collapses to near-baseline (\S5.5), confirming
+  trusted-upstream hint: latent recovery collapses to near-baseline (\S\ref{sec:policyprobe}), confirming
   the LLM column is a trusted-state probe, not autonomous detection.
 \end{itemize}
 
@@ -638,8 +685,12 @@ applicants, employees, customers, or proprietary records.
 \section{Reproducibility}
 Failure scenarios are regenerable from fixed seeds, and every reported aggregate
 is recomputable from committed artifacts. The Exp 1 reproduction script
-regenerates the \S5.1 table from the committed gold set (offline baselines need
-no key; the LLM row runs when the Anthropic API key is set). The measured
+regenerates the \S\ref{sec:exp1} table from the committed gold set (offline baselines need
+no key; the LLM row runs when the Anthropic API key is set), and
+\texttt{scripts/run\_exp1\_baselines.py} recomputes the Fixed / Heuristic /
+TF-IDF rows and Fig.~\ref{fig:exp1ladder} fully offline. A model-agnostic
+cross-model harness (\texttt{scripts/run\_exp2\_crossmodel.py}) re-runs the
+five-mode probe on any set of models into a pooled comparison table. The measured
 analysis script recomputes every Exp 2/3/4 and policy-probe number above
 (per-mode recovery, cascade radius by depth, decomposition fidelity, and
 trusted-state ablation) with bootstrap 95\% CIs and exact paired permutation

@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 artifacts/
+.claude/
+*.egg-info/
 
 # local virtualenv
 .venv/
