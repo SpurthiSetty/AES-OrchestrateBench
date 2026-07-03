@@ -199,15 +199,29 @@ HARD_MODES = (
 )
 
 
-def _call_claude(client, prompt: str) -> Tuple[Optional[int], float]:
+def _call_claude(client, prompt: str, max_retries: int = 6) -> Tuple[Optional[int], float]:
+    """One agent turn. Transient API errors (rate-limit / overload / 5xx / connection)
+    are retried with exponential backoff so a long measured run survives a blip."""
     t0 = time.time()
-    resp = client.messages.create(
-        model=DEFAULT_MODEL,
-        max_tokens=MAX_TOKENS,
-        messages=[{"role": "user", "content": prompt}],
-    )
-    text = "".join(b.text for b in resp.content if getattr(b, "type", "") == "text")
-    return _parse(text), (time.time() - t0) * 1000.0
+    for attempt in range(max_retries):
+        try:
+            resp = client.messages.create(
+                model=DEFAULT_MODEL,
+                max_tokens=MAX_TOKENS,
+                messages=[{"role": "user", "content": prompt}],
+            )
+            text = "".join(b.text for b in resp.content if getattr(b, "type", "") == "text")
+            return _parse(text), (time.time() - t0) * 1000.0
+        except Exception as exc:  # noqa: BLE001 -- retry only transient API errors
+            status = getattr(exc, "status_code", None)
+            name = type(exc).__name__
+            transient = status in (429, 500, 502, 503, 529) or any(
+                k in name for k in ("Overloaded", "RateLimit", "InternalServer",
+                                    "APIConnection", "APITimeout", "APIStatus")
+            )
+            if not transient or attempt == max_retries - 1:
+                raise
+            time.sleep(min(2 ** attempt, 30))
 
 
 def _mock_value(

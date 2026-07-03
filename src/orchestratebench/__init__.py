@@ -52,6 +52,7 @@ from .statistics import (
     metric_ci,
     paired_bootstrap_test,
     paired_bootstrap_values,
+    paired_permutation_p,
 )
 from .routing_comparison import (
     LLMPolicy,
@@ -152,6 +153,7 @@ __all__ = [
     "metric_ci",
     "paired_bootstrap_test",
     "paired_bootstrap_values",
+    "paired_permutation_p",
     "LLMPolicy",
     "make_routing_eval_set",
     "run_routing_comparison",

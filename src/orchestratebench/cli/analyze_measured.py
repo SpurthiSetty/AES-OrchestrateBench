@@ -8,7 +8,11 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Sequence
 
-from orchestratebench.statistics import bootstrap_ci, paired_bootstrap_values
+from orchestratebench.statistics import (
+    bootstrap_ci,
+    paired_bootstrap_values,
+    paired_permutation_p,
+)
 
 LATENT_MODES = (
     "ambiguous_delegation",
@@ -114,9 +118,10 @@ def analyze_exp4(rows: list[dict], seed: int) -> None:
         right = [float(by["monolithic"][task][metric]) for task in tasks]
         result = paired_bootstrap_values(left, right, seed=seed)
         low, high = result["ci"]  # type: ignore[misc]
+        exact_p = paired_permutation_p(left, right, seed=seed)
         print(
             f"      paired decompose-monolithic: diff={result['diff']:.3f} "
-            f"95% CI [{low:.3f}, {high:.3f}]  p={result['p_value']:.4f}  (n_pairs={len(left)})"
+            f"95% CI [{low:.3f}, {high:.3f}]  exact permutation p={exact_p:.2e}  (n_pairs={len(left)})"
         )
     for policy in ("decompose", "monolithic"):
         final_correct = [_bool(by[policy][task]["final_correct"]) for task in tasks]
@@ -162,6 +167,38 @@ def analyze_policies(rows: list[dict], title: str, seed: int) -> None:
             print(f"    {policy:18s}  {_stat(recovery[policy], seed):30s}  {_stat(cascade[policy], seed)}")
 
 
+def analyze_ablation(rows: list[dict], seed: int) -> None:
+    """5.5 ablation: does the LLM policy's latent recovery survive WITHOUT the
+    trusted-upstream hint? Pair llm vs llm_noupstream by (workflow, mode, run) on
+    the latent modes. We report the exact sign-flip permutation p: the paired
+    samples are separated, so the percentile-bootstrap p is anti-conservative."""
+    print(f"\n### Exp 2 -- ablation: llm vs llm_noupstream latent recovery  (N={len(rows)})")
+
+    def keyed(policy: str) -> dict:
+        return {
+            (row["workflow"], row["failure_mode"], row["run"]): row
+            for row in rows
+            if row["policy"] == policy and row["failure_mode"] in LATENT_MODES
+        }
+
+    llm, nou = keyed("llm"), keyed("llm_noupstream")
+    shared = sorted(set(llm) & set(nou))
+    if not shared:
+        print("    (no paired llm / llm_noupstream latent scenarios found)")
+        return
+    left = [float(llm[key]["recovery_completeness"]) for key in shared]
+    right = [float(nou[key]["recovery_completeness"]) for key in shared]
+    print(f"    {'llm':18s}  latent recovery  {_stat(left, seed)}")
+    print(f"    {'llm_noupstream':18s}  latent recovery  {_stat(right, seed)}")
+    result = paired_bootstrap_values(left, right, seed=seed)
+    low, high = result["ci"]  # type: ignore[misc]
+    exact_p = paired_permutation_p(left, right, seed=seed)
+    print(
+        f"      paired drop (llm - noupstream): diff={result['diff']:.3f} "
+        f"95% CI [{low:.3f}, {high:.3f}]  exact permutation p={exact_p:.2e}  (n_pairs={len(left)})"
+    )
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     args = parse_args(argv)
     data_dir = args.data_dir
@@ -170,6 +207,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     print("OrchestrateBench -- measured-experiment statistics (regenerated from CSV)")
     print(f"data-dir={data_dir}")
     print(f"seed={args.seed}  bootstrap=10000 resamples, 95% percentile CI")
+    print("paired tests: exact sign-flip permutation p (not the anti-conservative bootstrap p)")
     print("=" * 78)
 
     exp2_arith = _load(data_dir / "exp2_real.csv")
@@ -183,6 +221,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         policy_file = data_dir / filename
         if policy_file.exists():
             analyze_policies(_load(policy_file), title, args.seed)
+    ablation_file = data_dir / "exp2_ablation_real.csv"
+    if ablation_file.exists():
+        analyze_ablation(_load(ablation_file), args.seed)
     print()
     return 0
 

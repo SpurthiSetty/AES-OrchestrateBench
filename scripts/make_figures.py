@@ -44,18 +44,20 @@ def fig1_cascade_by_depth() -> None:
     plt.plot(depths, [np.mean(lat[d]) for d in depths], "o-", color="#B03A2E", label="latent / semantic modes")
     plt.plot(depths, [np.mean(tool[d]) for d in depths], "s-", color="#1E8449", label="tool_invocation_error")
     plt.xlabel("pipeline depth"); plt.ylabel("mean cascade radius")
-    plt.title("Cascade radius scales with depth\n(real Claude Sonnet 4.6, N=90)", fontsize=10)
+    plt.title(f"Cascade radius scales with depth\n(real Claude Sonnet 4.6, N={len(rows)})", fontsize=10)
     plt.xticks(depths); plt.legend(fontsize=8); plt.grid(alpha=0.3); plt.tight_layout()
     plt.savefig(OUT / "exp3_cascade_by_depth.png", dpi=150); plt.close()
 
 
 def fig2_arith_vs_domain() -> None:
-    def fmrate(p: Path) -> dict:
+    def fmrate(p: Path) -> tuple[dict, int]:
+        rows = load(p)
         g = defaultdict(list)
-        for r in load(p):
+        for r in rows:
             g[r["failure_mode"]].append(istrue(r["final_task_success"]))
-        return {m: np.mean(v) for m, v in g.items()}
-    arith, domain = fmrate(DATA / "exp2_real.csv"), fmrate(DATA / "exp2_domain_real.csv")
+        return {m: np.mean(v) for m, v in g.items()}, len(rows)
+    arith, arith_n = fmrate(DATA / "exp2_real.csv")
+    domain, domain_n = fmrate(DATA / "exp2_domain_real.csv")
     modes = ["tool_invocation_error", "ambiguous_delegation", "context_pollution",
              "conflicting_outputs", "premature_action"]
     x, w = np.arange(len(modes)), 0.38
@@ -63,7 +65,8 @@ def fig2_arith_vs_domain() -> None:
     plt.bar(x - w / 2, [arith.get(m, 0) for m in modes], w, label="arithmetic chain", color="#377AB7")
     plt.bar(x + w / 2, [domain.get(m, 0) for m in modes], w, label="loan-approval workflow", color="#E69F00")
     plt.ylabel("final-task success"); plt.ylim(0, 1.08)
-    plt.title("Failure-mode recovery: arithmetic vs domain workflow\n(real Claude, N=30 each)", fontsize=10)
+    n_label = f"N={arith_n} each" if arith_n == domain_n else f"N={arith_n}/{domain_n}"
+    plt.title(f"Failure-mode recovery: arithmetic vs domain workflow\n(real Claude, {n_label})", fontsize=10)
     plt.xticks(x, [m.replace("_", "\n") for m in modes], fontsize=7)
     plt.legend(fontsize=8); plt.tight_layout()
     plt.savefig(OUT / "exp2_arith_vs_domain.png", dpi=150); plt.close()
@@ -86,7 +89,7 @@ def fig3_policy_cascade() -> None:
     plt.plot(depths, cas({"llm"}), "s-", color="#2874A6", label="LLM-as-router")
     plt.plot(depths, cas({"oracle"}), "^-", color="#1E8449", label="Oracle (ceiling)")
     plt.xlabel("pipeline depth"); plt.ylabel("mean cascade radius (latent)")
-    plt.title("Cascade containment is policy-conditioned\n(real Claude, N=225)", fontsize=10)
+    plt.title(f"Cascade containment is policy-conditioned\n(real Claude, N={len(rows)})", fontsize=10)
     plt.xticks(depths); plt.legend(fontsize=8); plt.grid(alpha=0.3); plt.tight_layout()
     plt.savefig(OUT / "exp3_policy_cascade.png", dpi=150); plt.close()
 

@@ -50,17 +50,17 @@ This indicates that the heuristic's blind spot is a property of the routing
 experiments, run
 with a real Claude agent over a \textbf{verifiable arithmetic dependency chain}
 as a controlled mechanism probe, quantify a reliability axis existing benchmarks
-leave undermeasured: across five MAST failure modes, the four latent/semantic
-modes fail completely (final-task success \textbf{0.0}) while a tool fault is
-fully recovered (\textbf{1.0}), and \textbf{retry does not repair the latent
-modes} --- it extends a corrupted trace rather than containing it; and cascade
-radius \textbf{scales monotonically with pipeline depth} (mean 1.0 / 2.9 / 5.0
-at depths 3 / 5 / 7) --- the stages-traversed signature MAS-FIRE leaves
-unquantified. A policy-conditioned extension further suggests that containment
-can improve under a stronger self-correction semantics: with trusted upstream
-state, an LLM router cuts latent cascade radius $\sim$5.5$\times$ over rule-based
-baselines at depth 7 --- but an ablation shows this gain is largely the
-trusted-state signal, not autonomous detection. We frame these as controlled-chain mechanism probes, not
+leave undermeasured: across five MAST failure modes, failure handling splits into
+three tiers --- a tool fault is fully recovered (\textbf{1.0}), ambiguous
+delegation is \emph{partially} recovered (\textbf{0.30}), and three
+latent/semantic modes never recover (\textbf{0.0}) --- and \textbf{retry does not
+repair the latent modes}, extending a corrupted trace rather than containing it;
+and cascade radius \textbf{grows monotonically with pipeline depth} (mean 0.9 to
+4.7 across depths 3--7) --- the stages-traversed signature MAS-FIRE leaves
+unquantified. A policy-conditioned probe asks whether trusted-state repair can contain these
+cascades; an ablation shows its apparent gain is largely the trusted-state
+signal rather than autonomous detection, so we report it as a trusted-state probe, not
+a deployable routing result. We frame these as controlled-chain mechanism probes, not
 domain-workload claims (\S\ref{sec:limitations}).
 \end{abstract}
 
@@ -96,14 +96,16 @@ orchestration framework on \emph{reliability} rather than ergonomics.
   artifacts) with templated enterprise workflow families.
   \item A \textbf{routing-policy comparison} (Fixed / Heuristic / LLM / Oracle)
   with bootstrap confidence intervals and paired significance testing where
-  applicable, isolating \emph{when} intelligent routing beats a zero-decision
-  baseline.
+  applicable, isolating the routing \emph{mechanism} effect on adversarial cases
+  (Exp 1); the graded ``when does routing pay off'' comparison on larger
+  workflow suites is future work.
 \end{enumerate}
 
 \paragraph{Research questions.}
 \begin{itemize}
   \item \textbf{RQ1 (routing value)}: When does intelligent routing (heuristic or
-  LLM) actually beat a zero-decision baseline?
+  LLM) actually beat a zero-decision baseline? \emph{(Partially: Exp 1 isolates
+  the mechanism gap; a graded answer needs the larger suite.)}
   \item \textbf{RQ2 (mechanism)}: Is routing reliability a property of task
   \emph{difficulty}, or of the routing \emph{mechanism} (keyword/flag matching
   vs.\ reasoning over intent)? \emph{(Answered by Exp 1.)}
@@ -185,14 +187,19 @@ and our response:
   \item \textbf{MAS-FIRE~\cite{masfire} already performs controlled fault
   injection + reliability evaluation}, overlapping our Exp 2/3 substantially. Our
   differentiation is \emph{not} ``we inject failures'' (they do too); it is (a)
-  \textbf{cascade radius across pipeline depths} as a first-class comparable
-  metric, (b) failure handling measured \textbf{per routing policy}, and (c) the
-  \textbf{routing-mechanism result} of Exp 1, which MAS-FIRE does not address. In
-  our reading, MAS-FIRE does not quantify cascade depth as a stages-traversed
-  metric and does not vary routing policy; its axes are topology (MetaGPT /
-  Table-Critic / CAMEL), fault-type (15), and model. OrchestraBench therefore
-  complements MAS-FIRE by making cascade depth and routing policy first-class
-  evaluation axes.
+  the \textbf{behavioral characterization} of failure handling --- the sharp
+  tool-vs-latent recovery split, its persistence under domain reframing, and
+  retry's inability to repair latent faults; (b) \textbf{cascade radius as a
+  stages-traversed metric across pipeline depths}, which MAS-FIRE does not
+  quantify (we report it honestly as partly structural on our verifiable chain);
+  and (c) the \textbf{routing-mechanism result} of Exp 1. In our reading,
+  MAS-FIRE does not quantify cascade depth as a stages-traversed metric and does
+  not vary routing policy; its axes are topology (MetaGPT / Table-Critic /
+  CAMEL), fault-type (15), and model. Our per-routing-policy containment is a
+  probe rather than a headline (the \S5.5 ablation shows the LLM policy's gain is
+  largely the trusted-state signal). OrchestraBench therefore complements
+  MAS-FIRE by adding a behavioral, depth-resolved view of the same failure
+  taxonomy.
   \item \textbf{Attribution benchmarks~\cite{traceelephant,attribution} are
   observational/post-hoc} --- a different instrument from seeded, reproducible
   injection + recovery.
@@ -206,17 +213,27 @@ and our response:
 \end{itemize}
 
 \section{The OrchestraBench Benchmark}
+OrchestraBench is released as a reusable artifact --- a seed-controlled workflow
+generator, the \texttt{FailureInjector}, the routing-policy suite, and the
+analysis scripts --- paired with the initial mechanism-probe results reported
+here; the broad multi-domain evaluation it is designed to host is future work.
+
 \textbf{Workflow suites.} Synthetically generated from templated task graphs
-(stages, inter-task dependencies, per-task \texttt{complexity\_score}), screened
-by two annotators for realism. Three enterprise families: finance approval
+(stages, inter-task dependencies, per-task \texttt{complexity\_score}),
+author-screened for realism. Three enterprise families: finance approval
 (4 stages), HR onboarding (5 stages), DevOps deployment (5 stages).
 
 \textbf{Routing decision space.} Each task is routed to one of four actions:
 \texttt{DIRECT\_TOOL}, \texttt{CODE\_EXECUTION}, \texttt{DECOMPOSE},
 \texttt{REASON\_ONLY}.
 
-\textbf{Gold labels.} Routing and decomposition labels are produced
-independently by two annotators with adjudication on disagreement.
+\textbf{Gold labels.} For the failure-recovery, cascade, and decomposition
+experiments (Exp~2--4), ground truth is \emph{objective}: an exact-match check
+against the verifiable arithmetic result, requiring no subjective annotation.
+The Exp~1 routing diagnostic (26 cases) is author-labelled from unambiguous task
+intent; a two-annotator protocol with reported inter-annotator agreement
+($\kappa$) remains future work for the larger workflow-suite evaluation
+(\S\ref{sec:limitations}).
 
 \textbf{Failure injection.} Failure scenarios are seeded \textbf{deterministically}
 on top of the suites via the \texttt{FailureInjector}, so each scenario is
@@ -249,9 +266,17 @@ Oracle & Ceiling & Routes to the gold label (upper bound) \\
 \bottomrule
 \end{tabular}
 \end{table}
-Reported confidence intervals use 95\% bootstrap CIs; paired bootstrap
-significance tests ($\alpha = 0.05$) are used where paired comparisons are
-defined.
+Reported confidence intervals use 95\% bootstrap CIs. For the paired
+comparisons (Exp 4; the policy ablation) we report an \emph{exact} two-sided
+sign-flip permutation $p$ ($\alpha = 0.05$): with small, often-separated paired
+samples the percentile-bootstrap $p$ is anti-conservative (it collapses to $0$
+when every paired difference shares a sign), so the permutation test is the
+honest instrument. Per-mode aggregates are $n{=}30$ (Exp 2) and $n{=}120$/depth
+(Exp 3), pooling the baseline policies. The fully-deterministic cells (e.g.\
+context pollution at final-task success 0.0) remain point masses regardless of
+$n$ --- a corrupted latent state always fails the final task --- so their CIs are
+zero-width by construction; the stochastic cells (ambiguous delegation; the
+domain framings) carry informative CIs (\S\ref{sec:limitations}).
 
 \section{Results}
 \label{sec:results}
@@ -283,7 +308,8 @@ Oracle (ceiling) & 100\% & 100\% & 100\% \\
 
 \textbf{Finding.} The heuristic is perfect on aligned cases but collapses to
 \textbf{0\%} on adversarial ones; the model-driven router recovers \textbf{all} of
-them (0\% $\to$ 100\%), matching the oracle on this diagnostic. Because the same
+them (0\% $\to$ 100\%; Wilson 95\% CI on the 10 adversarial cases $[0.00, 0.28]$
+vs.\ $[0.72, 1.00]$), matching the oracle on this diagnostic. Because the same
 tasks are solved by an intent-reasoning router, the heuristic's adversarial
 failure is best explained by the routing \textbf{mechanism} (keyword/flag
 matching vs.\ reasoning over intent), not by inherent task difficulty. Larger
@@ -303,7 +329,8 @@ measured-run module is included in the repository.
 \begin{table}[t]
 \centering
 \caption{Experiment 2: per-mode final-task success and cascade radius, arithmetic
-chain vs.\ loan-approval domain (real Claude, $N{=}30$ each; 95\% bootstrap CI).}
+chain vs.\ loan-approval domain (real Claude, $N{=}150$ each, $n{=}30$/mode;
+95\% bootstrap CI).}
 \label{tab:exp2}
 \small
 \begin{tabular}{@{}lcccc@{}}
@@ -313,8 +340,8 @@ chain vs.\ loan-approval domain (real Claude, $N{=}30$ each; 95\% bootstrap CI).
 \textbf{Failure mode} & \textbf{Success} & \textbf{Cascade} & \textbf{Success} &
 \textbf{Cascade} \\
 \midrule
-tool\_invocation\_error & 1.00 & 0.00 & 0.67 & 0.67 \\
-ambiguous\_delegation & 0.00 & 2.00 & 0.50 & 1.00 \\
+tool\_invocation\_error & 1.00 & 0.00 & 0.70 & 0.60 \\
+ambiguous\_delegation & 0.30 & 1.40 & 0.40 & 1.20 \\
 context\_pollution & 0.00 & 2.00 & 0.00 & 2.00 \\
 conflicting\_outputs & 0.00 & 2.00 & 0.00 & 2.00 \\
 premature\_action & 0.00 & 2.00 & 0.00 & 2.00 \\
@@ -322,33 +349,35 @@ premature\_action & 0.00 & 2.00 & 0.00 & 2.00 \\
 \end{tabular}
 \end{table}
 
-\textbf{Real measured findings (Sonnet 4.6, $N{=}30$).}
-The tool-invocation mode is \textbf{fully recovered} (recovery 1.0, cascade
-radius 0) --- the agent computes by hand when the tool fails. The four
-\textbf{latent/semantic modes} all \textbf{fail} (final-task success
-\textbf{0.0}) and \textbf{cascade to every downstream stage} (cascade radius 2 of
-2). Critically, the retry policy \textbf{does not recover them}: retrying
-while the failure is still present reproduces the error and only
-\textbf{lengthens time-to-detection}. This real-agent result supports the
-mechanism: retry repairs retryable tool faults but not failures needing
-attribution, state repair, or semantic validation (RQ3/RQ4). Bootstrap CIs are
-degenerate here (latent modes 0.0 [0.0, 0.0]; tool fault 1.0 [1.0, 1.0], $n{=}6$
-each), reflecting the controlled construct and small per-mode sample, not
-statistical strength
-(\S\ref{sec:limitations}).
+\textbf{Real measured findings (Sonnet 4.6, $N{=}150$, $n{=}30$/mode).}
+Failure handling splits into \textbf{three tiers}. (i) The tool-invocation mode
+is \textbf{fully recovered} (recovery 1.0, cascade radius 0) --- the agent
+recomputes by hand when the tool fails. (ii) \textbf{Ambiguous delegation is
+partially recovered} (final-task success \textbf{0.30 [0.13, 0.47]}, cascade
+radius 1.40) --- with $n{=}30$ the agent infers the intended operation about a
+third of the time, a genuinely \emph{stochastic} cell rather than a point mass.
+(iii) The remaining three latent/semantic modes (context pollution, conflicting
+outputs, premature action) \textbf{never recover} (final-task success
+\textbf{0.0}) and cascade to every downstream stage. Critically, the retry policy
+\textbf{does not recover the latent modes}: retrying while the failure is still
+present reproduces the error and only \textbf{lengthens time-to-detection} ---
+retry repairs retryable tool faults but not failures needing attribution, state
+repair, or semantic validation (RQ3/RQ4). The stochastic cells now carry
+informative CIs (ambiguous 0.30 [0.13, 0.47]); the fully-deterministic 0.0 / 1.0
+cells remain point masses by construction (\S\ref{sec:limitations}).
 
-\textbf{Domain-grounded validation (loan-approval workflow, $N{=}30$).} To test
+\textbf{Domain-grounded validation (loan-approval workflow, $N{=}150$).} To test
 whether these signatures are an artifact of the abstract arithmetic chain, we
 re-ran the \emph{identical} failure injection on a domain-grounded variant: the
 same verifiable computation reframed as a multi-role loan-approval pipeline
 (Intake Officer $\to$ Risk Analyst $\to$ Compliance Officer $\to$ Approval
 Manager), each stage prompted in business terms. \textbf{The core ordering
-mostly holds}: context pollution, conflicting outputs, and premature action
-still fail completely, while tool faults remain the most recoverable
+holds}: context pollution, conflicting outputs, and premature action still fail
+completely, while tool faults remain the most recoverable
 (Figure~\ref{fig:exp2}). Crucially, the \textbf{absolute rates shift with
-framing}: ambiguous delegation rises to \textbf{0.50} (the business-role
-context lets the agent infer the intended operation about half the time) and
-tool-invocation recovery falls to \textbf{0.67}. This
+framing}: ambiguous delegation rises from \textbf{0.30} to \textbf{0.40} (the
+business-role context helps the agent infer the intended operation) while
+tool-invocation recovery falls from \textbf{1.00} to \textbf{0.70}. This
 framing-sensitivity is evidence of model behavior under context, not a purely
 structural tautology, and directly addresses the construct-validity concern
 (\S\ref{sec:limitations}).
@@ -358,58 +387,65 @@ structural tautology, and directly addresses the construct-validity concern
 \includegraphics[width=\columnwidth]{exp2_arith_vs_domain.png}
 \caption{Experiment 2 --- failure-mode final-task success, arithmetic chain vs.\
 loan-approval workflow; the failure-mode \emph{ordering} is robust across framings
-while absolute rates shift (real Claude, $N{=}30$ each).}
+while absolute rates shift (real Claude, $N{=}150$ each).}
 \label{fig:exp2}
 \end{figure}
 
 \subsection{Experiment 3 --- Cascade Propagation Depth (real Claude measured run,
-$N{=}90$; core)}
+$N{=}750$; core)}
 \textbf{Design.} Inject a single seeded error at stage 1 of variable-depth
-(3-, 5-, 7-stage) pipelines and measure how far it propagates. \textbf{Cascade
-radius} (downstream stages corrupted) is a central differentiator vs.\ MAS-FIRE,
+pipelines (depths 3 through 7) and measure how far it propagates. \textbf{Cascade
+radius} (downstream stages corrupted) is a differentiator vs.\ MAS-FIRE,
 which has no stages-traversed metric.
 
 \begin{table}[t]
 \centering
 \caption{Experiment 3: mean cascade radius by pipeline depth (real Claude,
-$N{=}90$; latent modes pooled, $n{=}24$/depth; 95\% bootstrap CI). Linear in
-depth: cascade $\approx$ depth $-$ 2.}
+$N{=}750$; latent modes pooled, $n{=}120$/depth; 95\% bootstrap CI). Latent
+cascade radius grows monotonically with depth: the three catastrophic modes track
+depth $-$ 2 exactly, while ambiguous delegation runs lower as it partially
+recovers.}
 \label{tab:exp3}
 \small
 \begin{tabular}{@{}lcc@{}}
 \toprule
 \textbf{Depth} & \textbf{Latent cascade radius} & \textbf{Tool cascade radius} \\
 \midrule
-3 & 1.00 [1.00, 1.00] & 0.00 \\
-5 & 2.88 [2.63, 3.00] & 0.00 \\
-7 & 5.00 [5.00, 5.00] & 0.00 \\
+3 & 0.93 [0.88, 0.97] & 0.00 \\
+4 & 1.85 [1.75, 1.93] & 0.00 \\
+5 & 2.80 [2.65, 2.93] & 0.00 \\
+6 & 3.63 [3.43, 3.83] & 0.00 \\
+7 & 4.67 [4.42, 4.88] & 0.00 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\textbf{Real measured findings (Sonnet 4.6, $N{=}90$).} Across the four
-latent/semantic failure modes, \textbf{mean cascade radius scales monotonically
-with depth: 1.0 $\to$ 2.9 $\to$ 5.0 at depths 3 / 5 / 7}
-(Table~\ref{tab:exp3}, Figure~\ref{fig:exp3}) --- the failure propagates to
-essentially every downstream stage (depth $-$ 2). Tool-invocation errors stay at
-cascade radius 0 at every depth (the agent recomputes by hand). The lone
-deviation is ambiguous delegation at depth 5 (mean 2.5 vs.\ 3.0 for the
-other latent modes), where the real agent occasionally guesses the intended
-operation correctly --- a realistic-noise signature absent from a deterministic
-model. \textbf{This is the paper's main cascade-depth result and a primary
-differentiator vs.\ MAS-FIRE.}
+\textbf{Real measured findings (Sonnet 4.6, $N{=}750$, $n{=}120$/depth).} Pooled
+over the latent modes, \textbf{mean cascade radius grows monotonically with
+depth: 0.93 $\to$ 1.85 $\to$ 2.80 $\to$ 3.63 $\to$ 4.67 across depths 3 / 4 / 5 /
+6 / 7} (Table~\ref{tab:exp3}, Figure~\ref{fig:exp3}), an almost-linear
+$\sim$0.9-per-stage trend now resolved at five depths with non-degenerate CIs.
+The structure is sharp per mode: the three catastrophic modes (context pollution,
+conflicting outputs, premature action) corrupt \emph{every} downstream stage
+(cascade $=$ depth $-$ 2 exactly), while ambiguous delegation runs consistently
+lower (0.7 / 1.4 / 2.2 / 2.5 / 3.7) because it partially recovers, and
+tool-invocation errors stay at 0 at every depth (the agent recomputes by hand).
+\textbf{This quantifies a stages-traversed signature MAS-FIRE leaves unmeasured};
+on the verifiable chain the deterministic modes' growth is partly structural
+(\S\ref{sec:limitations}), so we read the depth-scaling as corroborating rather
+than as the paper's headline.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{exp3_cascade_by_depth.png}
 \caption{Experiment 3 --- mean cascade radius vs.\ pipeline depth; latent/semantic
-modes scale 1.0 $\to$ 2.9 $\to$ 5.0 across depths 3/5/7 while tool faults stay at
-0 (real Claude, $N{=}90$).}
+modes scale 0.93 $\to$ 4.67 across depths 3--7 while tool faults stay at
+0 (real Claude, $N{=}750$).}
 \label{fig:exp3}
 \end{figure}
 
 \subsection{Experiment 4 --- Decomposition Quality (real Claude measured run,
-$N{=}20$; secondary)}
+$N{=}40$; secondary)}
 For composite tasks $(a \mathbin{op} b) \mathbin{op} (c \mathbin{op} d)$ with a
 canonical 3-step gold decomposition, we score the produced decomposition against
 gold --- \textbf{delegation fidelity} (gold sub-results recovered),
@@ -419,7 +455,8 @@ gold --- \textbf{delegation fidelity} (gold sub-results recovered),
 \begin{table}[t]
 \centering
 \caption{Experiment 4: decomposition quality, decompose vs.\ monolithic (real
-Claude, $N{=}20$; 95\% bootstrap CI). Paired bootstrap over the 10 shared tasks.}
+Claude, $N{=}40$; 95\% bootstrap CI; exact permutation $p$ over the 20 shared
+tasks). Zero-width CIs are degenerate by construction (\S\ref{sec:setup}).}
 \label{tab:exp4}
 \small
 \begin{tabular}{@{}lccc@{}}
@@ -428,21 +465,21 @@ Claude, $N{=}20$; 95\% bootstrap CI). Paired bootstrap over the 10 shared tasks.
 \textbf{Final correct} \\
 \midrule
 decompose & 1.00 [1.00, 1.00] & 0.00 [0.00, 0.00] & 1.00 \\
-monolithic & 0.37 [0.33, 0.43] & 2.00 [2.00, 2.00] & 1.00 \\
+monolithic & 0.37 [0.33, 0.42] & 2.00 [2.00, 2.00] & 1.00 \\
 \midrule
-paired $\Delta$ & \multicolumn{3}{l}{fidelity $+0.63$ [0.57, 0.67], $p<0.0001$;
-granularity $-2.0$, $p<0.0001$} \\
+paired $\Delta$ & \multicolumn{3}{l}{fidelity $+0.63$ [0.58, 0.67], $p{=}1.9{\times}10^{-6}$;
+granularity $-2.0$, $p{=}1.9{\times}10^{-6}$} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\textbf{Real measured findings (Sonnet 4.6, $N{=}20$).} The \texttt{decompose}
+\textbf{Real measured findings (Sonnet 4.6, $N{=}40$).} The \texttt{decompose}
 policy produces a faithful three-step decomposition (delegation fidelity
 \textbf{1.00}, granularity error \textbf{0}), while \texttt{monolithic} reaches
 the correct final answer but exposes no delegable sub-structure (fidelity
-\textbf{0.37 [0.33, 0.43]}, granularity error \textbf{2}). This fidelity gap is
-large and statistically significant under a paired bootstrap over the 10 shared
-tasks: \textbf{$+0.63$, 95\% CI [0.57, 0.67], $p<0.0001$}
+\textbf{0.37 [0.33, 0.42]}, granularity error \textbf{2}). This fidelity gap is
+large and statistically significant under an exact sign-flip permutation test
+over the 20 shared tasks: \textbf{$+0.63$, 95\% CI [0.58, 0.67], $p{=}1.9{\times}10^{-6}$}
 (Table~\ref{tab:exp4}). Notably, \texttt{final\_correct} is \textbf{1.0 for both}
 --- the arithmetic is easy enough that both get the answer; the discriminator is
 the \textbf{decomposition structure}, not final correctness. For multi-agent
@@ -485,11 +522,13 @@ version remains future work (Figure~\ref{fig:policy}). The policy CSVs are
 committed under \texttt{data/measured/}.
 
 \textbf{Ablation: the model, or the hint?} The rows above hand the router the
-trusted upstream value --- a possible information leak. Re-running Exp 2 with an
+trusted upstream value --- a possible information leak. Re-running Exp 2 as an
+independent, larger sweep ($N{=}180$; its LLM estimate 0.67 is a separate sample
+from Table~\ref{tab:policy}'s $N{=}75$ value 0.83) with an added
 \texttt{llm\_noupstream} policy (same self-correction, \emph{no} trusted-upstream
-hint) collapses latent recovery from \textbf{0.75 [0.50, 1.00]} to
-\textbf{0.17 [0.00, 0.42]}, barely above the baseline 0.08 (paired drop
-\textbf{0.58 [0.17, 0.92], $p<0.01$}). The LLM policy's containment is thus
+hint) collapses latent recovery from \textbf{0.67 [0.46, 0.83]} to
+\textbf{0.08 [0.00, 0.21]}, down to the baseline level (paired drop
+\textbf{0.58 [0.33, 0.79], $p{=}4.8{\times}10^{-4}$}, $n{=}24$ pairs). The LLM policy's containment is thus
 \emph{mostly the trusted-upstream signal, not autonomous detection}: we read the
 LLM column as a trusted-state probe, not evidence that an LLM router autonomously
 contains latent cascades (\texttt{exp2\_ablation\_real.csv}).
@@ -504,30 +543,46 @@ nearly flat and Oracle fully contains (real Claude, $N{=}225$).}
 \end{figure}
 
 \section{Discussion}
-Experiment 1 establishes the paper's first reproducible claim: routing reliability
-depends on \emph{mechanism}. Experiments 2 and 3 deliver the main reliability
-result on a controlled verifiable chain: the \textbf{failure-mode gap} is
-measured (four latent modes at 0.0 final-task success vs.\ a fully-recovered tool
-fault), and \textbf{cascade radius scales with pipeline depth} (1.0 $\to$ 2.9
-$\to$ 5.0 at depths 3 / 5 / 7) --- a stages-traversed signature not emphasized
-by prior reliability benchmarks. Critically, \textbf{retry does not eliminate latent
-cascades}: it reproduces the failure and lengthens time-to-detection, so
-\emph{detection/attribution} --- not blind retry --- is the necessary containment
-mechanism. The policy-conditioned extension shows the potential value of trusted
-state repair, but its deployable interpretation is deliberately limited
-(\S\ref{sec:limitations}). We are deliberate that these are mechanism probes on a
-controlled chain; domain-workflow validation is the next step.
+Experiment 1 establishes the paper's first reproducible claim: routing
+reliability depends on \emph{mechanism}. Experiments 2 and 3 then deliver the
+central behavioral finding: the agent's failure handling \emph{splits sharply by
+fault type}. A tool-invocation fault is fully recovered (recovery 1.0) --- the
+agent recomputes the value by hand --- ambiguous delegation is \emph{partially}
+recovered (0.30, the agent sometimes infers the intended operation), and the
+remaining three latent/semantic modes are \emph{never} recovered (0.0
+final-task success); and \textbf{retry does not repair the latent modes}: it
+reproduces the failure and only lengthens time-to-detection, so
+\emph{detection/attribution}, not blind retry, is the necessary containment
+mechanism. Crucially this split is \emph{model behavior, not a construct
+artifact}: it survives reframing the identical computation as a loan-approval
+workflow --- the failure-mode ordering persists while absolute rates shift with
+context (Fig.~\ref{fig:exp2}). On top of this we quantify a structural signature
+prior reliability benchmarks leave unmeasured: cascade radius grows with pipeline
+depth (0.9 to 4.7 across depths 3--7, near-linear); on this verifiable chain that
+growth is partly by construction (\S\ref{sec:limitations}), so we read it as
+corroborating the depth-scaling of latent cascades rather than as the headline.
+The policy-conditioned extension shows the potential value of trusted-state
+repair, but its deployable interpretation is deliberately limited
+(\S\ref{sec:limitations}). These are mechanism probes on a controlled chain;
+domain-workflow validation is the next step.
 
 \section{Limitations}
 \label{sec:limitations}
 \begin{itemize}
   \item The Exp 1 diagnostic is small (26 cases) and \emph{saturates} for a
   capable model --- it is a mechanism probe, not a difficulty benchmark; the
-  larger workflow-suite results are needed for a graded comparison.
+  larger workflow-suite results are needed for a graded comparison. Its labels
+  are author-provided; a two-annotator protocol with reported $\kappa$ is future
+  work for the larger suite.
   \item Workflows are synthetically generated; real-world pipeline validation is
   future work.
   \item Single model family reported for the LLM router; a cross-model sweep is
   future work.
+  \item \textbf{Modest samples.} Per-mode aggregates are $n{=}30$ (Exp 2) and
+  $n{=}120$/depth (Exp 3); the fully-deterministic cells still yield zero-width
+  CIs by construction (a corrupted latent state always fails the final task),
+  while the stochastic cells now carry informative intervals. Larger, more
+  diverse workflow suites remain future work.
   \item \textbf{Construct validity of Exp 2/3.} The failure-recovery and cascade
   experiments run on a \emph{verifiable arithmetic dependency chain}, chosen for
   clean ground truth, not a domain workflow. In this construct cascade radius is
@@ -535,8 +590,9 @@ controlled chain; domain-workflow validation is the next step.
   so a latent corruption propagates to $\sim$(depth $-$ 2) stages --- so we
   present Exp 2/3 as \textbf{controlled mechanism probes}. The evidence that this
   measures model behavior rather than a tautology is the
-  non-determinism we observe (ambiguous delegation at depth 5 yields
-  mean cascade 2.88, below the structural maximum) and the domain-grounded re-run
+  non-determinism we observe (ambiguous delegation stays below the structural
+  maximum at every depth --- mean cascade 2.2 vs.\ 3 at depth 5 --- and recovers
+  0.30 of the time) and the domain-grounded re-run
   (Figure~\ref{fig:exp2}): the failure-mode \emph{ordering} mostly persists
   across framings while absolute rates shift with context. Full finance /
   HR / DevOps suite validation remains future work.
@@ -586,10 +642,10 @@ regenerates the \S5.1 table from the committed gold set (offline baselines need
 no key; the LLM row runs when the Anthropic API key is set). The measured
 analysis script recomputes every Exp 2/3/4 number above (per-mode recovery,
 cascade radius by depth, decomposition fidelity) with bootstrap 95\% CIs and
-paired significance tests, directly from the committed CSVs (offline, no key).
+exact paired permutation tests, directly from the committed CSVs (offline, no key).
 Code is Apache-2.0; data and failure scenarios are seeded; the full test suite
 (151 tests) runs offline on Python 3.10/3.11/3.12. Total real-LLM cost across the
-project is $\approx\$1.50$ (Sonnet 4.6; short arithmetic prompts), so reproduction
+project is $\approx\$4$ (Sonnet 4.6; short arithmetic prompts), so reproduction
 is negligible.
 
 \section{Conclusion}
@@ -597,14 +653,17 @@ OrchestraBench reframes multi-agent evaluation from ``did the task succeed?'' to
 ``did the orchestrator route, recover, and decompose reliably?'' Experiment 1
 delivers a clean, reproducible result --- model-driven routing closes a
 0\%$\to$100\% adversarial gap that keyword routing cannot --- while the
-failure-injection and cascade experiments measure, on a controlled chain, the
-reliability axis production teams most need: latent failures that retry cannot
-repair, and a cascade radius that grows with pipeline depth (1.0 $\to$ 2.9 $\to$
-5.0 across depths 3 / 5 / 7).
+failure-injection experiments surface, on a controlled chain, the reliability
+axis production teams most need: a sharp three-tier fault split (tool faults
+fully recovered, ambiguous delegation partially recovered, three semantic faults
+never recovered and beyond the reach of retry) that persists under domain
+reframing, with cascade radius growing with pipeline depth (0.9 to 4.7 across
+depths 3--7) as a corroborating structural signature.
 
-\begin{acks}
-The authors thank Natan Vidra (Anote) for supervision and framing.
-\end{acks}
+% CAMERA-READY: restore acknowledgments after review.
+% \begin{acks}
+% The authors thank Natan Vidra (Anote) for supervision and framing.
+% \end{acks}
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}

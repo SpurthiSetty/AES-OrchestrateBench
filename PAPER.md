@@ -1,13 +1,13 @@
 # OrchestraBench: Evaluating Multi-Agent Orchestration Failure Modes, Recovery, and Decomposition Quality
 
 **Authors**: Yidian Chen, Yingzi Gu · **Supervisor**: Natan Vidra (Anote)
-**Target venues**: DAI 2026 Industry Track (8/3) · EMNLP ORACLE workshop (9/18) · AAAI 2027 (7/28)
+**Target venues**: DAI 2026 Research Track (8/3) · EMNLP ORACLE workshop (9/18) · AAAI 2027 (7/28)
 
-> **DRAFT v0.6 (2026-06-22, addresses issue #8).** Built from the approved design document (`DESIGN_DOC.md`).
+> **DRAFT v0.7 (2026-07-02, addresses issue #8).** Built from the approved design document (`DESIGN_DOC.md`).
 > **Honesty markers**: All four experiments now report *measured* results (Exp 1 routing; Exp 2 = real Claude
-> N=30 + domain-grounded loan-approval re-run N=30; Exp 3 = real Claude N=90, cascade-by-depth; Exp 4 = real
-> Claude N=20, decomposition). Exp 2/3 (failure taxonomy / cascade) remain a **core contribution with Y. Gu
-> (issues #4/#7)**.
+> N=150 + domain-grounded loan-approval re-run N=150; Exp 3 = real Claude N=750, cascade-by-depth; Exp 4 = real
+> Claude N=40, decomposition; §5.5 policy probes = N=75 + N=225 plus N=180 ablation). Exp 2/3 (failure
+> taxonomy / cascade) remain a **core contribution with Y. Gu (issues #4/#7)**.
 
 ---
 
@@ -17,25 +17,25 @@ Multi-agent orchestration frameworks (AutoGen, LangGraph, CrewAI, Anthropic Agen
 from demos to production, yet they can only be compared on *task accuracy* — not on *reliability*.
 Existing agent benchmarks measure whether a pipeline succeeds, but cannot diagnose *why* it failed,
 *where* a cascade began, or *which* routing decision caused the breakdown. We present **OrchestraBench**,
-the first benchmark that evaluates how multi-agent systems **fail, recover, and decompose** as
+a benchmark that evaluates how multi-agent systems **fail, recover, and decompose** as
 first-class, comparable metrics. OrchestraBench contributes (i) a controlled, seed-reproducible
 **failure-injection harness** over templated enterprise workflows, (ii) **cascade-radius** and
-per-failure-mode recovery as primary metrics, and (iii) a **routing-policy comparison** with full
-statistical rigor. Our first experiment isolates the routing-mechanism question: on a 26-case
+per-failure-mode recovery as primary metrics, and (iii) a **routing-policy comparison** with
+bootstrap confidence intervals and exact paired tests where applicable. Our first experiment isolates the routing-mechanism question: on a 26-case
 gold-labelled diagnostic, a keyword/flag heuristic — representative of production rule-based routers —
 scores **0% on adversarial cases** (misleading or missing surface flags), while a model-driven
 router that reasons over intent scores **100%**, closing the entire gap to an oracle ceiling. This
 quantifies, reproducibly, that the heuristic's blind spot is a property of the routing *mechanism*,
 not task difficulty. Two further experiments, run with a real Claude agent over a **verifiable arithmetic
-dependency chain** as a controlled mechanism probe, quantify the reliability axis no existing benchmark
-reports: across five MAST failure modes, the four latent/semantic modes fail completely (final-task success
-**0.0**) while a tool fault is fully recovered (**1.0**), and **retry does not repair the latent modes** — it
-extends a corrupted trace rather than containing it; and cascade radius **scales monotonically with pipeline
-depth** (mean 1.0 / 2.9 / 5.0 at depths 3 / 5 / 7) — the stages-traversed signature MAS-FIRE leaves
-unquantified. Adding **LLM-as-router** and **Oracle** routing policies, we further show cascade containment is
-**policy-conditioned**: an LLM router that re-derives from trusted state cuts latent cascade radius
-~5.5× over rule-based baselines at depth 7 — though an ablation (§5.5) shows this gain is largely the
-trusted-state signal, not autonomous detection. We frame these
+dependency chain** as a controlled mechanism probe, quantify a reliability axis existing benchmarks
+under-measure: across five MAST failure modes, failure handling splits into three tiers — a tool fault is fully
+recovered (**1.0**), ambiguous delegation is *partially* recovered (**0.30**), and three latent/semantic
+modes never recover (**0.0**) — and **retry does not repair the latent modes**, extending a corrupted trace
+rather than containing it; and cascade radius **grows monotonically with pipeline depth** (mean 0.9 to 4.7
+across depths 3–7) — the stages-traversed signature MAS-FIRE leaves
+unquantified. A policy-conditioned probe further asks whether trusted-state repair can contain these
+cascades; an ablation (§5.5) shows its apparent gain is largely the trusted-state signal rather than
+autonomous detection, so we report it as a trusted-state probe, not a deployable routing result. We frame these
 as mechanism probes on a controlled chain, not domain-workload claims (§7).
 
 ---
@@ -56,12 +56,14 @@ choosing and hardening an orchestration framework on *reliability* rather than e
 2. A **seed-reproducible** workflow + failure-injection harness (every reported number regenerable
    from a seed) over three enterprise workflow families.
 3. A **routing-policy comparison** (Fixed / Heuristic / LLM / Oracle) with bootstrap confidence
-   intervals and paired significance testing, isolating *when* intelligent routing beats a
-   zero-decision baseline once cost is accounted for.
+   intervals and paired significance testing where applicable, isolating the routing *mechanism*
+   effect on adversarial cases (Exp 1); the graded "when does routing pay off" comparison on larger
+   workflow suites is future work.
 
 **Research questions.**
 - **RQ1 (routing value)**: When does intelligent routing (heuristic or LLM) actually beat a
-  zero-decision baseline, once cost is accounted for?
+  zero-decision baseline, once cost is accounted for? *(Partially: Exp 1 isolates the mechanism gap; a
+  graded answer needs the larger suite.)*
 - **RQ2 (mechanism)**: Is routing reliability a property of task *difficulty*, or of the routing
   *mechanism* (keyword/flag matching vs. reasoning over intent)? *(Answered by Exp 1.)*
 - **RQ3 (attribution)**: Can a pipeline failure be attributed to a specific failure mode *and* stage,
@@ -101,11 +103,14 @@ An honest audit (the space moved fast in early 2026) surfaces one direct overlap
 
 - **MAS-FIRE (arXiv:2602.19843) already performs controlled fault injection + reliability evaluation
   for MAS**, overlapping OrchestraBench's Exp 2/3 (issues #4/#7) substantially. Our differentiation
-  is **not** "we inject failures" (they do too); it must be (a) **cascade radius across pipeline
-  depths** as a first-class comparable metric, (b) failure handling measured **per routing policy**
-  (Fixed/Heuristic/LLM/Oracle), and (c) the **routing-mechanism result** of Exp 1, which MAS-FIRE does
-  not address. A reviewer *will* ask "why not just extend MAS-FIRE?" — the paper must lead with the
-  routing + cascade-radius framing, not generic injection. **Verified (full-text read, 2026-06-17): MAS-FIRE does *not* quantify cascade depth (no stages-traversed metric — only the qualitative "propagates downstream unchecked") and does *not* vary routing policy; its axes are topology (MetaGPT / Table-Critic / CAMEL), fault-type (15), and model. Both of our primary differentiators are uncovered, not merely reframed.**
+  is **not** "we inject failures" (they do too); it is (a) the **behavioral characterization** of
+  failure handling — the sharp tool-vs-latent recovery split, its persistence under domain reframing, and
+  retry's inability to repair latent faults; (b) **cascade radius as a stages-traversed metric across
+  pipeline depths** (which MAS-FIRE does not quantify; reported honestly as partly structural on the
+  verifiable chain); and (c) the **routing-mechanism result** of Exp 1. Per-routing-policy containment is
+  a probe, not a headline (the §5.5 ablation shows the LLM gain is largely the trusted-state signal). A
+  reviewer *will* ask "why not just extend MAS-FIRE?" — the paper leads with the behavioral split +
+  depth-resolved cascade framing, not generic injection. **Verified (full-text read, 2026-06-17): MAS-FIRE does *not* quantify cascade depth (no stages-traversed metric — only the qualitative "propagates downstream unchecked") and does *not* vary routing policy; its axes are topology (MetaGPT / Table-Critic / CAMEL), fault-type (15), and model. Both of our primary differentiators are uncovered, not merely reframed.**
 - **Attribution benchmarks (TraceElephant 2604.22708; ICML 2025) are observational/post-hoc** — a
   different instrument from seeded, reproducible injection + recovery. Lower overlap risk.
 - **Internal overlap (flagged by N. Vidra in the #11 assignment): Paper #2, *Intent Specification as a
@@ -125,15 +130,23 @@ An honest audit (the space moved fast in early 2026) surfaces one direct overlap
 
 ## 3. The OrchestraBench Benchmark
 
+OrchestraBench is released as a reusable artifact — a seed-controlled workflow generator, the
+`FailureInjector`, the routing-policy suite, and the analysis scripts — paired with the initial
+mechanism-probe results reported here; the broad multi-domain evaluation it is designed to host is
+future work.
+
 **Workflow suites.** Synthetically generated from templated task graphs (stages, inter-task
-dependencies, per-task `complexity_score`), screened by both co-authors for realism. Three enterprise
+dependencies, per-task `complexity_score`), author-screened for realism. Three enterprise
 families: finance approval (4 stages), HR onboarding (5 stages), DevOps deployment (5 stages).
 
 **Routing decision space.** Each task is routed to one of four actions: `DIRECT_TOOL`,
 `CODE_EXECUTION`, `DECOMPOSE`, `REASON_ONLY`.
 
-**Gold labels.** Routing and decomposition labels are produced independently by both co-authors with
-adjudication on disagreement (target inter-annotator agreement Cohen's κ > 0.7).
+**Gold labels.** For the failure-recovery, cascade, and decomposition experiments (Exp 2–4), ground
+truth is *objective*: an exact-match check against the verifiable arithmetic result, requiring no
+subjective annotation. The Exp 1 routing diagnostic (26 cases) is author-labelled from unambiguous task
+intent; a two-annotator protocol with reported inter-annotator agreement (Cohen's κ) remains future work
+for the larger workflow-suite evaluation.
 
 **Failure injection.** Failure scenarios are seeded **deterministically** on top of the suites via the
 `FailureInjector` (shipped, PR #21), so every number is reproducible from a seed.
@@ -154,8 +167,13 @@ radius**, time-to-detection, recovery completeness, decomposition delegation fid
 | RetryPolicy(Heuristic/LLM) | Test | Adds automatic retry — does retry alone contain cascades? |
 | OraclePolicy | Ceiling | Routes to the gold label (upper bound) |
 
-All comparisons report 95% bootstrap CIs and paired bootstrap significance (α = 0.05) via the
-statistics module (PR #20).
+All comparisons report 95% bootstrap CIs. For the paired comparisons (Exp 4; the §5.5 ablation) we
+report an exact two-sided sign-flip permutation p (α = 0.05) via the statistics module: with small,
+often-separated paired samples the percentile-bootstrap p is anti-conservative (it collapses to 0 when
+every paired difference shares a sign). Per-mode aggregates are n=30 (Exp 2) and n=120/depth (Exp 3),
+pooling the baseline policies; the fully-deterministic cells (e.g. context pollution at 0.0) remain point
+masses regardless of n, while the stochastic cells (ambiguous delegation; the domain framings) carry
+informative CIs (§7).
 
 ---
 
@@ -177,13 +195,14 @@ passes (78/78), and the prompt never sees the gold label.
 | OraclePolicy (ceiling) | 100% | 100% | 100% |
 
 **Finding.** The heuristic is perfect on aligned cases but collapses to **0%** on adversarial ones;
-the model-driven router recovers **all** of them (0% → 100%), closing the entire gap to the oracle.
+the model-driven router recovers **all** of them (0% → 100%; Wilson 95% CI on the 10 adversarial cases
+[0.00, 0.28] vs. [0.72, 1.00]), closing the entire gap to the oracle.
 Because a *cost-efficient* model saturates this set, the heuristic's adversarial failure is shown to
 be a property of the routing **mechanism** (keyword/flag matching vs. reasoning over intent), **not**
-task difficulty. The larger 1,800-trace workflow suite is where the LLM router is expected to drop
-below 100% and yield a graded comparison (projected 85–95% vs. heuristic 65–75%).
+task difficulty. The larger workflow suite remains the right place for a graded comparison where the
+LLM router may no longer saturate the task.
 
-> **Product tie-in (#14).** The same keyword-routing weakness exists in Anote's Panacea
+> **Internal product note (#14; not submission text).** The same keyword-routing weakness exists in Anote's Panacea
 > (`multi_agent_system.py`); a flag-gated model-driven router was added there (PR #222) as the
 > opt-in remedy this experiment motivates.
 
@@ -196,42 +215,45 @@ policies `fixed` / `heuristic` / `retry(heuristic)`. Real recovery / cascade are
 against ground truth; the same modes also run through the offline auto-harness (PR #33/#34) for large-N
 projection, and real records feed the measured-input pipeline (`measured_runs.py`). Code: `real_run.py`.
 
-**Real measured findings (Claude Sonnet 4.6, N=30, 2026-06-20).** `tool_invocation_error` is **fully
-recovered** (recovery 1.0, cascade radius 0) — the agent computes by hand when the tool fails. The four
-**latent/semantic modes** (ambiguous delegation, context pollution, conflicting outputs, premature
-action) all **fail** (final-task success **0.0**) and **cascade to every downstream stage** (cascade
-radius **2 of 2**). Critically, **`retry(heuristic)` does not recover them**: retrying while the failure
-is still present reproduces the error and only **lengthens time-to-detection** — it extends a corrupted
-trace instead of containing it. This real-agent result **confirms** the offline-harness mechanism: retry
+**Real measured findings (Claude Sonnet 4.6, N=150, n=30/mode).** Failure handling splits into **three
+tiers**: (i) `tool_invocation_error` is **fully recovered** (recovery 1.0, cascade radius 0) — the agent
+recomputes by hand; (ii) **`ambiguous_delegation` is partially recovered** (final-task success **0.30
+[0.13, 0.47]**, cascade 1.40) — with n=30 the agent infers the intended operation about a third of the
+time, a genuinely stochastic cell; (iii) the remaining three latent/semantic modes (context pollution,
+conflicting outputs, premature action) **never recover** (final-task success **0.0**) and **cascade to
+every downstream stage**. Critically, **`retry(heuristic)` does not recover the latent modes**: retrying
+while the failure is still present reproduces the error and only **lengthens time-to-detection** — it
+extends a corrupted trace instead of containing it. This real-agent result **confirms** the offline-harness mechanism: retry
 repairs retryable tool faults but not failures needing attribution, state repair, or semantic validation
 (RQ3/RQ4).
 
-**Statistics & limitations (honest).** Bootstrap 95% CIs are degenerate here — latent modes 0.0 [0.0, 0.0]
-and the tool fault 1.0 [1.0, 1.0] (n=6 each) — reflecting the controlled construct, not statistical strength
+**Statistics & limitations (honest).** With n=30/mode the stochastic cells carry informative CIs
+(ambiguous 0.30 [0.13, 0.47]); the fully-deterministic cells (0.0 latent, 1.0 tool) remain point masses by
+construction, not for lack of samples
 (see §7, construct validity). Small-N MVP; agents are LLM-simulated (no real external tools); the workload is
 a controlled arithmetic chain (clean ground truth for cascade, not a domain task); success is
 exact-match. Next: the full 1,500-trace suite, harder/domain workloads, and a cross-model sweep. Data:
 `data/measured/exp2_real.csv`.
 
-**Domain-grounded validation (loan-approval workflow, real Claude N=30, 2026-06-22).** To test whether
+**Domain-grounded validation (loan-approval workflow, real Claude N=150).** To test whether
 these signatures are an artifact of the abstract arithmetic chain, we re-ran the *identical* failure
 injection on a domain-grounded variant: the same verifiable computation reframed as a multi-role
 loan-approval pipeline (Intake Officer → Risk Analyst → Compliance Officer → Approval Manager), each stage
-prompted in business terms (`run_exp2 --domain`). **The core mechanism holds**: the latent/semantic modes
-(conflicting outputs, context pollution, premature action) still fail completely (final-task success
-**0.0**), and the tool fault stays more recoverable than the latent modes — the failure-mode *ordering* is
-robust across framings (**Figure 2**). Crucially, the **absolute rates shift with framing**: `ambiguous_delegation` rises to
-**0.50** (the business-role context lets the agent infer the intended operation about half the time) and
-`tool_invocation_error` recovery falls to **0.67** (by-hand recomputation is noisier inside the richer
+prompted in business terms (`run_exp2 --domain`). **The core mechanism holds**: the three catastrophic
+latent modes (conflicting outputs, context pollution, premature action) still fail completely (final-task
+success **0.0**), and the tool fault stays more recoverable — the failure-mode *ordering* is robust across
+framings (**Figure 2**). Crucially, the **absolute rates shift with framing**: `ambiguous_delegation` rises
+from **0.30** to **0.40** (the business-role context helps the agent infer the intended operation) and
+`tool_invocation_error` recovery falls from **1.00** to **0.70** (by-hand recomputation is noisier inside the richer
 business prompt). This framing-sensitivity is the signature of *real agent behavior*, not a structural
 tautology — the mechanism is robust while the magnitudes respond to context. Directly addresses the
 construct-validity concern (§7). Data: `data/measured/exp2_domain_real.csv`.
 
-### 5.3 Experiment 3 — Cascade propagation depth *(real Claude measured run, N=90 + offline harness; core, with Y. Gu / #7)*
+### 5.3 Experiment 3 — Cascade propagation depth *(real Claude measured run, N=750 + offline harness; core, with Y. Gu / #7)*
 
 **Design.** Inject a single seeded error at stage 1/2/3 of variable-depth (3-, 5-, 7-stage) pipelines
-and measure how far it propagates. **Metrics**: **cascade radius** (downstream stages corrupted — the
-primary differentiator vs. MAS-FIRE, which has no stages-traversed metric), time-to-detection, recovery
+and measure how far it propagates. **Metrics**: **cascade radius** (downstream stages corrupted — a
+stages-traversed metric MAS-FIRE lacks), time-to-detection, recovery
 completeness, per routing policy. **Scale**: planned = 100 × 3 depths × 3 injection points = **900
 traces**; the one-command harness (`scripts/run_exp23_pipeline.py`) currently reproduces **135
 measured-style rows per mode** and ingests real records via `--input-file`.
@@ -239,38 +261,41 @@ measured-style rows per mode** and ingests real records via `--input-file`.
 **Offline auto-harness findings (2026-06-20, `context_pollution`).** Earlier-stage failures produce
 strictly larger cascades, and deeper pipelines amplify it: mean cascade radius = **2 / 4 / 6** for
 inject-stage-1 at depths 3 / 5 / 7, **1 / 3 / 5** for stage-2, **0 / 2 / 4** for stage-3 — exactly the
-depth×stage signature no existing benchmark measures. `retry(heuristic)` does **not** improve cascade
+depth×stage signature prior benchmarks leave unmeasured. `retry(heuristic)` does **not** improve cascade
 containment or final-task success on latent failures.
 
-**Real measured findings (Claude Sonnet 4.6, N=90, 2026-06-22).** `run_exp3` extends the Experiment 2
+**Real measured findings (Claude Sonnet 4.6, N=750, n=120/depth).** `run_exp3` extends the Experiment 2
 real-agent design to variable depth — the same prompt-level injection and exact-match grading, looped over
-3-/5-/7-stage chains with the error injected at stage 1. Across the four latent/semantic failure modes, **mean
-cascade radius scales monotonically with depth: 1.0 [1.0, 1.0] (depth 3) → 2.9 [2.6, 3.0] (depth 5) → 5.0 [5.0, 5.0] (depth 7)** (bootstrap 95% CIs, latent modes pooled, n=24/depth; **Figure 1**) — the failure
-propagates to essentially every downstream stage (depth − 2). `tool_invocation_error` stays at **cascade radius
-0 at every depth** (the agent recomputes by hand). The lone deviation is `ambiguous_delegation` at depth 5
-(mean 2.5 vs 3.0 for the other latent modes), where the real agent occasionally guesses the intended operation
-correctly — a realistic-noise signature absent from the deterministic offline model. All 90 records pass the
-`MeasuredExp3Record` schema. Data: `data/measured/exp3_real.csv`. **This is the paper's headline cascade-depth
-result and the primary differentiator vs. MAS-FIRE, which reports no stages-traversed metric.** (The
+3- to 7-stage chains with the error injected at stage 1. Pooled over the latent modes, **mean cascade radius
+grows monotonically with depth: 0.93 → 1.85 → 2.80 → 3.63 → 4.67 across depths 3 / 4 / 5 / 6 / 7** (bootstrap
+95% CIs, latent modes pooled, n=120/depth; **Figure 1**) — an almost-linear ~0.9-per-stage trend resolved at
+five depths with non-degenerate CIs. The structure is sharp per mode: the three catastrophic modes (context
+pollution, conflicting outputs, premature action) corrupt *every* downstream stage (cascade = depth − 2
+exactly), while `ambiguous_delegation` runs consistently lower (0.7 / 1.4 / 2.2 / 2.5 / 3.7) because it
+partially recovers, and `tool_invocation_error` stays at **cascade radius 0 at every depth** (the agent
+recomputes by hand). All 750 records pass the
+`MeasuredExp3Record` schema. Data: `data/measured/exp3_real.csv`. **This quantifies a stages-traversed
+signature MAS-FIRE leaves unmeasured**; on the verifiable chain the growth is partly structural (§7), so we
+read it as corroborating the depth-scaling of latent cascades rather than as the paper's headline. (The
 offline-harness figures above are a large-N trend projection under a slightly different cascade convention;
 these real measured values supersede them as the primary result.)
 
-### 5.4 Experiment 4 — Decomposition quality *(real Claude measured run, N=20; secondary)*
+### 5.4 Experiment 4 — Decomposition quality *(real Claude measured run, N=40; secondary)*
 
 For composite tasks `(a op b) op (c op d)` with a canonical 3-step gold decomposition, we score the
 produced decomposition against gold — **delegation fidelity** (gold sub-results recovered), **granularity
 error**, **wasted sub-tasks** — comparing a `monolithic` (single-step) vs a `decompose` (planner) policy.
 
-**Real measured findings (Claude Sonnet 4.6, N=20, 2026-06-22).** The `decompose` policy produces a
+**Real measured findings (Claude Sonnet 4.6, N=40).** The `decompose` policy produces a
 faithful three-step decomposition (**delegation fidelity 1.00, granularity error 0**), while `monolithic`
-reaches the correct final answer but exposes no delegable sub-structure (**fidelity 0.37 [0.33, 0.43],
-granularity error 2**). This fidelity gap is large and statistically significant under a paired bootstrap
-over the 10 shared tasks: **+0.63, 95% CI [0.57, 0.67], p < 0.0001** (decompose vs. monolithic), and the
-granularity-error gap is likewise **−2.0, p < 0.0001**. Notably, `final_correct` is **1.0 for both** — the arithmetic is easy enough that both get the answer;
+reaches the correct final answer but exposes no delegable sub-structure (**fidelity 0.37 [0.33, 0.42],
+granularity error 2**). This fidelity gap is large and statistically significant under an exact sign-flip
+permutation test over the 20 shared tasks: **+0.63, 95% CI [0.58, 0.67], p = 1.9×10⁻⁶** (decompose vs.
+monolithic), and the granularity-error gap is likewise **−2.0, p = 1.9×10⁻⁶**. Notably, `final_correct` is **1.0 for both** — the arithmetic is easy enough that both get the answer;
 the discriminator is the **decomposition structure**, not final correctness. For multi-agent orchestration
 this is exactly the point: a monolithic agent can be *right* yet produce nothing a planner can delegate,
 audit, or recover from — decomposition quality is about delegable structure, which a routing policy can
-measure and reward. Data: `data/measured/exp4_real.csv`. (Scale: 10 tasks × 2 policies = 20 traces; a larger
+measure and reward. Data: `data/measured/exp4_real.csv`. (Scale: 20 tasks × 2 policies = 40 traces; a larger
 suite with a 3-policy comparison and gold κ is future work.)
 
 ### 5.5 Policy-conditioned containment *(real Claude measured run, N=75 + N=225; addresses review R2)*
@@ -292,7 +317,7 @@ barely contain anything; the LLM router recovers most; Oracle is the ceiling.
 | **LLM-as-router** | **0.83 [0.58, 1.00]** | **0.33 [0.00, 0.83]** |
 | Oracle (ceiling) | 1.00 [1.00, 1.00] | 0.00 [0.00, 0.00] |
 
-**Cascade by depth (Exp 3 framing, N=225) — the headline policy result.** The policy effect
+**Cascade by depth (Exp 3 framing, N=225) — the policy-conditioned depth trend.** The policy effect
 *amplifies with pipeline depth*: baseline cascade radius grows with depth, while the LLM router stays
 nearly flat and Oracle fully contains. At depth 7 the LLM router cuts cascade radius **~5.5×** versus
 the baselines — intelligent routing's containment benefit is *larger in deeper pipelines*, exactly the
@@ -307,11 +332,13 @@ policy-conditioned signature MAS-FIRE does not measure (**Figure 3**).
 Data: `data/measured/exp2_policy_real.csv` + `exp3_policy_real.csv`; regenerate via
 `scripts/analyze_measured.py`.
 
-**Ablation — the model, or the hint? (real Claude, N=90).** The LLM-policy rows above hand the router
+**Ablation — the model, or the hint? (real Claude, N=180).** The LLM-policy rows above hand the router
 the trusted upstream value — a possible information leak (flagged in review). We re-ran Exp 2 with an
 `llm_noupstream` policy: the *same* self-correction prompt but **without** the trusted-upstream hint.
-Latent recovery **collapses from 0.75 [0.50, 1.00] (llm) to 0.17 [0.00, 0.42] (llm_noupstream)** — barely
-above the baseline 0.08 — a paired drop of **0.58 [0.17, 0.92], p<0.01**. So the LLM policy's containment
+Latent recovery **collapses from 0.67 [0.46, 0.83] (llm) to 0.08 [0.00, 0.21] (llm_noupstream)** — down to
+the baseline level — a paired drop of **0.58 [0.33, 0.79], p = 4.8×10⁻⁴** (exact sign-flip permutation, n=24 pairs).
+(This ablation is an independent N=180 sweep, so its LLM estimate 0.67 is a separate sample from the policy
+table's N=75 value 0.83.) So the LLM policy's containment
 is **mostly the trusted-upstream signal, not autonomous fault detection**: a blind LLM self-check recovers
 only marginally over baseline. We therefore read the LLM column as a **trusted-state probe** (what
 near-perfect upstream knowledge buys), *not* as evidence that an LLM router autonomously contains latent
@@ -322,13 +349,19 @@ cascades — the honest scope of the policy-conditioned result. Data: `data/meas
 ## 6. Discussion
 
 Experiment 1 establishes the paper's first reproducible claim: routing reliability is a function of
-*mechanism*. Experiments 2 and 3 deliver the reliability headline on a controlled verifiable chain: the
-**failure-mode gap** is measured (four latent modes at 0.0 final-task success vs. a fully-recovered tool
-fault), and **cascade radius scales with pipeline depth** (1.0 → 2.9 → 5.0 at depths 3 / 5 / 7) — the
-stages-traversed signature no existing benchmark quantifies. Critically, **retry does not eliminate latent
-cascades**: it reproduces the failure and lengthens time-to-detection, so *detection/attribution* — not
-blind retry — is the necessary containment mechanism. We are deliberate that these are mechanism probes on
-a controlled chain (§7); domain-workflow validation is the next step.
+*mechanism*. Experiments 2 and 3 then deliver the central behavioral finding: the agent's failure handling
+*splits sharply by fault type*. A tool-invocation fault is fully recovered (recovery 1.0) — the agent
+recomputes the value by hand — ambiguous delegation is *partially* recovered (0.30, the agent sometimes
+infers intent), and the remaining three latent/semantic modes are *never* recovered (0.0 final-task
+success); and **retry does not repair the latent modes**: it reproduces the failure and only lengthens
+time-to-detection, so *detection/attribution*, not blind retry, is the necessary containment mechanism.
+Crucially this split is *model behavior, not a construct artifact*: it survives reframing the identical
+computation as a loan-approval workflow — the failure-mode ordering persists while absolute rates shift
+with context. On top of this we quantify a structural signature prior reliability benchmarks leave
+unmeasured: cascade radius grows with pipeline depth (0.9 to 4.7 across depths 3–7, near-linear); on this
+verifiable chain that growth is partly by construction (§7), so we read it as corroborating the
+depth-scaling of latent cascades rather than as the headline. We are deliberate that these are mechanism
+probes on a controlled chain (§7); domain-workflow validation is the next step.
 
 ---
 
@@ -388,39 +421,41 @@ Every reported number is regenerable from a fixed seed. Artifact-release checkli
 
 - [x] **Code released** — harness, four routing policies, 26-case gold set, `FailureInjector` (PR #21),
   statistics module (PR #20), offline Exp 2/3 harness (PR #30) + **real-LLM measured run `real_run.py`
-  (PR #37, Exp 2 N=30 + Exp 3 N=90)**; Apache-2.0.
+  (Exp 2 N=150 + domain N=150 + Exp 3 N=750 + Exp 4 N=40 + policy/ablation sweeps)**; Apache-2.0.
 - [x] **Deterministic data** — workflow suites + failure scenarios generated from seeds; the gold set
   is committed, not regenerated.
-- [x] **Tests** — routing comparison ships 12 unit tests; **full suite 107 passing** (incl. 8 for the
-  Exp 2/3 harness, PR #30); non-LLM policies run offline (no key/network).
+- [x] **Tests** — routing comparison ships 12 unit tests; **full suite 151 passing**; non-LLM policies
+  run offline (no key/network).
 - [x] **Pinned environment** — Python ≥3.10; deps pinned in `pyproject.toml`; CI on 3.10/3.11/3.12.
 - [ ] **LLM-router reproducibility** — model id (`claude-sonnet-4-6`), exact prompt, and `tool_choice`
   config documented; result stable across 3 passes (78/78). State the non-determinism caveat and
   report multi-trial means + bootstrap CIs (PR #20) in the final table.
-- [x] **Cost log** — Sonnet 4.6; Exp 1 ≈ $0.07/run, Exp 2 (N=30) ≈ $0.4, Exp 3 (N=90) ≈ $0.4; full
-  real-LLM total across the project ≈ **$1** (token-estimated; short arithmetic prompts). Reproduction cost
+- [x] **Cost log** — Sonnet 4.6; bumped-N runs: Exp 2 (N=150 ×2 framings) + Exp 3 (N=750, 5 depths) + Exp 4 (N=40) + ablation (N=180); full
+  real-LLM total across the project ≈ **$4** (token-estimated; short arithmetic prompts). Reproduction cost
   is negligible — a strength for an artifact-release benchmark.
 - [x] **One-command repro** — `python scripts/reproduce_exp1.py` regenerates the §5.1 table from the
   committed gold set (offline baselines need no key; LLM row runs when `ANTHROPIC_API_KEY` is set).
 - [x] **Measured-stats regeneration (Exp 2/3/4)** — `python scripts/analyze_measured.py` recomputes every
   number in §5.2–§5.4 (per-mode recovery, cascade radius by depth, decomposition fidelity) with bootstrap
-  95% CIs and the paired significance tests, directly from the committed CSVs (offline, no key).
+  95% CIs and exact paired permutation tests, directly from the committed CSVs (offline, no key).
 
 ## 10. Conclusion
 
 OrchestraBench reframes multi-agent evaluation from "did the task succeed?" to "did the orchestrator
 route, recover, and decompose reliably?" Experiment 1 delivers a clean, reproducible result —
 model-driven routing closes a 0%→100% adversarial gap that keyword routing cannot — while the
-failure-injection and cascade experiments measure, on a controlled chain, the reliability axis production
-teams most need: latent failures that retry cannot repair, and a cascade radius that grows with pipeline
-depth (1.0 → 2.9 → 5.0 across depths 3 / 5 / 7).
+failure-injection experiments surface, on a controlled chain, the reliability axis production teams most
+need: a sharp three-tier fault split (tool faults fully recovered, ambiguous delegation partially
+recovered, three semantic faults never recovered and beyond the reach of retry) that persists under domain
+reframing, with cascade radius growing with pipeline depth (0.9 to 4.7 across depths 3–7) as a
+corroborating structural signature.
 
 ---
 
 ## Figures
 
-- **Figure 1** (`figures/exp3_cascade_by_depth.png`): Exp 3 — mean cascade radius vs pipeline depth; latent/semantic modes scale 1.0 → 2.9 → 5.0 across depths 3/5/7 while `tool_invocation_error` stays at 0 (real Claude, N=90).
-- **Figure 2** (`figures/exp2_arith_vs_domain.png`): Exp 2 — failure-mode final-task success, arithmetic chain vs loan-approval workflow; the failure-mode *ordering* is robust across framings while absolute rates shift (real Claude, N=30 each).
+- **Figure 1** (`figures/exp3_cascade_by_depth.png`): Exp 3 — mean cascade radius vs pipeline depth; latent/semantic modes scale 0.93 → 4.67 across depths 3–7 while `tool_invocation_error` stays at 0 (real Claude, N=750).
+- **Figure 2** (`figures/exp2_arith_vs_domain.png`): Exp 2 — failure-mode final-task success, arithmetic chain vs loan-approval workflow; the failure-mode *ordering* is robust across framings while absolute rates shift (real Claude, N=150 each).
 - **Figure 3** (`figures/exp3_policy_cascade.png`): Exp 3 — mean latent cascade radius vs pipeline depth per routing policy; baseline grows with depth while LLM-as-router stays nearly flat and Oracle fully contains (real Claude, N=225).
 
 ## References *(working list; to be formatted to venue style)*
@@ -442,20 +477,19 @@ depth (1.0 → 2.9 → 5.0 across depths 3 / 5 / 7).
 - **Done (solo, no Exp 2/3 numbers needed)**: §1–§4, §5.1 (measured Exp 1), §2 + §2.1 novelty audit
   (#18 — **both external/internal risks resolved 6/17**), §5.2–§5.4 experiment designs + metrics + scale,
   §8 ethics (#17), §9 repro checklist (#15), §6/§7/§10.
-- **Done (real measured, 6/20–22)**: §5.2 (Exp 2, real Claude N=30) and §5.3 (Exp 3, real Claude N=90) —
-  run via `real_run.py` (PR #37), bootstrap CIs computed, paper at v0.4. Coordinate with Yingzi on her
-  offline-harness pipeline (`measured_runs.py`) + gold-label κ for the larger workflow-suite run.
-- **Still open**: Exp 4 (decomposition); add LLM/Oracle routing-policy columns to Exp 2/3 cascade (needs a
-  real run); domain-workflow validation for construct validity (§7); full 1,800-trace Exp 1 suite; format
-  references to venue style.
+- **Done (real measured, 6/20–7/2)**: §5.2 (Exp 2, real Claude N=150 + domain N=150), §5.3 (Exp 3,
+  real Claude N=750), §5.4 (Exp 4, real Claude N=40), and §5.5 policy-conditioned + no-upstream ablation
+  sweeps; bootstrap CIs and exact paired tests computed.
+- **Still open**: larger workflow-suite validation; cross-model sweep; two-annotator κ for subjective
+  workflow-suite labels; references formatted to venue style.
 - **Source**: in-repo `DESIGN_DOC.md` (1:1 mapping; its milestone table gates to DAI 8/3 with a 7/27 freeze).
 
 ### #9 — Venue strategy
 | Venue | Deadline | Fit | Note |
 |---|---|---|---|
-| **DAI 2026 Industry Track** | 8/3 | High — production-reliability angle, shorter format | Primary near-term target; Exp 1 + partial Exp 2 may suffice |
-| **AAAI 2027** | 7/28 (abstract) | Medium-high — top-tier, needs full Exp 2/3 | Stretch; only if cascade results land |
+| **DAI 2026 Research Track** | 8/3 | High — benchmark + reliability-evaluation framing | Primary near-term target; current PDF is anonymous and within the 8-page limit |
+| **AAAI 2027** | 7/28 (abstract) | Medium-high — top-tier, needs broader validation | Stretch; only if larger workflow-suite validation lands |
 | **EMNLP ORACLE** (workshop) | 9/18 | High — reliability/operational-eval theme fits exactly | De-risked fallback (official venue per #11 sheet) |
 - **Strategy**: target **DAI 2026** as primary (industry track rewards the reliability + cost-Pareto
   framing); **EMNLP ORACLE workshop (9/18)** as the de-risked fallback if Exp 2/3 slip past the DAI
-  window; **AAAI 2027** only if Exp 2/3 deliver the cascade headline with strong measured results.
+  window; **AAAI 2027** only if Exp 2/3 deliver strong measured behavioral results.

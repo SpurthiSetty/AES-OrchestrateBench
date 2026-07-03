@@ -14,6 +14,7 @@ statistical-rigor requirements. Pure NumPy — no SciPy dependency.
 
 from __future__ import annotations
 
+import itertools
 from typing import Callable, Dict, List, Tuple
 
 import numpy as np
@@ -129,6 +130,48 @@ def paired_bootstrap_values(
         "ci": (low, high),
         "p_value": min(p_value, 1.0),
     }
+
+
+def paired_permutation_p(
+    values_a: List[float],
+    values_b: List[float],
+    max_exact_n: int = 18,
+    n_resamples: int = 100000,
+    seed: int = 0,
+) -> float:
+    """Exact two-sided sign-flip permutation p-value for the paired mean diff.
+
+    For small paired samples the percentile-bootstrap p from
+    ``paired_bootstrap_values`` is anti-conservative and degenerates to 0 when
+    the two conditions are perfectly separated (every paired difference shares a
+    sign), reporting an implausibly tiny p. The sign-flip permutation test is
+    the correct small-sample instrument: under H0 the paired differences are
+    symmetric about 0, so each difference's sign is exchangeable. We enumerate
+    all ``2**n`` sign assignments exactly when ``n <= max_exact_n`` and sample
+    otherwise. Deterministic for a fixed ``seed``.
+    """
+    if len(values_a) != len(values_b):
+        raise ValueError(
+            f"paired permutation needs equal-length value lists; "
+            f"got {len(values_a)} vs {len(values_b)}"
+        )
+    diffs = np.asarray(values_a, dtype=float) - np.asarray(values_b, dtype=float)
+    n = diffs.shape[0]
+    if n == 0:
+        return 1.0
+    obs = abs(float(diffs.mean()))
+    nz = diffs[diffs != 0.0]
+    if nz.size and (np.all(nz > 0.0) or np.all(nz < 0.0)):
+        # Fully separated: |mean| is maximal, so only the all-+ and all-- sign
+        # assignments reach it -> exact two-sided p = 2 / 2**(#nonzero pairs).
+        return float(min(1.0, 2.0 / 2.0 ** nz.size))
+    if n <= max_exact_n:
+        signs = np.array(list(itertools.product((1.0, -1.0), repeat=n)))
+    else:
+        rng = np.random.default_rng(seed)
+        signs = rng.choice((-1.0, 1.0), size=(n_resamples, n))
+    perm_means = np.abs((signs * diffs).mean(axis=1))
+    return float(np.mean(perm_means >= obs - 1e-12))
 
 
 def paired_bootstrap_test(

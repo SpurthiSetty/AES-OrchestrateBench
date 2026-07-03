@@ -4,13 +4,21 @@ A ~8-minute live walkthrough of all four experiments. **Every headline result ru
 offline from committed data — no API key required.** Only the optional live agent
 run (Step 4) needs `ANTHROPIC_API_KEY`, and even that has a keyless fallback.
 
-## 0. One-time setup
+## 0. One-time setup (do this BEFORE the demo, not live)
+
+Requires **Python 3.10+**. macOS ships `python3` as 3.9, which will fail with
+`requires a different Python: 3.9.x not in '>=3.10'` — install a newer one first:
+`brew install python@3.12`.
 
 ```bash
-# from a fresh clone of the research repo:
-python3 -m pip install -e ".[dev]"
-python3 -m pytest -q          # expect: 151 passed
+# from a fresh clone of the research repo, in a 3.10+ venv:
+python3.12 -m venv .venv && source .venv/bin/activate
+python -m pip install --upgrade pip            # venv's bundled pip can be too old for editable installs
+python -m pip install -e ".[dev]"
+python -m pytest -q                            # expect: 151 passed
 ```
+
+Verified on a clean clone (Python 3.12.13): 151 passed; all demo steps below run.
 
 ## Demo flow
 
@@ -33,23 +41,26 @@ python3 scripts/analyze_measured.py
 ```
 
 - **Show**: every §5.2–§5.4 number regenerated from the committed CSVs, with bootstrap CIs:
-  - **Exp 2**: tool fault fully recovered (**1.0**); four latent modes fail (**0.0**), cascade 2/2.
-  - **Exp 3**: cascade radius scales with depth — **1.0 → 2.9 → 5.0** at depths 3 / 5 / 7.
-  - **Exp 4**: decompose vs monolithic delegation fidelity **+0.63, p<0.0001** (paired bootstrap).
+  - **Exp 2**: tool fault fully recovered (**1.0**); ambiguous delegation partially recovers
+    (**0.30**); three semantic modes fail (**0.0**); loan-approval framing preserves the ordering
+    while shifting magnitudes.
+  - **Exp 3**: latent cascade radius grows with depth — **0.93 → 4.67** across depths 3–7.
+  - **Exp 4**: decompose vs monolithic delegation fidelity **+0.63, p=1.9e-6** (exact paired test).
 - **Say**: "retry can't repair latent failures — it extends a corrupted trace; cascade
-  radius grows with pipeline depth, the stages-traversed signature no existing benchmark quantifies."
+  radius grows with pipeline depth, the stages-traversed signature MAS-FIRE leaves unquantified."
 
 ### 3. Figures
 
-Open the two committed figures:
+Open the three committed figures:
 
 - `figures/exp3_cascade_by_depth.png` — cascade radius vs depth (latent modes vs tool fault).
 - `figures/exp2_arith_vs_domain.png` — failure-mode ordering robust across arithmetic vs loan-approval framings.
+- `figures/exp3_policy_cascade.png` — policy-conditioned cascade containment.
 
 ### 4. (Optional — needs key) Live real-agent run
 
 ```bash
-# real run — needs ANTHROPIC_API_KEY (~$0.4, N=30); writes to /tmp to keep committed data intact
+# quick smoke run — needs ANTHROPIC_API_KEY (~$0.4, small sample); writes to /tmp to keep committed data intact
 python3 -m orchestratebench.real_run --exp 2 --out /tmp/exp2_live.csv
 
 # no key? show the same mechanism live with the mock harness (no key, no cost):
@@ -62,8 +73,8 @@ ORCHESTRATEBENCH_MOCK=1 python3 -m orchestratebench.real_run --exp 2 --out /tmp/
 ## One-line summary
 
 > "OrchestraBench measures how multi-agent systems **fail, recover, and decompose**. All four
-> experiments now run on real Claude data; everything reproduces offline from a clone for under
-> $1.50 of total API spend."
+> experiments now run on real Claude data; everything reproduces offline from a clone for about
+> $4 of total API spend."
 
 ## If something fails
 
