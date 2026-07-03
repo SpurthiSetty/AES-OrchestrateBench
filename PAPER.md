@@ -435,9 +435,10 @@ Every reported number is regenerable from a fixed seed. Artifact-release checkli
   is negligible — a strength for an artifact-release benchmark.
 - [x] **One-command repro** — `python scripts/reproduce_exp1.py` regenerates the §5.1 table from the
   committed gold set (offline baselines need no key; LLM row runs when `ANTHROPIC_API_KEY` is set).
-- [x] **Measured-stats regeneration (Exp 2/3/4)** — `python scripts/analyze_measured.py` recomputes every
-  number in §5.2–§5.4 (per-mode recovery, cascade radius by depth, decomposition fidelity) with bootstrap
-  95% CIs and exact paired permutation tests, directly from the committed CSVs (offline, no key).
+- [x] **Measured-stats regeneration (Exp 2/3/4 + policy probes)** — `python scripts/analyze_measured.py`
+  recomputes every number in §5.2–§5.5 (per-mode recovery, cascade radius by depth, decomposition
+  fidelity, and trusted-state ablation) with bootstrap 95% CIs and exact paired permutation tests,
+  directly from the committed CSVs (offline, no key).
 
 ## 10. Conclusion
 
@@ -475,7 +476,7 @@ corroborating structural signature.
 ---
 ### Authoring notes (not part of submission)
 - **Done (solo, no Exp 2/3 numbers needed)**: §1–§4, §5.1 (measured Exp 1), §2 + §2.1 novelty audit
-  (#18 — **both external/internal risks resolved 6/17**), §5.2–§5.4 experiment designs + metrics + scale,
+  (#18 — **both external/internal risks resolved 6/17**), §5.2–§5.5 experiment designs + metrics + scale,
   §8 ethics (#17), §9 repro checklist (#15), §6/§7/§10.
 - **Done (real measured, 6/20–7/2)**: §5.2 (Exp 2, real Claude N=150 + domain N=150), §5.3 (Exp 3,
   real Claude N=750), §5.4 (Exp 4, real Claude N=40), and §5.5 policy-conditioned + no-upstream ablation
@@ -490,6 +491,6 @@ corroborating structural signature.
 | **DAI 2026 Research Track** | 8/3 | High — benchmark + reliability-evaluation framing | Primary near-term target; current PDF is anonymous and within the 8-page limit |
 | **AAAI 2027** | 7/28 (abstract) | Medium-high — top-tier, needs broader validation | Stretch; only if larger workflow-suite validation lands |
 | **EMNLP ORACLE** (workshop) | 9/18 | High — reliability/operational-eval theme fits exactly | De-risked fallback (official venue per #11 sheet) |
-- **Strategy**: target **DAI 2026** as primary (industry track rewards the reliability + cost-Pareto
-  framing); **EMNLP ORACLE workshop (9/18)** as the de-risked fallback if Exp 2/3 slip past the DAI
-  window; **AAAI 2027** only if Exp 2/3 deliver strong measured behavioral results.
+- **Strategy**: target **DAI 2026 Research Track** as primary (benchmark + reliability-evaluation framing);
+  **EMNLP ORACLE workshop (9/18)** as the de-risked fallback if broader validation slips past the DAI
+  window; **AAAI 2027** only if larger workflow-suite and cross-model validation land.

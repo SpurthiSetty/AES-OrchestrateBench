@@ -40,7 +40,7 @@ python3 scripts/reproduce_exp1.py
 python3 scripts/analyze_measured.py
 ```
 
-- **Show**: every §5.2–§5.4 number regenerated from the committed CSVs, with bootstrap CIs:
+- **Show**: every §5.2–§5.5 number regenerated from the committed CSVs, with bootstrap CIs:
   - **Exp 2**: tool fault fully recovered (**1.0**); ambiguous delegation partially recovers
     (**0.30**); three semantic modes fail (**0.0**); loan-approval framing preserves the ordering
     while shifting magnitudes.

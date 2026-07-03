@@ -640,9 +640,10 @@ Failure scenarios are regenerable from fixed seeds, and every reported aggregate
 is recomputable from committed artifacts. The Exp 1 reproduction script
 regenerates the \S5.1 table from the committed gold set (offline baselines need
 no key; the LLM row runs when the Anthropic API key is set). The measured
-analysis script recomputes every Exp 2/3/4 number above (per-mode recovery,
-cascade radius by depth, decomposition fidelity) with bootstrap 95\% CIs and
-exact paired permutation tests, directly from the committed CSVs (offline, no key).
+analysis script recomputes every Exp 2/3/4 and policy-probe number above
+(per-mode recovery, cascade radius by depth, decomposition fidelity, and
+trusted-state ablation) with bootstrap 95\% CIs and exact paired permutation
+tests, directly from the committed CSVs (offline, no key).
 Code is Apache-2.0; data and failure scenarios are seeded; the full test suite
 (151 tests) runs offline on Python 3.10/3.11/3.12. Total real-LLM cost across the
 project is $\approx\$4$ (Sonnet 4.6; short arithmetic prompts), so reproduction

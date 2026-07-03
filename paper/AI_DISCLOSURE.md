@@ -6,9 +6,9 @@
 
 ## AI-usage statement
 
-Generative AI tools (Anthropic's Claude, via the Claude Code assistant) were used
-substantially in preparing this work, under the direction and full responsibility
-of the human authors:
+Generative AI tools (including Anthropic's Claude via Claude Code and OpenAI
+Codex) were used substantially in preparing this work, under the direction and
+full responsibility of the human authors:
 
 - **Writing** — drafting and editing manuscript prose (abstract, section text, table
   captions), always reviewed and approved by the authors.
@@ -30,7 +30,7 @@ the content, including any errors.
 ## Conflict-of-interest note (separate OpenReview COI field)
 
 The authors' affiliation is stated in the OpenReview form. The system under test in
-this paper is Anthropic's Claude (`claude-sonnet-4-6`), which was also used as the
-writing/coding assistant above; the authors have no financial relationship with
-Anthropic beyond ordinary metered API usage. `[Authors to confirm/complete any
-additional COI in the form.]`
+this paper is Anthropic's Claude (`claude-sonnet-4-6`), and Anthropic/OpenAI tools
+were also used as writing/coding assistants above; the authors have no financial
+relationship with Anthropic or OpenAI beyond ordinary metered API usage. `[Authors
+to confirm/complete any additional COI in the form.]`
