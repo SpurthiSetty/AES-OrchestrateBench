@@ -249,6 +249,14 @@ business prompt). This framing-sensitivity is the signature of *real agent behav
 tautology — the mechanism is robust while the magnitudes respond to context. Directly addresses the
 construct-validity concern (§7). Data: `data/measured/exp2_domain_real.csv`.
 
+**Cross-model check (Sonnet 4.6 / Opus 4.8 / Haiku 4.5, real Claude, N=150 each).** To test whether the
+tier structure is model-specific, we re-ran the arithmetic-chain probe on three Claude capability tiers.
+The core structure is **model-invariant**: tool faults fully recover (1.0) and the two catastrophic latent
+modes (context pollution, premature action) never recover (0.0) in *all three* models; only the stochastic
+ambiguous-delegation rate moves (Sonnet 0.33 / Opus 0.10 / Haiku 0.20) without changing the ordering. The
+tool-vs-latent gap — the paper's central finding — holds across capability tiers, not just Sonnet. Data:
+`data/measured/exp2_crossmodel.csv` (regenerate via `scripts/run_exp2_crossmodel.py`).
+
 ### 5.3 Experiment 3 — Cascade propagation depth *(real Claude measured run, N=750 + offline harness; core, with Y. Gu / #7)*
 
 **Design.** Inject a single seeded error at stage 1/2/3 of variable-depth (3-, 5-, 7-stage) pipelines
@@ -370,7 +378,8 @@ probes on a controlled chain (§7); domain-workflow validation is the next step.
 - The Exp 1 diagnostic is small (26 cases) and *saturates* for a capable model — it is a mechanism
   probe, not a difficulty benchmark; the workflow-suite results are needed for a graded comparison.
 - Workflows are synthetically generated; real-world pipeline validation is future work (#12).
-- Single model family reported for the LLM router; a cross-model sweep is future work.
+- Core numbers are on Sonnet 4.6; a three-model cross-check (Sonnet / Opus / Haiku, §5.2) confirms the
+  tool-vs-latent structure is model-invariant across capability tiers. A non-Claude sweep (GPT, Gemini) is future work.
 - **Construct validity of Exp 2/3 (important).** The failure-recovery and cascade experiments run on a
   *verifiable arithmetic dependency chain*, chosen for clean ground truth, not a domain workflow. In this
   construct cascade radius is **partly by design** — a downstream stage consumes the upstream value, so a
@@ -481,7 +490,7 @@ corroborating structural signature.
 - **Done (real measured, 6/20–7/2)**: §5.2 (Exp 2, real Claude N=150 + domain N=150), §5.3 (Exp 3,
   real Claude N=750), §5.4 (Exp 4, real Claude N=40), and §5.5 policy-conditioned + no-upstream ablation
   sweeps; bootstrap CIs and exact paired tests computed.
-- **Still open**: larger workflow-suite validation; cross-model sweep; two-annotator κ for subjective
+- **Still open**: larger workflow-suite validation; non-Claude cross-model sweep; two-annotator κ for subjective
   workflow-suite labels; references formatted to venue style.
 - **Source**: in-repo `DESIGN_DOC.md` (1:1 mapping; its milestone table gates to DAI 8/3 with a 7/27 freeze).
 

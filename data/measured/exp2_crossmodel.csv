@@ -1,0 +1,6 @@
+failure_mode,success_claude-sonnet-4-6,success_claude-opus-4-8,success_claude-haiku-4-5,max_abs_delta
+tool_invocation_error,1.0,1.0,1.0,0.0
+ambiguous_delegation,0.3333333333333333,0.1,0.2,0.2333333333333333
+context_pollution,0.0,0.0,0.0,0.0
+conflicting_outputs,0.0,0.1,0.0,0.1
+premature_action,0.0,0.0,0.0,0.0
