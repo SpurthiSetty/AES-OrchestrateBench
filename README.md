@@ -43,6 +43,7 @@ Useful repository documents:
 - [DESIGN_DOC.md](DESIGN_DOC.md)
 - [REPRODUCIBILITY.md](REPRODUCIBILITY.md)
 - [data/measured/README.md](data/measured/README.md)
+- [docs/README.md](docs/README.md)
 
 ## Current In-Repo Findings
 
