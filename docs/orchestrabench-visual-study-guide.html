@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OrchestraBench Visual Study Guide</title>
+  <style>
+    :root {
+      --bg: #f4f1ea;
+      --paper: #fffdfa;
+      --ink: #132238;
+      --muted: #5b6778;
+      --line: #d9d3c7;
+      --navy: #0f2747;
+      --blue: #1f5a7a;
+      --teal: #1d6f6d;
+      --gold: #b88a3b;
+      --rose: #9f4f44;
+      --shadow: 0 18px 40px rgba(15, 39, 71, 0.08);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Avenir Next", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(184, 138, 59, 0.12), transparent 28%),
+        linear-gradient(180deg, #f7f5ef 0%, #f1ede4 100%);
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--blue);
+    }
+
+    .hero a {
+      color: #9fd5ff;
+    }
+
+    .hero a:hover {
+      color: #ffffff;
+    }
+
+    .shell {
+      width: min(1180px, calc(100vw - 32px));
+      margin: 24px auto 48px;
+    }
+
+    .hero {
+      background:
+        linear-gradient(135deg, rgba(15, 39, 71, 0.98), rgba(31, 90, 122, 0.94)),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+      color: #f7f8fb;
+      padding: 38px 40px 34px;
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .hero h1,
+    h2,
+    h3 {
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 {
+      margin: 18px 0 14px;
+      font-size: clamp(2.4rem, 5vw, 4.3rem);
+      line-height: 1.04;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 900px;
+      font-size: 1.14rem;
+      color: rgba(247, 248, 251, 0.92);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr;
+      gap: 18px;
+      margin-top: 26px;
+    }
+
+    .meta-card,
+    .quick-card {
+      border-radius: 18px;
+      padding: 18px 20px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 0.93rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .page-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0 24px;
+    }
+
+    .page-nav a {
+      text-decoration: none;
+      color: var(--navy);
+      background: rgba(255, 253, 250, 0.9);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 700;
+      box-shadow: 0 6px 16px rgba(15, 39, 71, 0.05);
+    }
+
+    .card {
+      background: var(--paper);
+      border: 1px solid rgba(217, 211, 199, 0.9);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 30px 32px;
+      margin: 20px 0;
+      scroll-margin-top: 20px;
+    }
+
+    .card h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.8rem, 4vw, 2.65rem);
+      line-height: 1.08;
+    }
+
+    .card h3 {
+      margin: 24px 0 10px;
+      font-size: 1.4rem;
+    }
+
+    .lede {
+      font-size: 1.06rem;
+      color: var(--muted);
+      max-width: 920px;
+    }
+
+    .status-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .status-box {
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: #fbf8f1;
+      border: 1px solid var(--line);
+    }
+
+    .status-label {
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .status-value {
+      font-size: 1.06rem;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .callout {
+      margin-top: 18px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      border-left: 6px solid var(--teal);
+      background: linear-gradient(180deg, #eef7f4, #f7fbfa);
+      font-size: 1.02rem;
+      font-weight: 700;
+    }
+
+    .callout strong {
+      color: var(--navy);
+    }
+
+    .grid-2,
+    .grid-3,
+    .metric-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .metric-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .mini {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px 18px 16px;
+      background: #fffdf9;
+    }
+
+    .mini strong {
+      display: block;
+      font-size: 1.06rem;
+      margin-bottom: 4px;
+      color: var(--navy);
+    }
+
+    .metric {
+      padding: 18px 18px 16px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fcfaf6, #f6f1e8);
+      border: 1px solid var(--line);
+    }
+
+    .metric .value {
+      font-size: 2rem;
+      line-height: 1;
+      font-weight: 900;
+      margin-bottom: 8px;
+      color: var(--navy);
+    }
+
+    .metric .label {
+      font-size: 0.93rem;
+      color: var(--muted);
+    }
+
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 22px 0 18px;
+    }
+
+    .node {
+      flex: 1 1 200px;
+      text-align: center;
+      padding: 18px 16px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #f9f6ef, #f5efe4);
+      border: 1px solid var(--line);
+      font-weight: 800;
+    }
+
+    .arrow {
+      font-size: 1.8rem;
+      color: var(--gold);
+      font-weight: 900;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 16px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 640px;
+    }
+
+    th,
+    td {
+      text-align: left;
+      vertical-align: top;
+      padding: 12px 10px;
+      border-bottom: 1px solid #e7e0d3;
+    }
+
+    th {
+      background: #f7f2e8;
+      color: var(--navy);
+      font-size: 0.96rem;
+    }
+
+    .good {
+      color: #0f6f52;
+      font-weight: 800;
+    }
+
+    .warn {
+      color: #9b6514;
+      font-weight: 800;
+    }
+
+    .bad {
+      color: #8f352d;
+      font-weight: 800;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 220px 1fr 72px;
+      gap: 12px;
+      align-items: center;
+      margin: 10px 0;
+    }
+
+    .bar {
+      height: 14px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #e7e2d7;
+    }
+
+    .fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--teal), var(--blue));
+    }
+
+    .figure-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    figure {
+      margin: 0;
+      padding: 16px;
+      border-radius: 18px;
+      background: #fffdfa;
+      border: 1px solid var(--line);
+    }
+
+    figure img {
+      width: 100%;
+      display: block;
+      border-radius: 12px;
+      border: 1px solid #e6e1d5;
+      background: #fff;
+    }
+
+    figcaption {
+      margin-top: 10px;
+      font-size: 0.94rem;
+      color: var(--muted);
+    }
+
+    .note {
+      margin-top: 14px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      border: 1px dashed #c4b79e;
+      background: #fbf8f1;
+      color: var(--muted);
+    }
+
+    details {
+      margin: 12px 0;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fffdf9;
+      padding: 14px 16px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .script {
+      margin-top: 14px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: #132238;
+      color: #edf2f7;
+      white-space: pre-wrap;
+      font-family: "SFMono-Regular", Menlo, Consolas, monospace;
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .links a {
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      padding: 10px 14px;
+      background: #fffdf9;
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+      padding: 14px 8px 8px;
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .grid-2,
+      .grid-3,
+      .metric-grid,
+      .figure-grid,
+      .status-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .bar-row {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 28px 24px;
+      }
+
+      .card {
+        padding: 24px 20px;
+      }
+
+      .shell {
+        width: min(1180px, calc(100vw - 18px));
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="hero">
+      <div class="eyebrow">Research companion page</div>
+      <h1>OrchestraBench Visual Study Guide</h1>
+      <p>
+        A reader-friendly guide to the benchmark's motivation, experimental
+        logic, main findings, and important caveats. This page is meant to help
+        someone understand the project quickly; the paper remains the
+        authoritative source.
+      </p>
+      <div class="hero-grid">
+        <div class="meta-card">
+          <strong>Source of truth</strong>
+          <p>
+            Based on the current paper draft in
+            <a href="../paper/main.pdf">paper/main.pdf</a> and the repository's
+            merged results as of <strong>July 15, 2026</strong>.
+          </p>
+          <div class="meta-row">
+            <span class="tag">Audience: teammates, reviewers, managers</span>
+            <span class="tag">Use: onboarding and short presentations</span>
+            <span class="tag">Status: explanatory companion, not new evidence</span>
+          </div>
+        </div>
+        <div class="quick-card">
+          <strong>Read this page when you want to answer:</strong>
+          <p>
+            What does OrchestraBench actually measure? Which results are the
+            real headline? What should we say carefully when discussing the
+            benchmark with others?
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <nav class="page-nav" aria-label="Sections">
+      <a href="#overview">Overview</a>
+      <a href="#terms">Key terms</a>
+      <a href="#design">Benchmark design</a>
+      <a href="#exp1">Experiment 1</a>
+      <a href="#exp2">Experiment 2</a>
+      <a href="#exp3">Experiment 3</a>
+      <a href="#exp4">Experiment 4</a>
+      <a href="#probe">Policy probe</a>
+      <a href="#novelty">Novelty and limits</a>
+      <a href="#repo">Repo context</a>
+    </nav>
+
+    <section id="overview" class="card">
+      <h2>1. What this project is really about</h2>
+      <p class="lede">
+        The paper's core claim is not "Claude can solve arithmetic." It is that
+        orchestration reliability has its own measurable structure: systems fail
+        differently depending on whether the fault is visible, ambiguous, or
+        latent, and those failures propagate differently through a pipeline.
+      </p>
+      <div class="flow">
+        <div class="node">Existing benchmarks report final task success</div>
+        <div class="arrow">&rarr;</div>
+        <div class="node">OrchestraBench injects controlled failures</div>
+        <div class="arrow">&rarr;</div>
+        <div class="node">Measures recovery and cascade propagation</div>
+        <div class="arrow">&rarr;</div>
+        <div class="node">Compares routing and decomposition quality</div>
+      </div>
+      <div class="callout">
+        <strong>Takeaway:</strong> the benchmark asks whether an orchestration
+        pipeline knows that it is wrong, contains the damage, and exposes useful
+        structure for repair, audit, or delegation.
+      </div>
+      <div class="status-strip">
+        <div class="status-box">
+          <div class="status-label">Routing diagnostic</div>
+          <div class="status-value">Exp 1, 26 cases</div>
+        </div>
+        <div class="status-box">
+          <div class="status-label">Failure recovery</div>
+          <div class="status-value">Exp 2, N=150</div>
+        </div>
+        <div class="status-box">
+          <div class="status-label">Cascade by depth</div>
+          <div class="status-value">Exp 3, N=750</div>
+        </div>
+        <div class="status-box">
+          <div class="status-label">Decomposition quality</div>
+          <div class="status-value">Exp 4, N=40</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="terms" class="card">
+      <h2>2. Eight terms to know before reading the results</h2>
+      <div class="grid-2">
+        <div class="mini">
+          <strong>Multi-agent system</strong>
+          Multiple specialized roles or stages cooperate on one larger task.
+        </div>
+        <div class="mini">
+          <strong>Orchestrator</strong>
+          The control layer that routes, decomposes, invokes tools, and manages
+          retries or recovery behavior.
+        </div>
+        <div class="mini">
+          <strong>Routing policy</strong>
+          A mechanism that decides which action or execution path to take.
+        </div>
+        <div class="mini">
+          <strong>Failure injection</strong>
+          A controlled fault deliberately inserted into the run so the same case
+          can be reproduced.
+        </div>
+        <div class="mini">
+          <strong>Recovery rate</strong>
+          The share of injected failures after which the final answer is still
+          correct.
+        </div>
+        <div class="mini">
+          <strong>Cascade radius</strong>
+          How many downstream stages are corrupted by one upstream fault.
+        </div>
+        <div class="mini">
+          <strong>Latent failure</strong>
+          A hidden error that still looks plausible to the next stage.
+        </div>
+        <div class="mini">
+          <strong>Decomposition fidelity</strong>
+          How closely a produced plan matches the intended subtask structure.
+        </div>
+      </div>
+    </section>
+
+    <section id="design" class="card">
+      <h2>3. What the benchmark adds beyond ordinary pass/fail evaluation</h2>
+      <p class="lede">
+        A single success rate cannot tell a team which component needs repair.
+        OrchestraBench adds controlled fault injection, per-mode recovery, and
+        cascade measurement so that orchestration can be debugged as a system.
+      </p>
+      <div class="grid-3">
+        <div class="mini">
+          <strong>Generate workflows</strong>
+          Template-based finance, HR, and DevOps-style task graphs with
+          explicit dependencies.
+        </div>
+        <div class="mini">
+          <strong>Choose a policy</strong>
+          Fixed, Heuristic, TF-IDF, LLM-as-Router, Retry, or Oracle.
+        </div>
+        <div class="mini">
+          <strong>Measure reliability</strong>
+          Routing accuracy, recovery rate, cascade radius, and decomposition
+          quality.
+        </div>
+      </div>
+      <h3>Useful mental model</h3>
+      <div class="metric-grid">
+        <div class="metric">
+          <div class="value">Visible</div>
+          <div class="label">Tool failures are often recoverable because the system can notice them.</div>
+        </div>
+        <div class="metric">
+          <div class="value">Ambiguous</div>
+          <div class="label">Some failures are partially recoverable because intent can sometimes be inferred.</div>
+        </div>
+        <div class="metric">
+          <div class="value">Latent</div>
+          <div class="label">Plausible wrong state is the hardest category because later stages trust it.</div>
+        </div>
+        <div class="metric">
+          <div class="value">Structural</div>
+          <div class="label">Pipeline depth matters because each downstream stage can inherit upstream damage.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="exp1" class="card">
+      <h2>4. Experiment 1: routing reliability is a mechanism question</h2>
+      <p class="lede">
+        This experiment is a focused diagnostic, not a giant workload leaderboard.
+        It asks: when surface flags are misleading, does the router still read
+        the task description and recover the right intent?
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Policy</th>
+              <th>Aligned</th>
+              <th>Adversarial</th>
+              <th>Interpretation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Heuristic</td>
+              <td class="good">100%</td>
+              <td class="bad">0%</td>
+              <td>Perfect when the flags are honest; collapses when the metadata misleads.</td>
+            </tr>
+            <tr>
+              <td>TF-IDF</td>
+              <td>88%</td>
+              <td class="good">100%</td>
+              <td>Reading the task description is enough to solve the adversarial set.</td>
+            </tr>
+            <tr>
+              <td>LLM Router</td>
+              <td class="good">100%</td>
+              <td class="good">100%</td>
+              <td>Semantic routing also clears the adversarial set.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout">
+        <strong>Interpret carefully:</strong> Exp 1 does not prove that an LLM
+        router is always required. It shows that <em>description-aware routing</em>
+        beats flag-only routing on this diagnostic.
+      </div>
+      <div class="figure-grid">
+        <figure>
+          <img src="../figures/exp1_routing_ladder.png" alt="Experiment 1 routing ladder figure">
+          <figcaption>
+            The aligned-versus-adversarial split is the real story: rule-based
+            flag matching is brittle, while reading the description closes the gap.
+          </figcaption>
+        </figure>
+        <div class="mini">
+          <strong>Why TF-IDF matters</strong>
+          TF-IDF is not just a baseline. It proves that the key distinction is
+          "reads the description" versus "matches the flags," which makes the
+          routing-mechanism claim much cleaner than a simple LLM-versus-non-LLM
+          story.
+        </div>
+      </div>
+      <div class="note">
+        Scope note: this diagnostic is only 26 cases and is intentionally sharp,
+        so the result is a mechanism probe rather than a broad production
+        difficulty benchmark.
+      </div>
+    </section>
+
+    <section id="exp2" class="card">
+      <h2>5. Experiment 2: recovery splits into three tiers</h2>
+      <p class="lede">
+        Five failure modes are injected into a verifiable dependency chain and
+        graded against exact ground truth. The result is not a smooth decline;
+        it breaks into three distinct reliability tiers.
+      </p>
+      <div class="bar-row">
+        <div>Tool invocation error</div>
+        <div class="bar"><div class="fill" style="width: 100%"></div></div>
+        <div class="good">1.00</div>
+      </div>
+      <div class="bar-row">
+        <div>Ambiguous delegation</div>
+        <div class="bar"><div class="fill" style="width: 30%"></div></div>
+        <div class="warn">0.30</div>
+      </div>
+      <div class="bar-row">
+        <div>Context pollution</div>
+        <div class="bar"><div class="fill" style="width: 0%"></div></div>
+        <div class="bad">0.00</div>
+      </div>
+      <div class="bar-row">
+        <div>Conflicting outputs</div>
+        <div class="bar"><div class="fill" style="width: 0%"></div></div>
+        <div class="bad">0.00</div>
+      </div>
+      <div class="bar-row">
+        <div>Premature action</div>
+        <div class="bar"><div class="fill" style="width: 0%"></div></div>
+        <div class="bad">0.00</div>
+      </div>
+      <div class="grid-3">
+        <div class="mini">
+          <strong>Tier 1: visible tool faults</strong>
+          The system can usually notice the failure and recompute the value by hand.
+        </div>
+        <div class="mini">
+          <strong>Tier 2: ambiguous intent</strong>
+          Recovery is partial because the model sometimes infers the intended operation.
+        </div>
+        <div class="mini">
+          <strong>Tier 3: latent semantic faults</strong>
+          Plausible wrong state survives the pipeline because later stages trust it.
+        </div>
+      </div>
+      <details>
+        <summary>Why retry does not fix the latent failures</summary>
+        <p>
+          Retry repeats the same run over the same corrupted state, so it often
+          extends the damage instead of repairing the cause. The paper's framing
+          is that latent failures need detection, attribution, and state repair,
+          not blind repetition.
+        </p>
+      </details>
+      <div class="figure-grid">
+        <figure>
+          <img src="../figures/exp2_arith_vs_domain.png" alt="Experiment 2 arithmetic versus domain workflow figure">
+          <figcaption>
+            The domain-grounded loan-approval reframing shifts absolute rates,
+            but the ordering of failure modes mostly persists.
+          </figcaption>
+        </figure>
+        <div class="mini">
+          <strong>Cross-model check</strong>
+          Across Sonnet 4.6, Opus 4.8, and Haiku 4.5 (N=150 each), the
+          tool-versus-latent structure stays intact. What changes is mainly the
+          exact ambiguous-delegation rate, not the overall tier pattern.
+        </div>
+      </div>
+    </section>
+
+    <section id="exp3" class="card">
+      <h2>6. Experiment 3: deeper pipelines amplify latent damage</h2>
+      <p class="lede">
+        Once a plausible but wrong upstream value enters the chain, each
+        downstream stage has another chance to inherit it. The measured cascade
+        radius rises almost linearly with pipeline depth.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Depth</th>
+              <th>Latent cascade radius</th>
+              <th>Tool cascade radius</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>3</td><td>0.93</td><td>0.00</td></tr>
+            <tr><td>4</td><td>1.85</td><td>0.00</td></tr>
+            <tr><td>5</td><td>2.80</td><td>0.00</td></tr>
+            <tr><td>6</td><td>3.63</td><td>0.00</td></tr>
+            <tr><td>7</td><td>4.67</td><td>0.00</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="figure-grid">
+        <figure>
+          <img src="../figures/exp3_cascade_by_depth.png" alt="Experiment 3 cascade by depth figure">
+          <figcaption>
+            Latent or semantic failures grow with depth, while tool faults stay
+            contained at zero downstream corruption.
+          </figcaption>
+        </figure>
+        <div class="mini">
+          <strong>Important caveat</strong>
+          This depth trend is informative, but it is partly structural: the
+          benchmark uses a verifiable dependency chain where later stages consume
+          earlier values. The paper treats this as a controlled mechanism probe,
+          not a claim that every real workflow will scale identically.
+        </div>
+      </div>
+    </section>
+
+    <section id="exp4" class="card">
+      <h2>7. Experiment 4: a correct answer can still be a poor orchestration output</h2>
+      <p class="lede">
+        Final correctness alone does not tell you whether the output is useful
+        for delegation, audit, or local repair. Exp 4 measures decomposition
+        quality directly.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Policy</th>
+              <th>Delegation fidelity</th>
+              <th>Granularity error</th>
+              <th>Final correct</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Decompose</td>
+              <td class="good">1.00</td>
+              <td class="good">0.00</td>
+              <td class="good">1.00</td>
+            </tr>
+            <tr>
+              <td>Monolithic</td>
+              <td class="warn">0.37</td>
+              <td class="bad">2.00</td>
+              <td class="good">1.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout">
+        <strong>Headline:</strong> both policies can return the right arithmetic
+        answer, but only the decomposition policy exposes structure that a real
+        orchestrator can delegate, inspect, or recover from.
+      </div>
+    </section>
+
+    <section id="probe" class="card">
+      <h2>8. Policy probe: did the model detect the failure, or receive a trusted answer?</h2>
+      <p class="lede">
+        The policy-conditioned probe is useful, but it must be described
+        carefully: the strongest LLM row is given privileged trusted-upstream
+        state, so it is closer to a trusted-state repair probe than a clean
+        autonomous detection result.
+      </p>
+      <div class="grid-2">
+        <div class="mini">
+          <strong>With trusted upstream value</strong>
+          <div style="font-size: 2.3rem; font-weight: 900; color: var(--teal); margin: 10px 0 6px;">0.67</div>
+          Latent recovery is much stronger when the model can compare current and trusted state.
+        </div>
+        <div class="mini">
+          <strong>Without the trusted hint</strong>
+          <div style="font-size: 2.3rem; font-weight: 900; color: var(--rose); margin: 10px 0 6px;">0.08</div>
+          Recovery falls back toward baseline once the privileged signal is removed.
+        </div>
+      </div>
+      <div class="figure-grid">
+        <figure>
+          <img src="../figures/exp3_policy_cascade.png" alt="Policy-conditioned cascade containment figure">
+          <figcaption>
+            Baseline cascade grows with depth, the LLM trusted-state probe stays
+            low, and Oracle fully contains the latent failures.
+          </figcaption>
+        </figure>
+        <div class="mini">
+          <strong>Best wording for discussions</strong>
+          Say: "the probe supports trusted-state repair." Avoid saying: "the
+          model autonomously detects latent failures in deployment conditions."
+        </div>
+      </div>
+    </section>
+
+    <section id="novelty" class="card">
+      <h2>9. What is actually novel here, and what should we say cautiously?</h2>
+      <div class="grid-3">
+        <div class="mini">
+          <strong>Failure-mode-resolved recovery</strong>
+          Recovery is broken out by fault type rather than collapsed into one score.
+        </div>
+        <div class="mini">
+          <strong>Depth-aware cascade</strong>
+          The benchmark measures how many downstream stages are corrupted.
+        </div>
+        <div class="mini">
+          <strong>Routing-conditioned analysis</strong>
+          The work compares fixed, heuristic, description-aware, LLM, and Oracle-style policies.
+        </div>
+      </div>
+      <h3>Main limitations to keep front and center</h3>
+      <div class="grid-2">
+        <div class="mini">
+          <strong>Not yet a literal multi-agent production stack</strong>
+          The core experiments run one Claude agent over a staged chain.
+        </div>
+        <div class="mini">
+          <strong>Controlled arithmetic construct</strong>
+          Great for exact ground truth, but still narrower than a full workflow benchmark.
+        </div>
+        <div class="mini">
+          <strong>Small routing diagnostic</strong>
+          Exp 1 is only 26 cases and intentionally saturates for stronger routers.
+        </div>
+        <div class="mini">
+          <strong>Single family in the core runs</strong>
+          The main measured experiments are on Claude Sonnet 4.6, with a Claude-tier cross-model check.
+        </div>
+        <div class="mini">
+          <strong>Partly structural depth growth</strong>
+          The cascade-by-depth result reflects dependency-chain design as well as model behavior.
+        </div>
+        <div class="mini">
+          <strong>Trusted-state advantage in the probe</strong>
+          The strongest policy-probe row benefits from privileged upstream information.
+        </div>
+      </div>
+      <div class="callout">
+        <strong>Good external framing:</strong> OrchestraBench complements prior
+        reliability work by making recovery structure, cascade depth, and
+        routing-mechanism behavior visible and reproducible.
+      </div>
+    </section>
+
+    <section id="repo" class="card">
+      <h2>10. How this page fits the repository</h2>
+      <p class="lede">
+        This page is not meant to replace the paper, README, or blog post. It
+        sits between them: more guided than the paper, more precise than a short
+        blog post, and easier to skim than the full repository documentation.
+      </p>
+      <div class="grid-2">
+        <div class="mini">
+          <strong>Use this page for</strong>
+          New teammates, quick stakeholder walkthroughs, talk prep, and fast
+          recall of the benchmark's main logic.
+        </div>
+        <div class="mini">
+          <strong>Do not use this page as</strong>
+          A standalone source of truth for exact claims, citations, or the
+          latest paper wording. For that, always fall back to the paper and
+          committed data.
+        </div>
+      </div>
+      <div class="script">OrchestraBench asks a reliability question that ordinary agent benchmarks usually skip: not just whether a pipeline finished, but whether it routed well, recognized faults, contained the damage, and exposed enough structure to recover. The main empirical pattern is a three-tier split: visible tool faults recover, ambiguous delegation only partly recovers, and latent semantic faults almost never recover. That makes detection, attribution, and trusted-state validation central mechanisms for robust orchestration.</div>
+      <div class="links">
+        <a href="../README.md">Repository README</a>
+        <a href="../paper/main.pdf">Paper PDF</a>
+        <a href="../BLOG.md">Public-facing blog post</a>
+        <a href="../DEMO.md">Demo runbook</a>
+      </div>
+    </section>
+
+    <div class="footer">
+      OrchestraBench Visual Study Guide · Companion page for the
+      Research-OrchestrateBench repository · Updated July 15, 2026
+    </div>
+  </div>
+</body>
+</html>
