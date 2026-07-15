@@ -7,7 +7,9 @@
 
 \usepackage{booktabs}
 \usepackage{graphicx}
+\usepackage{xurl}
 \graphicspath{{../figures/}{./figures/}{./}}
+\emergencystretch=1.5em
 
 \settopmatter{printacmref=false}
 
@@ -99,7 +101,7 @@ orchestration framework on \emph{reliability} rather than ergonomics.
   \item A \textbf{seed-reproducible} workflow + failure-injection harness
   (scenarios regenerable from seeds; aggregates recomputable from committed
   artifacts) with templated enterprise workflow families.
-  \item A \textbf{routing-policy comparison} (Fixed / Heuristic / LLM / Oracle)
+  \item A \textbf{routing-policy comparison} (Fixed, Heuristic, LLM, and Oracle)
   with bootstrap confidence intervals and paired significance testing where
   applicable, isolating the routing \emph{mechanism} effect on adversarial cases
   (Exp 1); the graded ``when does routing pay off'' comparison on larger
@@ -217,8 +219,8 @@ and our response:
   MAS-FIRE by adding a behavioral, depth-resolved view of the same failure
   taxonomy.
   \item \textbf{Attribution benchmarks~\cite{traceelephant,attribution} are
-  observational/post-hoc} --- a different instrument from seeded, reproducible
-  injection + recovery.
+  observational or post-hoc} --- a different instrument from seeded,
+  reproducible injection and recovery.
   \item \textbf{Internal overlap: IntentBench~\cite{intentbench}} evaluates
   whether the agent's \emph{understanding of intent} is correct (intent-spec vs.\
   syntactic tool-call correctness); OrchestraBench evaluates which
@@ -235,7 +237,7 @@ analysis scripts --- paired with the initial mechanism-probe results reported
 here; the broad multi-domain evaluation it is designed to host is future work.
 
 \textbf{Workflow suites.} Synthetically generated from templated task graphs
-(stages, inter-task dependencies, per-task \texttt{complexity\_score}),
+(stages, inter-task dependencies, per-task complexity score),
 author-screened for realism. Three enterprise families: finance approval
 (4 stages), HR onboarding (5 stages), DevOps deployment (5 stages).
 
@@ -353,6 +355,7 @@ setting for a graded comparison once the diagnostic no longer saturates.
 task the router reads. The flag heuristic's aligned/adversarial cliff (100\%/0\%)
 is flattened by a description-reading TF-IDF router (88\%/100\%) with no model,
 isolating the heuristic's blind spot as a mechanism property.}
+\Description{A bar chart comparing routing accuracy for Fixed, Heuristic, TF-IDF, and LLM routers on aligned versus adversarial cases. Fixed is low on both, Heuristic is perfect on aligned but zero on adversarial, and both TF-IDF and LLM are near-ceiling on adversarial cases.}
 \label{fig:exp1ladder}
 \end{figure}
 
@@ -363,7 +366,7 @@ measured run; core)}
 sub-agent outputs}, \emph{premature action} --- injected at the \textbf{prompt
 level} into a verifiable arithmetic dependency chain executed by a \textbf{real
 Claude agent} (Sonnet 4.6), under fixed, heuristic, and retry policies. Real
-recovery / cascade are measured by exact-match against ground truth; the
+recovery and cascade are measured by exact-match against ground truth; the
 measured-run module is included in the repository.
 
 \begin{table}[t]
@@ -403,15 +406,15 @@ outputs, premature action) \textbf{never recover} (final-task success
 present reproduces the error and only \textbf{lengthens time-to-detection} ---
 retry repairs retryable tool faults but not failures needing attribution, state
 repair, or semantic validation (RQ3/RQ4). The stochastic cells now carry
-informative CIs (ambiguous 0.30 [0.13, 0.47]); the fully-deterministic 0.0 / 1.0
+informative CIs (ambiguous 0.30 [0.13, 0.47]); the fully-deterministic 0.0 and 1.0
 cells remain point masses by construction (\S\ref{sec:limitations}).
 
 \textbf{Domain-grounded validation (loan-approval workflow, $N{=}150$).} To test
 whether these signatures are an artifact of the abstract arithmetic chain, we
 re-ran the \emph{identical} failure injection on a domain-grounded variant: the
-same verifiable computation reframed as a multi-role loan-approval pipeline
-(Intake Officer $\to$ Risk Analyst $\to$ Compliance Officer $\to$ Approval
-Manager), each stage prompted in business terms. \textbf{The core ordering
+same verifiable computation reframed as a four-role loan-approval pipeline
+spanning Intake Officer, Risk Analyst, Compliance Officer, and Approval
+Manager, with each stage prompted in business terms. \textbf{The core ordering
 holds}: context pollution, conflicting outputs, and premature action still fail
 completely, while tool faults remain the most recoverable
 (Figure~\ref{fig:exp2}). Crucially, the \textbf{absolute rates shift with
@@ -428,10 +431,11 @@ structural tautology, and directly addresses the construct-validity concern
 \caption{Experiment 2 --- failure-mode final-task success, arithmetic chain vs.\
 loan-approval workflow; the failure-mode \emph{ordering} is robust across framings
 while absolute rates shift (real Claude, $N{=}150$ each).}
+\Description{A grouped bar chart comparing arithmetic-chain and loan-approval variants across five failure modes. Tool faults remain the most recoverable, ambiguous delegation shifts modestly, and the three latent semantic modes remain at zero in both framings.}
 \label{fig:exp2}
 \end{figure}
 
-\textbf{Cross-model check (Sonnet 4.6 / Opus 4.8 / Haiku 4.5, $N{=}150$ each).}
+\textbf{Cross-model check (Sonnet 4.6, Opus 4.8, and Haiku 4.5; $N{=}150$ each).}
 To test whether the tier structure is specific to one model, we re-ran the
 arithmetic-chain probe on three Claude tiers spanning the weak/mid/strong
 capability range (Table~\ref{tab:crossmodel}). The core structure is
@@ -445,10 +449,10 @@ within $n{=}30$ noise). The tool-vs-latent gap --- the paper's central finding
 
 \begin{table}[t]
 \centering
-\caption{Cross-model check: per-mode final-task success on the arithmetic chain
-across three Claude tiers (real Claude, $N{=}150$ each, $n{=}30$/mode;
-\texttt{exp2\_crossmodel.csv}). The tool-vs-latent structure is invariant; only
-the stochastic ambiguous rate moves with the model.}
+\caption{Cross-model check on the arithmetic chain across three Claude tiers
+(Sonnet 4.6, Opus 4.8, Haiku 4.5; $N{=}150$ each, $n{=}30$/mode). The
+tool-vs-latent structure is invariant; only the stochastic ambiguous-delegation
+rate moves with the model.}
 \label{tab:crossmodel}
 \small
 \begin{tabular}{@{}lccc@{}}
@@ -474,10 +478,9 @@ which has no stages-traversed metric.
 \begin{table}[t]
 \centering
 \caption{Experiment 3: mean cascade radius by pipeline depth (real Claude,
-$N{=}750$; latent modes pooled, $n{=}120$/depth; 95\% bootstrap CI). Latent
-cascade radius grows monotonically with depth: the three catastrophic modes track
-depth $-$ 2 exactly, while ambiguous delegation runs lower as it partially
-recovers.}
+$N{=}750$; latent-mode pool, $n{=}120$/depth; 95\% bootstrap CI). Latent cascade
+radius grows monotonically with depth: the three catastrophic modes track depth
+$-$ 2 exactly, while ambiguous delegation runs lower as it partially recovers.}
 \label{tab:exp3}
 \small
 \begin{tabular}{@{}lcc@{}}
@@ -514,6 +517,7 @@ than as the paper's headline.
 \caption{Experiment 3 --- mean cascade radius vs.\ pipeline depth; latent/semantic
 modes scale 0.93 $\to$ 4.67 across depths 3--7 while tool faults stay at
 0 (real Claude, $N{=}750$).}
+\Description{A two-line plot of mean cascade radius versus pipeline depth. The latent or semantic curve rises steadily from just under 1 at depth 3 to nearly 4.7 at depth 7, while the tool-invocation curve stays at zero throughout.}
 \label{fig:exp3}
 \end{figure}
 
@@ -532,6 +536,7 @@ Claude, $N{=}40$; 95\% bootstrap CI; exact permutation $p$ over the 20 shared
 tasks). Zero-width CIs are degenerate by construction (\S\ref{sec:setup}).}
 \label{tab:exp4}
 \small
+\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}lccc@{}}
 \toprule
 \textbf{Policy} & \textbf{Deleg.\ fidelity} & \textbf{Granularity err.} &
@@ -540,8 +545,8 @@ tasks). Zero-width CIs are degenerate by construction (\S\ref{sec:setup}).}
 decompose & 1.00 [1.00, 1.00] & 0.00 [0.00, 0.00] & 1.00 \\
 monolithic & 0.37 [0.33, 0.42] & 2.00 [2.00, 2.00] & 1.00 \\
 \midrule
-paired $\Delta$ & \multicolumn{3}{l}{fidelity $+0.63$ [0.58, 0.67], $p{=}1.9{\times}10^{-6}$;
-granularity $-2.0$, $p{=}1.9{\times}10^{-6}$} \\
+paired $\Delta$ (fidelity) & \multicolumn{3}{l}{$+0.63$ [0.58, 0.67], $p{=}1.9{\times}10^{-6}$} \\
+paired $\Delta$ (gran.) & \multicolumn{3}{l}{$-2.0$, $p{=}1.9{\times}10^{-6}$} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -613,6 +618,7 @@ contains latent cascades (\texttt{exp2\_ablation\_real.csv}).
 \caption{Experiment 3 --- mean latent cascade radius vs.\ pipeline depth per
 routing policy; baseline grows with depth while the trusted-state LLM probe stays
 nearly flat and Oracle fully contains (real Claude, $N{=}225$).}
+\Description{A three-line plot of latent cascade radius by pipeline depth for baseline, LLM-as-router, and Oracle policies. The baseline rises sharply with depth, the LLM line stays low and nearly flat, and Oracle remains at zero across all depths.}
 \label{fig:policy}
 \end{figure}
 
@@ -626,7 +632,7 @@ recovered (0.30, the agent sometimes infers the intended operation), and the
 remaining three latent/semantic modes are \emph{never} recovered (0.0
 final-task success); and \textbf{retry does not repair the latent modes}: it
 reproduces the failure and only lengthens time-to-detection, so
-\emph{detection/attribution}, not blind retry, is the necessary containment
+\emph{detection and attribution}, not blind retry, is the necessary containment
 mechanism. Crucially this split is \emph{model behavior, not a construct
 artifact}: it survives reframing the identical computation as a loan-approval
 workflow --- the failure-mode ordering persists while absolute rates shift with
@@ -651,32 +657,31 @@ domain-workflow validation is the next step.
   \item Workflows are synthetically generated; real-world pipeline validation is
   future work.
   \item \textbf{Model coverage.} The core Exp 2--4 numbers are on Claude Sonnet
-  4.6. A three-model cross-check (Sonnet 4.6 / Opus 4.8 / Haiku 4.5,
+  4.6. A three-model cross-check (Sonnet 4.6, Opus 4.8, and Haiku 4.5;
   Table~\ref{tab:crossmodel}) confirms the tool-vs-latent structure is
   \emph{model-invariant} across capability tiers --- tool faults fully recovered
   and the catastrophic latent modes never recovered in all three --- with only
-  the stochastic ambiguous rate moving. A broader non-Claude sweep (e.g.\ GPT,
-  Gemini) via the same \texttt{scripts/run\_exp2\_crossmodel.py} harness remains
-  future work.
-  \item \textbf{Modest samples.} Per-mode aggregates are $n{=}30$ (Exp 2) and
-  $n{=}120$/depth (Exp 3); the fully-deterministic cells still yield zero-width
+  the stochastic ambiguous rate moving. A broader non-Claude sweep (e.g.\ GPT
+  or Gemini) through the same cross-model harness remains future work.
+  \item \textbf{Modest samples.} Per-mode aggregates are $n{=}30$ in
+  Experiment~2 and $n{=}120$ per depth in Experiment~3; the fully-deterministic cells still yield zero-width
   CIs by construction (a corrupted latent state always fails the final task),
   while the stochastic cells now carry informative intervals. Larger, more
   diverse workflow suites remain future work.
-  \item \textbf{Construct validity of Exp 2/3.} The failure-recovery and cascade
+  \item \textbf{Construct validity of Experiments~2 and~3.} The failure-recovery and cascade
   experiments run on a \emph{verifiable arithmetic dependency chain}, chosen for
   clean ground truth, not a domain workflow. In this construct cascade radius is
   \textbf{partly by design} --- a downstream stage consumes the upstream value,
   so a latent corruption propagates to $\sim$(depth $-$ 2) stages --- so we
-  present Exp 2/3 as \textbf{controlled mechanism probes}. The evidence that this
+  present Experiments~2 and~3 as \textbf{controlled mechanism probes}. The evidence that this
   measures model behavior rather than a tautology is the
   non-determinism we observe (ambiguous delegation stays below the structural
   maximum at every depth --- mean cascade 2.2 vs.\ 3 at depth 5 --- and recovers
   0.30 of the time) and the domain-grounded re-run
   (Figure~\ref{fig:exp2}): the failure-mode \emph{ordering} mostly persists
-  across framings while absolute rates shift with context. Full finance /
-  HR / DevOps suite validation remains future work.
-  \item \textbf{Single LLM, not a literal multi-agent system.} Exp 2/3 execute one
+  across framings while absolute rates shift with context. Full finance, HR,
+  and DevOps suite validation remains future work.
+  \item \textbf{Single LLM, not a literal multi-agent system.} Experiments~2 and~3 execute one
   Claude agent over a staged chain with prompt-level fault injection ---
   simulating orchestration failure modes rather than wiring $N$ independent
   agents; a real multi-agent harness is future work.
@@ -720,10 +725,10 @@ Failure scenarios are regenerable from fixed seeds, and every reported aggregate
 is recomputable from committed artifacts. The Exp 1 reproduction script
 regenerates the \S\ref{sec:exp1} table from the committed gold set (offline baselines need
 no key; the LLM row runs when the Anthropic API key is set), and
-\texttt{scripts/run\_exp1\_baselines.py} recomputes the Fixed / Heuristic /
-TF-IDF rows and Fig.~\ref{fig:exp1ladder} fully offline. A model-agnostic
-cross-model harness (\texttt{scripts/run\_exp2\_crossmodel.py}) re-runs the
-five-mode probe on any set of models into a pooled comparison table. The measured
+the offline baseline script recomputes the Fixed, Heuristic, and TF-IDF rows
+and Fig.~\ref{fig:exp1ladder} fully offline. A model-agnostic cross-model
+harness re-runs the five-mode probe on any set of models into a pooled
+comparison table. The measured
 analysis script recomputes every Exp 2/3/4 and policy-probe number above
 (per-mode recovery, cascade radius by depth, decomposition fidelity, and
 trusted-state ablation) with bootstrap 95\% CIs and exact paired permutation
