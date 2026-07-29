@@ -11,6 +11,9 @@ requires-python = ">=3.10"
 authors = [
     {name = "Yidian Chen"},
     {name = "Yingzi Gu"},
+    {name = "Natan Vidra"},
+    {name = "Spurthi Setty"},
+    {name = "Sharon Zheng"},
 ]
 keywords = [
     "llm",

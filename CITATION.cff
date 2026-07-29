@@ -12,6 +12,12 @@ authors:
     given-names: Yidian
   - family-names: Gu
     given-names: Yingzi
+  - family-names: Vidra
+    given-names: Natan
+  - family-names: Setty
+    given-names: Spurthi
+  - family-names: Zheng
+    given-names: Sharon
 repository-code: "https://github.com/anote-ai/Research-OrchestrateBench"
 url: "https://github.com/anote-ai/Research-OrchestrateBench"
 keywords:

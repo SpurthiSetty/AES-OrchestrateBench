@@ -1,8 +1,7 @@
 # OrchestrateBench — Research Design Document
 
 **Paper #11 (T7 Orchestration)**  
-**Authors**: Yidian Chen, Yingzi Gu  
-**Supervisor**: Natan Vidra  
+**Authors**: Yidian Chen, Yingzi Gu, Natan Vidra, Spurthi Setty, Sharon Zheng
 **Date**: 2026-06-20  
 **Target venues**: DAI 2026 Industry Track (8/3) · EMNLP ORACLE workshop (9/18) · AAAI 2027 (7/28)
 
