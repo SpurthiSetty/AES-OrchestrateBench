@@ -4,9 +4,17 @@
 
 OrchestrateBench is a research benchmark for evaluating the orchestration
 meta-decision layer of multi-agent LLM systems: routing, failure recovery, and
-cascade propagation. The repository is designed to support both mechanism-level
-benchmarking inside the repo harness and paper-oriented analysis workflows that
-export Markdown and LaTeX artifacts directly.
+cascade propagation, and decomposition quality. The repository supports both
+mechanism-level benchmarking inside the repo harness and paper-oriented analysis
+workflows that export Markdown and LaTeX artifacts directly.
+
+## Start Here
+
+- [Public-facing research summary](BLOG.md)
+- [Visual study guide](docs/orchestrabench-visual-study-guide.html)
+- [Research design and experiment definitions](DESIGN_DOC.md)
+- [Reproducibility guide](REPRODUCIBILITY.md)
+- [Committed measured results](data/measured/README.md)
 
 ## What This Repository Contributes
 
@@ -25,7 +33,7 @@ The current repository includes:
 - a routing benchmark with `fixed`, `heuristic`, retry-wrapped, and LLM-based
   policy support
 - controlled failure injection derived from the MAST-style taxonomy
-- Experiment 2 and 3 analyzers with bootstrap summaries and pairwise policy
+- Experiment 2, 3, and 4 analyzers with bootstrap summaries and pairwise policy
   comparisons
 - one-command export of paper-facing `paper_summary.md` and `paper_tables.tex`
 
@@ -36,7 +44,7 @@ The current repository includes:
 | Exp 1: routing diagnostic | Measured and reproducible in-repo | `python3 scripts/reproduce_exp1.py` |
 | Exp 2: failure recovery | Auto-harness pipeline available; collaborative measured input path supported | `./scripts/run_exp23_pipeline.py --with-ci --exp3-modes context_pollution,tool_invocation_error` |
 | Exp 3: cascade propagation | Auto-harness pipeline available; collaborative measured input path supported | `./scripts/run_exp23_pipeline.py --with-ci --exp3-modes context_pollution,tool_invocation_error` |
-| Exp 4: decomposition quality | Planned | n/a |
+| Exp 4: decomposition quality | Real Claude measured run committed (`N=40`) | `python3 scripts/analyze_measured.py` |
 
 Useful repository documents:
 
@@ -60,6 +68,9 @@ external measurement has been finalized:
   larger cascade radius, and deeper pipelines amplify the effect; retry fully
   contains `tool_invocation_error` but does not generically stop latent
   corruption.
+- **Exp 4 measured decomposition probe**: the `decompose` policy reaches 1.00
+  delegation fidelity with zero granularity error, compared with 0.37
+  delegation fidelity and granularity error 2 for the monolithic policy.
 
 ## Result Provenance Matters
 
@@ -93,6 +104,7 @@ Fastest entrypoints by task:
 | Demo the routing policies | `python3 scripts/run_demo.py` |
 | Reproduce Exp 1 measured diagnostic | `python3 scripts/reproduce_exp1.py` |
 | Run Exp 2/3 auto-harness pipeline | `./scripts/run_exp23_pipeline.py --with-ci --exp3-modes context_pollution,tool_invocation_error` |
+| Recompute all committed measured-result summaries, including Exp 4 | `python3 scripts/analyze_measured.py` |
 | Scaffold real measured input files | `python3 scripts/scaffold_measured_inputs.py --output-dir data/measured` |
 | Validate a collaborative measured file | `python3 scripts/validate_measured_input.py --experiment 2 --input-file path/to/exp2_measured.csv --strict` |
 
