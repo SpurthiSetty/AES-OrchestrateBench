@@ -1,6 +1,6 @@
 # Measuring How Multi-Agent AI Pipelines Fail — Not Just Whether They Succeed
 
-*Blog post for the Anote research hub. Authors: Yidian Chen and Yingzi Gu. Based on the OrchestraBench paper (DAI 2026 submission). Non-anonymized — this is the public-facing version, safe to brand.*
+*Blog post for the Anote research hub. Authors: Yidian Chen, Yingzi Gu, Natan Vidra, Spurthi Setty, and Sharon Zheng. Based on the OrchestraBench paper (AAAI 2027 submission). Non-anonymized — this is the public-facing version, safe to brand.*
 
 ---
 

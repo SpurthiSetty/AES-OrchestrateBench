@@ -203,7 +203,7 @@ If you need a BibTeX entry, the repository currently recommends:
 ```bibtex
 @misc{orchestratebench2026,
   title   = {OrchestrateBench},
-  author  = {Yidian Chen and Yingzi Gu},
+  author  = {Yidian Chen and Yingzi Gu and Natan Vidra and Spurthi Setty and Sharon Zheng},
   year    = {2026},
   url     = {https://github.com/anote-ai/Research-OrchestrateBench},
   note    = {Research benchmark for LLM orchestration routing, failure recovery, and cascade propagation}

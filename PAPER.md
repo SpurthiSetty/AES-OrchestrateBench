@@ -1,6 +1,6 @@
 # OrchestraBench: Evaluating Multi-Agent Orchestration Failure Modes, Recovery, and Decomposition Quality
 
-**Authors**: Yidian Chen, Yingzi Gu · **Supervisor**: Natan Vidra (Anote)
+**Authors**: Yidian Chen, Yingzi Gu, Natan Vidra, Spurthi Setty, Sharon Zheng
 **Target venues**: DAI 2026 Research Track (8/3) · EMNLP ORACLE workshop (9/18) · AAAI 2027 (7/28)
 
 > **DRAFT v0.7 (2026-07-02, addresses issue #8).** Built from the approved design document (`DESIGN_DOC.md`).
