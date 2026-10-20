@@ -10,3 +10,14 @@ artifacts/
 .venv/
 venv/
 data/measured/_mock/
+
+# AES 2026 local working files
+AES2026_HANDOFF.md
+routing_annotation_sheet.xlsx
+paper/aes2026/*.aux
+paper/aes2026/*.log
+paper/aes2026/*.fls
+paper/aes2026/*.fdb_latexmk
+paper/aes2026/*.xdv
+paper/aes2026/*.blg
+paper/aes2026/*.out

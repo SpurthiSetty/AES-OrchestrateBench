@@ -1,0 +1,113 @@
+\begin{thebibliography}{15}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Cemri et~al.(2025)Cemri, Pan, Yang, Agrawal, Chopra, Tiwari, Keutzer,
+  Parameswaran, Klein, Ramchandran, Zaharia, Gonzalez, and Stoica]{mast}
+Mert Cemri, Melissa~Z. Pan, Shuyi Yang, Lakshya~A. Agrawal, Bhavya Chopra,
+  Rishabh Tiwari, et~al.
+\newblock Why do multi-agent {LLM} systems fail?, 2025.
+
+\bibitem[Chen et~al.(2026{\natexlab{a}})Chen, Wang, Mu, Wang, Liu, Feng, and
+  Wang]{traceelephant}
+Mengzhuo Chen, Junjie Wang, Fangwen Mu, Yawen Wang, Zhe Liu, Huanxiang Feng,
+  et~al.
+\newblock Seeing the whole elephant: A benchmark for failure attribution in
+  {LLM}-based multi-agent systems, 2026{\natexlab{a}}.
+
+\bibitem[Chen et~al.(2026{\natexlab{b}})Chen, Gu, Vidra, Setty, and
+  Zheng]{chen2026orchestrabench}
+Yidian Chen, Yingzi Gu, Natan Vidra, Spurthi Setty, and Sharon Zheng.
+\newblock {OrchestraBench}: Evaluating multi-agent orchestration failure modes,
+  recovery, and decomposition quality, 2026{\natexlab{b}}.
+\newblock \url{https://arxiv.org/abs/2608.05263}.
+
+\bibitem[Haing et~al.(2026)Haing, Vidra, and Setty]{devintent}
+Susana Haing, Natan Vidra, and Spurthi Setty.
+\newblock {DevIntent}: How much does {LLM}-generated code violate developer
+  intent?, 2026.
+\newblock \url{https://arxiv.org/abs/2608.07614}.
+
+\bibitem[Huang et~al.(2025)Huang, Zhou, Jin, Zhou, Chen, Wang, Yuan, Lyu, and
+  Sap]{huang2025resilience}
+Jen-Tse Huang, Jiaxu Zhou, Tailin Jin, Xuhui Zhou, Zixi Chen, Wenxuan Wang,
+  et~al.
+\newblock On the resilience of {LLM}-based multi-agent collaboration with
+  faulty agents.
+\newblock In \emph{Proceedings of the 42nd International Conference on Machine
+  Learning (ICML)}, volume 267 of \emph{PMLR}, pages 26202--26226, 2025.
+
+\bibitem[Jia et~al.(2026)Jia, Deng, Chen, Wang, and Zheng]{masfire}
+Jin Jia, Zhiling Deng, Zhuangbin Chen, Yingqi Wang, and Zibin Zheng.
+\newblock {MAS-FIRE}: Fault injection and reliability evaluation for
+  {LLM}-based multi-agent systems, 2026.
+
+\bibitem[Jimenez et~al.(2024)Jimenez, Yang, Wettig, Yao, Pei, Press, and
+  Narasimhan]{swebench}
+Carlos~E. Jimenez, John Yang, Alexander Wettig, Shunyu Yao, Kexin Pei, Ofir
+  Press, et~al.
+\newblock {SWE-bench}: Can language models resolve real-world {GitHub} issues?
+\newblock In \emph{International Conference on Learning Representations
+  (ICLR)}, 2024.
+
+\bibitem[Kulkarni and Kulkarni(2026)]{orchpattern}
+Siddhant Kulkarni and Yukta Kulkarni.
+\newblock Benchmarking multi-agent {LLM} architectures for financial document
+  processing: A comparative study of orchestration patterns, cost-accuracy
+  tradeoffs and production scaling strategies, 2026.
+
+\bibitem[Liu et~al.(2024)Liu, Yu, Zhang, Xu, Lei, Lai, Gu, Ding, Men, Yang,
+  Zhang, Deng, Zeng, Du, Zhang, Shen, Zhang, Su, Sun, Huang, Dong, and
+  Tang]{agentbench}
+Xiao Liu, Hao Yu, Hanchen Zhang, Yifan Xu, Xuanyu Lei, Hanyu Lai, et~al.
+\newblock {AgentBench}: Evaluating {LLM}s as agents.
+\newblock In \emph{International Conference on Learning Representations
+  (ICLR)}, 2024.
+
+\bibitem[Shen et~al.(2025)Shen, Liu, Dai, Wang, Miao, Tan, Pan, and
+  Wang]{shen2025propagation}
+Xu~Shen, Yixin Liu, Yiwei Dai, Yili Wang, Rui Miao, Yue Tan, et~al.
+\newblock Understanding the information propagation effects of communication
+  topologies in {LLM}-based multi-agent systems.
+\newblock In \emph{Proceedings of the 2025 Conference on Empirical Methods in
+  Natural Language Processing (EMNLP)}, pages 12347--12361, 2025.
+
+\bibitem[Tian et~al.(2025)Tian, Zhang, Tang, Cho, Li, Yi, Wang, Zhang, Qi, Li,
+  Xiang, Guntuku, Ungar, Shi, and Wang]{beyondstrongest}
+Aaron~Xuxiang Tian, Ruofan Zhang, Jiayao Tang, Young~Min Cho, Xueqian Li, Qiang
+  Yi, et~al.
+\newblock Beyond the strongest {LLM}: Multi-turn multi-agent orchestration vs.\
+  single {LLM}s on benchmarks, 2025.
+
+\bibitem[Wang et~al.(2025)Wang, Han, Diaz, Xu, R{\"u}hle, and
+  Rajmohan]{odysseybench}
+Weixuan Wang, Dongge Han, Daniel~Madrigal Diaz, Jin Xu, Victor R{\"u}hle, and
+  Saravan Rajmohan.
+\newblock {OdysseyBench}: Evaluating {LLM} agents on long-horizon complex
+  office application workflows, 2025.
+
+\bibitem[Xie et~al.(2026)Xie, Zhu, Zhang, Zhu, Ye, Qi, Chen, and
+  Zhou]{sparkfire}
+Yizhe Xie, Congcong Zhu, Xinyue Zhang, Tianqing Zhu, Dayong Ye, Minfeng Qi,
+  et~al.
+\newblock From spark to fire: Modeling and mitigating error cascades in
+  {LLM}-based multi-agent collaboration, 2026.
+
+\bibitem[Yu(2026)]{adaptorch}
+Geunbin Yu.
+\newblock {AdaptOrch}: Task-adaptive multi-agent orchestration in the era of
+  {LLM} performance convergence, 2026.
+
+\bibitem[Zhang et~al.(2025)Zhang, Yin, Zhang, Liu, Han, Zhang, Li, Wang, Wang,
+  Chen, and Wu]{attribution}
+Shaokun Zhang, Ming Yin, Jieyu Zhang, Jiale Liu, Zhiguang Han, Jingyang Zhang,
+  et~al.
+\newblock Which agent causes task failures and when? on automated failure
+  attribution of {LLM} multi-agent systems.
+\newblock In \emph{Proceedings of the 42nd International Conference on Machine
+  Learning (ICML)}, 2025.
+
+\end{thebibliography}
