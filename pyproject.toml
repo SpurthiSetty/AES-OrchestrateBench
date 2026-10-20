@@ -34,6 +34,12 @@ dependencies = [
 dev = [
     "pytest>=9.0",
 ]
+# Cross-provider measured runs (AES 2026): Gemini and OpenAI adapters in providers.py
+providers = [
+    "anthropic",
+    "google-genai",
+    "openai",
+]
 
 [project.scripts]
 orbench-analyze-measured = "orchestratebench.cli.analyze_measured:main"

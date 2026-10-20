@@ -9,3 +9,4 @@ artifacts/
 # local virtualenv
 .venv/
 venv/
+data/measured/_mock/

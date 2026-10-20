@@ -36,10 +36,14 @@ from dataclasses import dataclass
 from typing import List, Optional, Tuple
 
 from .failures import FailureMode
+from . import providers
 
 DEFAULT_MODEL = os.getenv("ORCHESTRATEBENCH_LLM_MODEL", "claude-sonnet-4-6")
 MAX_TOKENS = int(os.getenv("ORCHESTRATEBENCH_MAX_TOKENS", "120"))
 MOCK = os.getenv("ORCHESTRATEBENCH_MOCK") == "1"
+# Optional JSONL log of every prompt/response (for trace analysis). Off unless set.
+RAW_LOG = os.getenv("ORCHESTRATEBENCH_RAW_LOG")
+CONTROL = "none"  # failure_mode label for no-injection control runs
 POLICIES: Tuple[str, ...] = ("fixed", "heuristic", "retry(heuristic)")
 
 CSV_FIELDS = [
@@ -202,13 +206,17 @@ HARD_MODES = (
 def _is_transient_api_error(exc: Exception) -> bool:
     """Return whether a Claude API error is worth retrying."""
     status = getattr(exc, "status_code", None)
+    if status is None:  # google-genai APIError exposes the HTTP status as `.code`
+        code = getattr(exc, "code", None)
+        status = code if isinstance(code, int) else None
     if status is not None:
         return status in (429, 500, 502, 503, 529)
 
     name = type(exc).__name__
     return any(
         token in name
-        for token in ("Overloaded", "RateLimit", "InternalServer", "APIConnection", "APITimeout")
+        for token in ("Overloaded", "RateLimit", "InternalServer", "APIConnection", "APITimeout",
+                      "ServerError", "ResourceExhausted", "ServiceUnavailable")
     )
 
 
@@ -224,11 +232,27 @@ def _call_claude(client, prompt: str, max_retries: int = 6) -> Tuple[Optional[in
                 messages=[{"role": "user", "content": prompt}],
             )
             text = "".join(b.text for b in resp.content if getattr(b, "type", "") == "text")
+            _log_raw(prompt, text)
             return _parse(text), (time.time() - t0) * 1000.0
         except Exception as exc:  # noqa: BLE001 -- retry only transient API errors
             if not _is_transient_api_error(exc) or attempt == max_retries - 1:
                 raise
             time.sleep(min(2 ** attempt, 30))
+
+
+def _log_raw(prompt: str, text: str) -> None:
+    if not RAW_LOG:
+        return
+    import json
+
+    os.makedirs(os.path.dirname(RAW_LOG) or ".", exist_ok=True)
+    with open(RAW_LOG, "a", encoding="utf-8") as f:
+        f.write(json.dumps({"model": DEFAULT_MODEL, "prompt": prompt, "response": text,
+                            "parsed": _parse(text)}) + "\n")
+
+
+def _mode_label(mode: Optional[FailureMode]) -> str:
+    return mode.value if mode is not None else CONTROL
 
 
 def _mock_value(
@@ -349,9 +373,10 @@ def _write_csv(rows: List[dict], fields: List[str], out_csv: str) -> None:
 
 def run_exp2(
     client, out_csv: str, n_stages: int = 4, n_runs: int = 3,
-    modes: Optional[List[FailureMode]] = None, policies: Tuple[str, ...] = POLICIES,
+    modes: Optional[List[Optional[FailureMode]]] = None, policies: Tuple[str, ...] = POLICIES,
     domain: bool = False,
 ) -> List[dict]:
+    """Pass ``modes=[None]`` for no-injection control chains (failure_mode="none")."""
     modes = modes or list(FailureMode)
     pf = _domain_prompt if domain else _prompt
     wf = "loan_approval" if domain else "arith_chain"
@@ -362,9 +387,10 @@ def run_exp2(
                 # same chain (seed=run) across policies -> paired comparison; inject at stage 1
                 r = measure_chain(client, n_stages, 1, mode, policy, seed=run, prompt_fn=pf)
                 rows.append({
-                    "policy": policy, "workflow": wf, "failure_mode": mode.value,
+                    "policy": policy, "workflow": wf, "failure_mode": _mode_label(mode),
                     "run": run, **r,
-                    "scenario_id": f"{wf}_{mode.value}_{policy}_r{run}", "annotator": "yc-real",
+                    "scenario_id": f"{wf}_{_mode_label(mode)}_{policy}_r{run}",
+                    "annotator": f"real:{DEFAULT_MODEL}",
                 })
     _write_csv(rows, CSV_FIELDS, out_csv)
     return rows
@@ -372,7 +398,7 @@ def run_exp2(
 
 def run_exp3(
     client, out_csv: str, depths: Tuple[int, ...] = (3, 5, 7), n_runs: int = 3,
-    injection_stage: int = 1, modes: Optional[List[FailureMode]] = None,
+    injection_stage: int = 1, modes: Optional[List[Optional[FailureMode]]] = None,
     policies: Tuple[str, ...] = POLICIES, domain: bool = False,
 ) -> List[dict]:
     """Cascade-by-depth (#7): fix an early injection, vary chain depth, measure how
@@ -390,10 +416,10 @@ def run_exp3(
                     r = measure_chain(client, depth, injection_stage, mode, policy, seed=run, prompt_fn=pf)
                     inj = r["injection_stage"]
                     rows.append({
-                        "policy": policy, "depth": depth, "failure_mode": mode.value,
+                        "policy": policy, "depth": depth, "failure_mode": _mode_label(mode),
                         "run": run, "seed": run, **r,
-                        "scenario_id": f"depth{depth}__{mode.value}__inj{inj}__run{run:04d}",
-                        "annotator": "yc-real", "notes": "loan_approval" if domain else "",
+                        "scenario_id": f"depth{depth}__{_mode_label(mode)}__inj{inj}__run{run:04d}",
+                        "annotator": f"real:{DEFAULT_MODEL}", "notes": "loan_approval" if domain else "",
                     })
     _write_csv(rows, EXP3_CSV_FIELDS, out_csv)
     return rows
@@ -480,11 +506,7 @@ def run_exp4(
 def _client():
     if MOCK:
         return None
-    key = os.environ.get("ANTHROPIC_API_KEY")
-    if not key:
-        raise SystemExit("ANTHROPIC_API_KEY not set (or run with ORCHESTRATEBENCH_MOCK=1)")
-    from anthropic import Anthropic  # lazy import; not needed in mock mode
-    return Anthropic(api_key=key)
+    return providers.make_client(DEFAULT_MODEL)  # provider inferred from the model id
 
 
 def main() -> None:
@@ -496,16 +518,29 @@ def main() -> None:
     ap.add_argument("--runs", type=int, default=3)
     ap.add_argument("--tasks", type=int, default=10, help="Exp 4 number of composite tasks")
     ap.add_argument("--domain", action="store_true", help="domain-grounded loan-approval workflow (role agents) instead of bare arithmetic")
+    ap.add_argument("--control", action="store_true",
+                    help="no-injection control: run clean chains (failure_mode=none) to measure "
+                         "baseline execution error separately from injected faults (Exp 2/3)")
     ap.add_argument("--policies", default=None,
                     help="comma-separated routing policies; default = fixed,heuristic,retry(heuristic). "
                          "Add llm,oracle for the policy-conditioned cascade study (Exp 2/3).")
     args = ap.parse_args()
     client = _client()
     pols = tuple(p.strip() for p in args.policies.split(",")) if args.policies else POLICIES
-    tag = "MOCK" if MOCK else f"real Claude ({DEFAULT_MODEL})"
+    tag = "MOCK" if MOCK else f"real {DEFAULT_MODEL}"
+    modes = [None] if args.control else None
+    # Never overwrite the committed Sonnet CSVs by default: control runs and non-default
+    # models get their own file names unless --out is given.
+    suffix = ""
+    if args.control:
+        suffix += "_control"
+    if DEFAULT_MODEL != "claude-sonnet-4-6":
+        suffix += "_" + re.sub(r"[^a-z0-9]+", "-", DEFAULT_MODEL.lower()).strip("-")
     if args.exp == 2:
-        out = args.out or ("data/measured/exp2_domain_real.csv" if args.domain else "data/measured/exp2_real.csv")
-        rows = run_exp2(client, out, n_stages=args.stages, n_runs=args.runs, domain=args.domain, policies=pols)
+        out = args.out or (f"data/measured/exp2_domain_real{suffix}.csv" if args.domain
+                           else f"data/measured/exp2_real{suffix}.csv")
+        rows = run_exp2(client, out, n_stages=args.stages, n_runs=args.runs, domain=args.domain,
+                        policies=pols, modes=modes)
         print(f"[{tag}] Exp2: wrote {len(rows)} rows -> {out}")
         agg = defaultdict(list)
         for r in rows:
@@ -513,9 +548,11 @@ def main() -> None:
         for mode, fs in sorted(agg.items()):
             print(f"  {mode:24s} final_success_rate={sum(fs) / len(fs):.2f}  (n={len(fs)})")
     elif args.exp == 3:
-        out = args.out or ("data/measured/exp3_domain_real.csv" if args.domain else "data/measured/exp3_real.csv")
+        out = args.out or (f"data/measured/exp3_domain_real{suffix}.csv" if args.domain
+                           else f"data/measured/exp3_real{suffix}.csv")
         depths = tuple(int(d) for d in args.depths.split(",") if d.strip())
-        rows = run_exp3(client, out, depths=depths, n_runs=args.runs, domain=args.domain, policies=pols)
+        rows = run_exp3(client, out, depths=depths, n_runs=args.runs, domain=args.domain,
+                        policies=pols, modes=modes)
         print(f"[{tag}] Exp3: wrote {len(rows)} rows -> {out}")
         agg = defaultdict(list)
         for r in rows:
@@ -523,7 +560,7 @@ def main() -> None:
         for (mode, depth), cr in sorted(agg.items()):
             print(f"  {mode:24s} depth={depth} cascade_radius_mean={sum(cr) / len(cr):.2f}  (n={len(cr)})")
     else:  # exp 4 — decomposition quality
-        out = args.out or "data/measured/exp4_real.csv"
+        out = args.out or f"data/measured/exp4_real{suffix}.csv"
         rows = run_exp4(client, out, n_tasks=args.tasks)
         print(f"[{tag}] Exp4: wrote {len(rows)} rows -> {out}")
         agg = defaultdict(lambda: defaultdict(list))
@@ -535,6 +572,10 @@ def main() -> None:
             print(f"  {policy:12s} delegation_fidelity={sum(m['fid']) / len(m['fid']):.2f} "
                   f"final_correct={sum(m['fin']) / len(m['fin']):.2f} "
                   f"granularity_err={sum(m['gran']) / len(m['gran']):.2f}")
+    if providers.EMPTY_RESPONSES["count"]:
+        print(f"WARNING: {providers.EMPTY_RESPONSES['count']} responses had no visible text "
+              f"(reasoning starvation or blocked output); they are scored as failures. "
+              f"Consider raising ORCHESTRATEBENCH_NONCLAUDE_MAX_TOKENS or lowering thinking.")
 
 
 if __name__ == "__main__":

@@ -15,7 +15,7 @@ harness's existing `--out` flag, driven by the `ORCHESTRATEBENCH_LLM_MODEL`
 env var the harness already honors.
 
 Cost note: whole-project spend is ~$4; a second model on the five modes is a
-few cents. Set ANTHROPIC_API_KEY to run for real; without it, pass --mock to
+few cents. Set the provider key (ANTHROPIC_API_KEY, GEMINI_API_KEY, OPENAI_API_KEY) to run for real; without it, pass --mock to
 exercise the plumbing offline (deterministic mock agent, not real results).
 
 Usage:
@@ -53,14 +53,17 @@ def _istrue(x: object) -> int:
     return 1 if str(x).strip().lower() in ("true", "1") else 0
 
 
-def run_one(model: str, runs: int, stages: int, mock: bool) -> Path:
-    out = DATA / f"exp2_{_tag(model)}.csv"
+def run_one(model: str, runs: int, stages: int, mock: bool, control: bool = False) -> Path:
+    # mock runs never write into data/measured/ (they would clobber the real committed CSVs)
+    base = DATA / "_mock" if mock else DATA
+    base.mkdir(parents=True, exist_ok=True)
+    out = base / (f"exp2_control_{_tag(model)}.csv" if control else f"exp2_{_tag(model)}.csv")
     env = dict(os.environ, ORCHESTRATEBENCH_LLM_MODEL=model)
     if mock:
         env["ORCHESTRATEBENCH_MOCK"] = "1"
     cmd = [sys.executable, "-m", "orchestratebench.real_run",
            "--exp", "2", "--runs", str(runs), "--stages", str(stages),
-           "--out", str(out)]
+           "--out", str(out)] + (["--control"] if control else [])
     print(f"\n=== {model}  ->  {out.name}  ({'MOCK' if mock else 'real'}) ===")
     subprocess.run(cmd, check=True, env=env, cwd=ROOT)
     return out
@@ -83,12 +86,25 @@ def main() -> None:
     ap.add_argument("--stages", type=int, default=4, help="Arithmetic chain length.")
     ap.add_argument("--mock", action="store_true",
                     help="Offline deterministic mock agent (pipeline test, not real results).")
+    ap.add_argument("--control", action="store_true",
+                    help="Also run no-injection control chains for each model.")
     args = ap.parse_args()
 
-    if not args.mock and not os.getenv("ANTHROPIC_API_KEY"):
-        ap.error("no ANTHROPIC_API_KEY set. Provide a key, or pass --mock to test the pipeline.")
+    sys.path.insert(0, str(ROOT / "src"))
+    from orchestratebench.providers import has_key, required_key
+
+    if not args.mock:
+        missing = [m for m in args.models if not has_key(m)]
+        if missing:
+            ap.error("missing API key for " + ", ".join(
+                f"{m} ({' or '.join(required_key(m))})" for m in missing)
+                + ". Provide keys, or pass --mock to test the pipeline.")
 
     rates = {m: rate_by_mode(run_one(m, args.runs, args.stages, args.mock)) for m in args.models}
+    if args.control:
+        for m in args.models:
+            c = rate_by_mode(run_one(m, args.runs, args.stages, args.mock, control=True))
+            print(f"control (no injection) {m}: final-task success = {c.get('none', float('nan')):.3f}")
 
     # pooled comparison table
     hdr = f"{'failure_mode':24}" + "".join(f"{m[-18:]:>20}" for m in args.models) + f"{'max|delta|':>12}"
@@ -103,13 +119,15 @@ def main() -> None:
                          **{f"success_{_tag(m)}": vals[i] for i, m in enumerate(args.models)},
                          "max_abs_delta": delta})
 
-    out_csv = DATA / "exp2_crossmodel.csv"
+    out_csv = (DATA / "_mock" if args.mock else DATA) / ("exp2_crossmodel.csv" if args.models[:3] == ["claude-sonnet-4-6",
+                      "claude-opus-4-8", "claude-haiku-4-5"] else
+                      "exp2_crossmodel_" + "_".join(_tag(m) for m in args.models) + ".csv")
     with out_csv.open("w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=list(out_rows[0].keys()))
         w.writeheader(); w.writerows(out_rows)
     print(f"\nwrote {out_csv}")
-    print("Interpretation: small max|delta| on the tier ORDER (not absolute rates) => "
-          "the three-tier split is model-invariant, strengthening C1.")
+    print("Interpretation: compare the tier ORDER (tool > ambiguous >= latent), not absolute "
+          "rates; with n=30 per cell, read agreement as consistency of ordering.")
 
 
 if __name__ == "__main__":
