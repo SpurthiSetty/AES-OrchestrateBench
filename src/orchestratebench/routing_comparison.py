@@ -124,7 +124,9 @@ class LLMPolicy:
         if self._client is None:
             import anthropic  # lazy: only needed when actually routing
 
-            self._client = anthropic.Anthropic()
+            from .providers import anthropic_headers
+
+            self._client = anthropic.Anthropic(default_headers=anthropic_headers())
         return self._client
 
     def _build_prompt(self, task: AgentTask) -> str:

@@ -21,3 +21,4 @@ paper/aes2026/*.fdb_latexmk
 paper/aes2026/*.xdv
 paper/aes2026/*.blg
 paper/aes2026/*.out
+.env

@@ -112,6 +112,12 @@ class _OpenAIMessages:
         return _wrap(getattr(resp, "output_text", None) or "")
 
 
+def anthropic_headers() -> Dict[str, str]:
+    """Extra headers for keys not scoped to a workspace (set ANTHROPIC_WORKSPACE_ID)."""
+    workspace = os.getenv("ANTHROPIC_WORKSPACE_ID")
+    return {"anthropic-workspace-id": workspace} if workspace else {}
+
+
 def make_client(model: str) -> Any:
     """Return an Anthropic-shaped client for ``model``; exits if its key is missing."""
     provider = provider_for(model)
@@ -123,7 +129,9 @@ def make_client(model: str) -> Any:
     if provider == "anthropic":
         from anthropic import Anthropic
 
-        return Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+        return Anthropic(
+            api_key=os.environ["ANTHROPIC_API_KEY"], default_headers=anthropic_headers()
+        )
     if provider == "gemini":
         from google import genai
 
