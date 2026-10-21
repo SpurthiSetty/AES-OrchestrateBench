@@ -1,0 +1,6 @@
+failure_mode,success_gemini-3-8-flash,max_abs_delta
+tool_invocation_error,1.0,nan
+ambiguous_delegation,0.2222222222222222,nan
+context_pollution,0.0,nan
+conflicting_outputs,0.0,nan
+premature_action,0.0,nan

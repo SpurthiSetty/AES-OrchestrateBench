@@ -1,0 +1,750 @@
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=8", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 16. Compute 16 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=144", "parsed": 144}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=4", "response": "RESULT=4", "parsed": 4}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 4. Compute 4 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=2", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 - 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=6", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6. Compute 6 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-1", "parsed": -1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -1. Compute -1 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-3", "parsed": -3}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=3", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=18", "parsed": 18}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 18. Compute 18 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=7", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 + 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=13", "parsed": 13}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=40", "parsed": 40}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 40. Compute 40 + 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=45", "parsed": 45}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=9", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=8", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 16. Compute 16 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=144", "parsed": 144}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=4", "response": "RESULT=4", "parsed": 4}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 4. Compute 4 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=2", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 - 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=6", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6. Compute 6 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-1", "parsed": -1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -1. Compute -1 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-3", "parsed": -3}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=3", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=18", "parsed": 18}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 18. Compute 18 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=7", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 + 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=13", "parsed": 13}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=40", "parsed": 40}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 40. Compute 40 + 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=45", "parsed": 45}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=9", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=8", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 16. Compute 16 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=144", "parsed": 144}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=4", "response": "RESULT=4", "parsed": 4}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 4. Compute 4 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=2", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 - 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=6", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6. Compute 6 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-1", "parsed": -1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -1. Compute -1 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-3", "parsed": -3}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=3", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=18", "parsed": 18}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 18. Compute 18 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=7", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 + 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=13", "parsed": 13}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=40", "parsed": 40}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 40. Compute 40 + 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=45", "parsed": 45}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=9", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=8", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 16. Compute 16 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=144", "parsed": 144}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 144. Compute 144 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=864", "parsed": 864}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=4", "response": "RESULT=4", "parsed": 4}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 4. Compute 4 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=27", "parsed": 27}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=2", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 20. Compute 20 - 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=14", "parsed": 14}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 - 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=28", "parsed": 28}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=6", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6. Compute 6 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-1", "parsed": -1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -1. Compute -1 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-3", "parsed": -3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -3. Compute -3 * 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-15", "parsed": -15}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=3", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=18", "parsed": 18}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 18. Compute 18 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 20. Compute 20 + 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=29", "parsed": 29}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=7", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 + 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=13", "parsed": 13}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 13. Compute 13 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=40", "parsed": 40}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 40. Compute 40 + 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=45", "parsed": 45}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 45. Compute 45 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=43", "parsed": 43}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=9", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=10", "parsed": 10}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=8", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 16. Compute 16 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=144", "parsed": 144}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 144. Compute 144 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=864", "parsed": 864}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=4", "response": "RESULT=4", "parsed": 4}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 4. Compute 4 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=27", "parsed": 27}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=2", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 20. Compute 20 - 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=14", "parsed": 14}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 - 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=28", "parsed": 28}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=6", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6. Compute 6 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-1", "parsed": -1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -1. Compute -1 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-3", "parsed": -3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -3. Compute -3 * 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-15", "parsed": -15}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=3", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=18", "parsed": 18}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 18. Compute 18 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 20. Compute 20 + 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=29", "parsed": 29}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=7", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 + 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=13", "parsed": 13}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 13. Compute 13 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=40", "parsed": 40}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 40. Compute 40 + 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=45", "parsed": 45}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 45. Compute 45 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=43", "parsed": 43}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=9", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=10", "parsed": 10}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=8", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 16. Compute 16 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=144", "parsed": 144}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 144. Compute 144 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=864", "parsed": 864}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=4", "response": "RESULT=4", "parsed": 4}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 4. Compute 4 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=27", "parsed": 27}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=2", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 20. Compute 20 - 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=14", "parsed": 14}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 - 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=28", "parsed": 28}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=6", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6. Compute 6 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-1", "parsed": -1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -1. Compute -1 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-3", "parsed": -3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -3. Compute -3 * 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-15", "parsed": -15}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=3", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=18", "parsed": 18}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 18. Compute 18 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 20. Compute 20 + 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=29", "parsed": 29}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=7", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 + 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=13", "parsed": 13}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 13. Compute 13 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=40", "parsed": 40}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 40. Compute 40 + 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=45", "parsed": 45}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 45. Compute 45 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=43", "parsed": 43}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=9", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=10", "parsed": 10}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=8", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 16. Compute 16 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=144", "parsed": 144}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 144. Compute 144 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=864", "parsed": 864}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 864. Compute 864 * 7. Output exactly one line: RESULT=<integer>.", "response": "864 * 7 = 6048\n\nRESULT=6048", "parsed": 6048}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=4", "response": "RESULT=4", "parsed": 4}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 4. Compute 4 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=27", "parsed": 27}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 27. Compute 27 * 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=216", "parsed": 216}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=2", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 20. Compute 20 - 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=14", "parsed": 14}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 14. Compute 14 * 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=70", "parsed": 70}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 - 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6. Compute 6 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=4", "parsed": 4}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=28", "parsed": 28}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 28. Compute 28 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=31", "parsed": 31}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=6", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6. Compute 6 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-1", "parsed": -1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -1. Compute -1 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-3", "parsed": -3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -3. Compute -3 * 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-15", "parsed": -15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -15. Compute -15 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-17", "parsed": -17}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=3", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=18", "parsed": 18}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 18. Compute 18 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 20. Compute 20 + 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=29", "parsed": 29}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 29. Compute 29 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=22", "parsed": 22}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=7", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 + 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=13", "parsed": 13}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 13. Compute 13 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 16. Compute 16 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=32", "parsed": 32}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=40", "parsed": 40}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 40. Compute 40 + 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=45", "parsed": 45}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 45. Compute 45 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=43", "parsed": 43}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 43. Compute 43 + 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=47", "parsed": 47}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=9", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=10", "parsed": 10}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 10. Compute 10 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=90", "parsed": 90}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=8", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 16. Compute 16 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=144", "parsed": 144}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 144. Compute 144 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=864", "parsed": 864}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 864. Compute 864 * 7. Output exactly one line: RESULT=<integer>.", "response": "864 * 7 = 6048\n\nRESULT=6048", "parsed": 6048}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=4", "response": "RESULT=4", "parsed": 4}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 4. Compute 4 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=27", "parsed": 27}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 27. Compute 27 * 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=216", "parsed": 216}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=2", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 20. Compute 20 - 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=14", "parsed": 14}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 14. Compute 14 * 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=70", "parsed": 70}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 - 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6. Compute 6 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=4", "parsed": 4}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=28", "parsed": 28}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 28. Compute 28 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=31", "parsed": 31}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=6", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6. Compute 6 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-1", "parsed": -1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -1. Compute -1 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-3", "parsed": -3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -3. Compute -3 * 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-15", "parsed": -15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -15. Compute -15 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-17", "parsed": -17}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=3", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=18", "parsed": 18}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 18. Compute 18 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 20. Compute 20 + 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=29", "parsed": 29}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 29. Compute 29 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=22", "parsed": 22}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=7", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 + 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=13", "parsed": 13}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 13. Compute 13 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 16. Compute 16 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=32", "parsed": 32}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=40", "parsed": 40}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 40. Compute 40 + 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=45", "parsed": 45}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 45. Compute 45 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=43", "parsed": 43}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 43. Compute 43 + 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=47", "parsed": 47}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=9", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=10", "parsed": 10}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 10. Compute 10 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=90", "parsed": 90}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=8", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 16. Compute 16 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=144", "parsed": 144}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 144. Compute 144 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=864", "parsed": 864}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 864. Compute 864 * 7. Output exactly one line: RESULT=<integer>.", "response": "864 * 7 = 6048\n\nRESULT=6048", "parsed": 6048}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=4", "response": "RESULT=4", "parsed": 4}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 4. Compute 4 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=27", "parsed": 27}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 27. Compute 27 * 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=216", "parsed": 216}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=2", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 20. Compute 20 - 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=14", "parsed": 14}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 14. Compute 14 * 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=70", "parsed": 70}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 - 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6. Compute 6 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=4", "parsed": 4}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=28", "parsed": 28}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 28. Compute 28 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=31", "parsed": 31}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=6", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6. Compute 6 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-1", "parsed": -1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -1. Compute -1 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-3", "parsed": -3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -3. Compute -3 * 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-15", "parsed": -15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -15. Compute -15 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-17", "parsed": -17}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=3", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=18", "parsed": 18}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 18. Compute 18 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 20. Compute 20 + 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=29", "parsed": 29}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 29. Compute 29 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=22", "parsed": 22}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=7", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 + 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=13", "parsed": 13}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 13. Compute 13 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 16. Compute 16 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=32", "parsed": 32}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=40", "parsed": 40}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 40. Compute 40 + 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=45", "parsed": 45}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 45. Compute 45 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=43", "parsed": 43}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 43. Compute 43 + 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=47", "parsed": 47}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=9", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=10", "parsed": 10}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 10. Compute 10 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=90", "parsed": 90}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=8", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 16. Compute 16 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=144", "parsed": 144}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 144. Compute 144 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=864", "parsed": 864}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 864. Compute 864 * 7. Output exactly one line: RESULT=<integer>.", "response": "864 * 7 = 6048\n\nRESULT=6048", "parsed": 6048}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6048. Compute 6048 - 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=6043", "parsed": 6043}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=4", "response": "RESULT=4", "parsed": 4}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 4. Compute 4 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=27", "parsed": 27}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 27. Compute 27 * 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=216", "parsed": 216}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 216. Compute 216 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=219", "parsed": 219}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=2", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 20. Compute 20 - 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=14", "parsed": 14}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 14. Compute 14 * 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=70", "parsed": 70}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 70. Compute 70 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=68", "parsed": 68}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 - 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6. Compute 6 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=4", "parsed": 4}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 4. Compute 4 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=24", "parsed": 24}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=28", "parsed": 28}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 28. Compute 28 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=31", "parsed": 31}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 31. Compute 31 + 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=39", "parsed": 39}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=6", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6. Compute 6 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-1", "parsed": -1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -1. Compute -1 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-3", "parsed": -3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -3. Compute -3 * 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-15", "parsed": -15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -15. Compute -15 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-17", "parsed": -17}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -17. Compute -17 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-14", "parsed": -14}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=3", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=18", "parsed": 18}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 18. Compute 18 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 20. Compute 20 + 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=29", "parsed": 29}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 29. Compute 29 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=22", "parsed": 22}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 22. Compute 22 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=44", "parsed": 44}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=7", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 + 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=13", "parsed": 13}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 13. Compute 13 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 16. Compute 16 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=32", "parsed": 32}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 32. Compute 32 - 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=27", "parsed": 27}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=40", "parsed": 40}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 40. Compute 40 + 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=45", "parsed": 45}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 45. Compute 45 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=43", "parsed": 43}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 43. Compute 43 + 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=47", "parsed": 47}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 47. Compute 47 + 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=52", "parsed": 52}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=9", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=10", "parsed": 10}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 10. Compute 10 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=90", "parsed": 90}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 90. Compute 90 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=87", "parsed": 87}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=8", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 16. Compute 16 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=144", "parsed": 144}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 144. Compute 144 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=864", "parsed": 864}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 864. Compute 864 * 7. Output exactly one line: RESULT=<integer>.", "response": "864 * 7 = 6048\n\nRESULT=6048", "parsed": 6048}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6048. Compute 6048 - 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=6043", "parsed": 6043}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=4", "response": "RESULT=4", "parsed": 4}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 4. Compute 4 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=27", "parsed": 27}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 27. Compute 27 * 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=216", "parsed": 216}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 216. Compute 216 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=219", "parsed": 219}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=2", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 20. Compute 20 - 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=14", "parsed": 14}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 14. Compute 14 * 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=70", "parsed": 70}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 70. Compute 70 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=68", "parsed": 68}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 - 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6. Compute 6 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=4", "parsed": 4}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 4. Compute 4 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=24", "parsed": 24}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=28", "parsed": 28}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 28. Compute 28 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=31", "parsed": 31}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 31. Compute 31 + 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=39", "parsed": 39}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=6", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6. Compute 6 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-1", "parsed": -1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -1. Compute -1 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-3", "parsed": -3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -3. Compute -3 * 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-15", "parsed": -15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -15. Compute -15 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-17", "parsed": -17}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -17. Compute -17 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-14", "parsed": -14}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=3", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=18", "parsed": 18}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 18. Compute 18 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 20. Compute 20 + 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=29", "parsed": 29}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 29. Compute 29 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=22", "parsed": 22}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 22. Compute 22 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=44", "parsed": 44}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=7", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 + 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=13", "parsed": 13}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 13. Compute 13 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 16. Compute 16 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=32", "parsed": 32}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 32. Compute 32 - 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=27", "parsed": 27}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=40", "parsed": 40}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 40. Compute 40 + 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=45", "parsed": 45}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 45. Compute 45 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=43", "parsed": 43}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 43. Compute 43 + 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=47", "parsed": 47}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 47. Compute 47 + 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=52", "parsed": 52}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=9", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=10", "parsed": 10}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 10. Compute 10 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=90", "parsed": 90}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 90. Compute 90 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=87", "parsed": 87}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=8", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 16. Compute 16 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=144", "parsed": 144}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 144. Compute 144 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=864", "parsed": 864}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 864. Compute 864 * 7. Output exactly one line: RESULT=<integer>.", "response": "864 * 7 = 6048\n\nRESULT=6048", "parsed": 6048}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6048. Compute 6048 - 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=6043", "parsed": 6043}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=4", "response": "RESULT=4", "parsed": 4}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 4. Compute 4 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=27", "parsed": 27}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 27. Compute 27 * 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=216", "parsed": 216}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 216. Compute 216 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=219", "parsed": 219}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=2", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 20. Compute 20 - 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=14", "parsed": 14}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 14. Compute 14 * 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=70", "parsed": 70}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 70. Compute 70 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=68", "parsed": 68}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 - 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6. Compute 6 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=4", "parsed": 4}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 4. Compute 4 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=24", "parsed": 24}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=28", "parsed": 28}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 28. Compute 28 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=31", "parsed": 31}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 31. Compute 31 + 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=39", "parsed": 39}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=6", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6. Compute 6 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-1", "parsed": -1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -1. Compute -1 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-3", "parsed": -3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -3. Compute -3 * 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-15", "parsed": -15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -15. Compute -15 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-17", "parsed": -17}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -17. Compute -17 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-14", "parsed": -14}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=3", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=18", "parsed": 18}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 18. Compute 18 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 20. Compute 20 + 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=29", "parsed": 29}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 29. Compute 29 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=22", "parsed": 22}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 22. Compute 22 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=44", "parsed": 44}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=7", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 + 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=13", "parsed": 13}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 13. Compute 13 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 16. Compute 16 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=32", "parsed": 32}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 32. Compute 32 - 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=27", "parsed": 27}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=40", "parsed": 40}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 40. Compute 40 + 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=45", "parsed": 45}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 45. Compute 45 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=43", "parsed": 43}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 43. Compute 43 + 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=47", "parsed": 47}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 47. Compute 47 + 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=52", "parsed": 52}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=9", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=10", "parsed": 10}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 10. Compute 10 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=90", "parsed": 90}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 90. Compute 90 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=87", "parsed": 87}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=8", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 16. Compute 16 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=144", "parsed": 144}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 144. Compute 144 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=864", "parsed": 864}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 864. Compute 864 * 7. Output exactly one line: RESULT=<integer>.", "response": "864 * 7 = 6048\n\nRESULT=6048", "parsed": 6048}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6048. Compute 6048 - 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=6043", "parsed": 6043}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6043. Compute 6043 - 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=6039", "parsed": 6039}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=4", "response": "RESULT=4", "parsed": 4}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 4. Compute 4 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=27", "parsed": 27}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 27. Compute 27 * 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=216", "parsed": 216}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 216. Compute 216 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=219", "parsed": 219}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 219. Compute 219 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=438", "parsed": 438}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=2", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 20. Compute 20 - 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=14", "parsed": 14}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 14. Compute 14 * 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=70", "parsed": 70}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 70. Compute 70 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=68", "parsed": 68}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 68. Compute 68 - 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=64", "parsed": 64}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 - 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6. Compute 6 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=4", "parsed": 4}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 4. Compute 4 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=24", "parsed": 24}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 24. Compute 24 - 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=19", "parsed": 19}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=28", "parsed": 28}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 28. Compute 28 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=31", "parsed": 31}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 31. Compute 31 + 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=39", "parsed": 39}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 39. Compute 39 - 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=33", "parsed": 33}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=6", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6. Compute 6 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-1", "parsed": -1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -1. Compute -1 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-3", "parsed": -3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -3. Compute -3 * 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-15", "parsed": -15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -15. Compute -15 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-17", "parsed": -17}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -17. Compute -17 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-14", "parsed": -14}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -14. Compute -14 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-126", "parsed": -126}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=3", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=18", "parsed": 18}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 18. Compute 18 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 20. Compute 20 + 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=29", "parsed": 29}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 29. Compute 29 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=22", "parsed": 22}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 22. Compute 22 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=44", "parsed": 44}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 44. Compute 44 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=396", "parsed": 396}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=7", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 + 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=13", "parsed": 13}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 13. Compute 13 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 16. Compute 16 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=32", "parsed": 32}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 32. Compute 32 - 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=27", "parsed": 27}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 27. Compute 27 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=30", "parsed": 30}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=40", "parsed": 40}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 40. Compute 40 + 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=45", "parsed": 45}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 45. Compute 45 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=43", "parsed": 43}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 43. Compute 43 + 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=47", "parsed": 47}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 47. Compute 47 + 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=52", "parsed": 52}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 52. Compute 52 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=104", "parsed": 104}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=9", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=10", "parsed": 10}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 10. Compute 10 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=90", "parsed": 90}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 90. Compute 90 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=87", "parsed": 87}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 87. Compute 87 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=174", "parsed": 174}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=8", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 16. Compute 16 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=144", "parsed": 144}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 144. Compute 144 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=864", "parsed": 864}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 864. Compute 864 * 7. Output exactly one line: RESULT=<integer>.", "response": "864 * 7 = 6048\n\nRESULT=6048", "parsed": 6048}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6048. Compute 6048 - 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=6043", "parsed": 6043}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6043. Compute 6043 - 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=6039", "parsed": 6039}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=4", "response": "RESULT=4", "parsed": 4}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 4. Compute 4 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=27", "parsed": 27}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 27. Compute 27 * 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=216", "parsed": 216}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 216. Compute 216 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=219", "parsed": 219}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 219. Compute 219 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=438", "parsed": 438}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=2", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 20. Compute 20 - 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=14", "parsed": 14}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 14. Compute 14 * 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=70", "parsed": 70}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 70. Compute 70 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=68", "parsed": 68}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 68. Compute 68 - 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=64", "parsed": 64}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 - 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6. Compute 6 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=4", "parsed": 4}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 4. Compute 4 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=24", "parsed": 24}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 24. Compute 24 - 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=19", "parsed": 19}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=28", "parsed": 28}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 28. Compute 28 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=31", "parsed": 31}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 31. Compute 31 + 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=39", "parsed": 39}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 39. Compute 39 - 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=33", "parsed": 33}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=6", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6. Compute 6 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-1", "parsed": -1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -1. Compute -1 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-3", "parsed": -3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -3. Compute -3 * 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-15", "parsed": -15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -15. Compute -15 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-17", "parsed": -17}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -17. Compute -17 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-14", "parsed": -14}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -14. Compute -14 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-126", "parsed": -126}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=3", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=18", "parsed": 18}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 18. Compute 18 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 20. Compute 20 + 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=29", "parsed": 29}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 29. Compute 29 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=22", "parsed": 22}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 22. Compute 22 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=44", "parsed": 44}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 44. Compute 44 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=396", "parsed": 396}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=7", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 + 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=13", "parsed": 13}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 13. Compute 13 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 16. Compute 16 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=32", "parsed": 32}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 32. Compute 32 - 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=27", "parsed": 27}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 27. Compute 27 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=30", "parsed": 30}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=40", "parsed": 40}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 40. Compute 40 + 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=45", "parsed": 45}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 45. Compute 45 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=43", "parsed": 43}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 43. Compute 43 + 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=47", "parsed": 47}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 47. Compute 47 + 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=52", "parsed": 52}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 52. Compute 52 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=104", "parsed": 104}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=9", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=10", "parsed": 10}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 10. Compute 10 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=90", "parsed": 90}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 90. Compute 90 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=87", "parsed": 87}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 87. Compute 87 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=174", "parsed": 174}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=8", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 16. Compute 16 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=144", "parsed": 144}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 144. Compute 144 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=864", "parsed": 864}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 864. Compute 864 * 7. Output exactly one line: RESULT=<integer>.", "response": "864 * 7 = 6048\n\nRESULT=6048", "parsed": 6048}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6048. Compute 6048 - 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=6043", "parsed": 6043}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6043. Compute 6043 - 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=6039", "parsed": 6039}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=4", "response": "RESULT=4", "parsed": 4}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 4. Compute 4 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=27", "parsed": 27}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 27. Compute 27 * 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=216", "parsed": 216}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 216. Compute 216 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=219", "parsed": 219}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 219. Compute 219 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=438", "parsed": 438}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=2", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 20. Compute 20 - 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=14", "parsed": 14}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 14. Compute 14 * 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=70", "parsed": 70}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 70. Compute 70 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=68", "parsed": 68}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 68. Compute 68 - 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=64", "parsed": 64}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 - 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=1", "parsed": 1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 1. Compute 1 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6. Compute 6 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=4", "parsed": 4}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 4. Compute 4 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=24", "parsed": 24}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 24. Compute 24 - 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=19", "parsed": 19}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=28", "parsed": 28}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 28. Compute 28 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=31", "parsed": 31}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 31. Compute 31 + 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=39", "parsed": 39}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 39. Compute 39 - 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=33", "parsed": 33}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=6", "response": "RESULT=6", "parsed": 6}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 6. Compute 6 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-1", "parsed": -1}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -1. Compute -1 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-3", "parsed": -3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -3. Compute -3 * 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-15", "parsed": -15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -15. Compute -15 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-17", "parsed": -17}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -17. Compute -17 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-14", "parsed": -14}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = -14. Compute -14 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=-126", "parsed": -126}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=3", "response": "RESULT=3", "parsed": 3}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 3. Compute 3 * 6. Output exactly one line: RESULT=<integer>.", "response": "RESULT=18", "parsed": 18}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 18. Compute 18 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=20", "parsed": 20}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 20. Compute 20 + 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=29", "parsed": 29}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 29. Compute 29 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=22", "parsed": 22}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 22. Compute 22 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=44", "parsed": 44}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 44. Compute 44 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=396", "parsed": 396}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=7", "response": "RESULT=7", "parsed": 7}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 7. Compute 7 + 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=15", "parsed": 15}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 15. Compute 15 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=13", "parsed": 13}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 13. Compute 13 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=16", "parsed": 16}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 16. Compute 16 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=32", "parsed": 32}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 32. Compute 32 - 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=27", "parsed": 27}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 27. Compute 27 + 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=30", "parsed": 30}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=5", "response": "RESULT=5", "parsed": 5}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 5. Compute 5 * 8. Output exactly one line: RESULT=<integer>.", "response": "RESULT=40", "parsed": 40}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 40. Compute 40 + 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=45", "parsed": 45}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 45. Compute 45 - 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=43", "parsed": 43}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 43. Compute 43 + 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=47", "parsed": 47}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 47. Compute 47 + 5. Output exactly one line: RESULT=<integer>.", "response": "RESULT=52", "parsed": 52}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 52. Compute 52 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=104", "parsed": 104}
+{"model": "claude-sonnet-4-6", "prompt": "Start a calculation chain. Output exactly one line: RESULT=9", "response": "RESULT=9", "parsed": 9}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 9. Compute 9 - 7. Output exactly one line: RESULT=<integer>.", "response": "RESULT=2", "parsed": 2}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 2. Compute 2 * 4. Output exactly one line: RESULT=<integer>.", "response": "RESULT=8", "parsed": 8}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 8. Compute 8 + 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=10", "parsed": 10}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 10. Compute 10 * 9. Output exactly one line: RESULT=<integer>.", "response": "RESULT=90", "parsed": 90}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 90. Compute 90 - 3. Output exactly one line: RESULT=<integer>.", "response": "RESULT=87", "parsed": 87}
+{"model": "claude-sonnet-4-6", "prompt": "Previous stage result = 87. Compute 87 * 2. Output exactly one line: RESULT=<integer>.", "response": "RESULT=174", "parsed": 174}

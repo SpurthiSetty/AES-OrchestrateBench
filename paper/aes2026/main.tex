@@ -41,17 +41,19 @@ router and an LLM router both score 100\%. (2)~Injecting five MAST failure modes
 into a verifiable arithmetic chain run by a Claude agent ($n{=}30$ per mode)
 yields three tiers: tool faults are recovered (1.00), ambiguous delegation is
 partially recovered (0.30), and three latent modes are never recovered (0/30
-each; exact 95\% upper bound 0.12).
+each; exact 95\% upper bound 0.12). Matched no-injection controls succeed on
+every chain (180/180), so these failures are attributable to the injected faults.
 The ordering is preserved when the same computation is framed as a loan-approval
-workflow and across three Claude models, while absolute rates shift. Retry does
+workflow and across five models from three providers (three Claude tiers,
+Gemini, and GPT), while absolute rates shift. On Sonnet, retry does
 not change final success for any mode and increases median time-to-detection
 by about 50\%. (3)~A latent fault corrupts about 93\% of downstream stages at
 every depth from 3 to 7, so absolute cascade radius grows from 0.93 to 4.67
 while the propagation fraction stays flat. (4)~An apparent containment gain from
 an LLM repair policy largely disappears when its trusted upstream value is
 removed (0.67 to 0.08). The harness is the primary contribution; the probes run
-one agent on a controlled chain within a single model family and are not
-estimates of production multi-agent reliability.
+one agent on a controlled chain and are not estimates of production multi-agent
+reliability.
 \end{abstract}
 
 \section{Introduction}
@@ -173,8 +175,15 @@ shows where injection and each metric enter a run.
 \section{Experimental Setup}
 \label{sec:setup}
 The agent is Claude Sonnet 4.6 (\texttt{claude-sonnet-4-6}) unless noted; the
-cross-model check adds \texttt{claude-opus-4-8} and \texttt{claude-haiku-4-5}.
-Runs were collected between June 21 and July 3, 2026. Experiment~2 uses depth-4
+cross-model check adds \texttt{claude-opus-4-8}, \texttt{claude-haiku-4-5},
+\texttt{gemini-3.8-flash}, and \texttt{gpt-6.1-sol}. Claude runs were collected
+between June 21 and July 3, 2026; the no-injection controls and the non-Claude
+runs on October 20, 2026. Neither non-Claude model accepts its provider's
+minimal reasoning setting, so both use the lowest available (\texttt{low});
+the non-Claude cells have 30 runs per policy ($n{=}90$ per mode). Controls
+run the same seeds, chains, and policies with no fault injected: 30 depth-4
+chains (Exp~2), 150 chains at depths 3--7 (Exp~3), and 90 depth-4 chains per
+non-Claude model. Experiment~2 uses depth-4
 chains with 10 runs per mode under each of the three baseline policies
 ($n{=}30$ per mode, $N{=}150$ per framing); Experiment~3 uses depths 3--7
 ($n{=}120$ latent runs per depth, $N{=}750$). We report 95\% percentile
@@ -187,7 +196,8 @@ bootstrap collapses to zero width there. These outcomes are not fixed by the
 construct: if a latent corruption persists, the final exact-match check must
 fail, but whether the agent detects and repairs it is the behavior being
 measured (Opus repairs conflicting outputs in 3 of 30 runs). Total API cost
-was about \$4.
+for the Claude runs was about \$4.
+% TODO(authors): add the cost of the Oct 20 control and non-Claude runs if wanted.
 
 \section{Results}
 \label{sec:results}
@@ -199,7 +209,11 @@ The routing diagnostic has 26 author-labelled cases over four routes: 16
 cases whose flags are missing or misleading while the description's intent is
 unambiguous. The LLM router receives the description and metadata but never the
 label, and returns a structured route; results were identical across three
-passes (78/78).
+passes (78/78). A second author, blind to the gold labels, independently
+labelled all 26 cases: agreement was 25/26 (Cohen's $\kappa{=}0.95$; 16/16
+aligned, 9/10 adversarial), with the one disagreement on a borderline case
+(``Is 17 a prime number?'', gold \emph{reason-only}, annotator
+\emph{code-execution}).
 
 \begin{table}[htbp]
   \centering
@@ -232,40 +246,51 @@ fails, not how routers rank on realistic distributions.
 
 \begin{table}[htbp]
   \centering
-  \begin{tabularx}{\linewidth}{@{}Xcccc@{}}
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabularx}{\linewidth}{@{}Xcccccc@{}}
     \toprule
-    & \multicolumn{2}{c}{Sonnet 4.6} & Opus 4.8 & Haiku 4.5 \\
+    & \multicolumn{2}{c}{Sonnet 4.6} & Opus 4.8 & Haiku 4.5 & Gemini 3.8 & GPT-6.1 \\
+    & & & & & Flash & Sol \\
     \cmidrule(lr){2-3}
-    Failure mode & Arithmetic & Loan approval & Arithmetic & Arithmetic \\
+    Failure mode & Arith. & Loan & Arith. & Arith. & Arith. & Arith. \\
     \midrule
-    Tool-invocation error & 1.00 & 0.70 [0.53, 0.87] & 1.00 & 1.00 \\
-    Ambiguous delegation & 0.30 [0.13, 0.47] & 0.40 [0.23, 0.57] & 0.10 & 0.20 \\
-    Context pollution & 0.00 & 0.00 & 0.00 & 0.00 \\
-    Conflicting outputs & 0.00 & 0.00 & 0.10 & 0.00 \\
-    Premature action & 0.00 & 0.00 & 0.00 & 0.00 \\
+    Tool-invocation error & 1.00 & 0.70 [0.53, 0.87] & 1.00 & 1.00 & 1.00 & 1.00 \\
+    Ambiguous delegation & 0.30 [0.13, 0.47] & 0.40 [0.23, 0.57] & 0.10 & 0.20 & 0.22 & 0.10 \\
+    Context pollution & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
+    Conflicting outputs & 0.00 & 0.00 & 0.10 & 0.00 & 0.00 & 0.03 \\
+    Premature action & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
+    \midrule
+    No injection (control) & 1.00 & -- & -- & -- & 1.00 & 1.00 \\
     \bottomrule
   \end{tabularx}
-  \caption{Final-task success by injected mode ($n{=}30$ per cell). Brackets are
-  95\% bootstrap CIs; every 0.00 cell has exact 95\% CI $[0, 0.12]$ and every
-  1.00 cell $[0.88, 1]$. Mean cascade radius on the depth-4
-  chain is 0.00 for tool faults, 1.40 for ambiguous delegation, and 2.00 (the
-  maximum) for the other three modes.}
+  \caption{Final-task success by injected mode ($n{=}30$ per Claude cell,
+  $n{=}90$ per Gemini/GPT cell). Brackets are 95\% bootstrap CIs; at $n{=}30$
+  every 0.00 cell has exact 95\% CI $[0, 0.12]$ and every 1.00 cell
+  $[0.88, 1]$; at $n{=}90$ these are $[0, 0.04]$ and $[0.96, 1]$. Non-Claude
+  ambiguous delegation: Gemini 0.22 [0.14, 0.31], GPT 0.10 [0.04, 0.17].
+  Mean cascade radius on the depth-4 chain (Sonnet) is 0.00 for tool faults,
+  1.40 for ambiguous delegation, and 2.00 (the maximum) for the other three
+  modes; no-injection controls have cascade radius 0.}
   \label{tab:exp2}
 \end{table}
 
 Table~\ref{tab:exp2} shows three tiers on the arithmetic chain. The agent
 recomputes by hand when a tool fails (success 1.00, cascade 0), infers the
 intended operation in about a third of ambiguous delegations, and never recovers
-from context pollution, conflicting outputs, or premature action. Two checks
+from context pollution, conflicting outputs, or premature action. Matched
+no-injection chains succeed in every run (30/30, exact 95\% CI $[0.88, 1]$),
+so baseline execution error does not account for these rates. Two checks
 bear on whether this reflects agent behavior or only the chain's structure.
 First, under the loan-approval framing the ordering holds but rates move: tool
 recovery drops to 0.70 and ambiguous delegation rises to 0.40
-(Figure~\ref{fig:exp2} in Appendix~\ref{app:figs}). Second, across three Claude
-models, tool faults are always recovered and context pollution and premature
-action never are; only ambiguous delegation (0.10--0.33) and one Opus cell
-(conflicting outputs, 0.10) vary. Because the cross-model cells use $n{=}30$
-and a single model family, we read this as consistency of ordering, not model
-invariance. The Sonnet cross-model run is also an independent repeat of the main
+(Figure~\ref{fig:exp2} in Appendix~\ref{app:figs}). Second, across five models
+from three providers, tool faults are always recovered and context pollution
+and premature action never are; only ambiguous delegation (0.10--0.33) and
+conflicting outputs (Opus 0.10, GPT 0.03) vary. Gemini and GPT controls also
+succeed on every clean chain (90/90 each). Because each model is a single
+configuration with $n{=}30$--$90$ per cell, we read this as consistency of
+ordering, not model invariance. The Sonnet cross-model run is also an independent repeat of the main
 probe: it reproduces all five cells (ambiguous delegation 0.33 vs.\ 0.30, the
 rest identical), a test--retest check on the harness itself.
 
@@ -273,7 +298,10 @@ rest identical), a test--retest check on the harness itself.
 under Fixed, Heuristic, and Retry for every mode (e.g.\ 0.30 for ambiguous
 delegation under all three), while median time-to-detection rises from 4.1--4.3\,s
 to 6.2\,s under Retry. Retrying with the corrupted state intact reproduces the
-error. For evaluation design, this means a recovery metric that counts retries
+error. On Gemini and GPT, Retry gains at most two of 30 runs in any mode
+(e.g.\ Gemini ambiguous delegation 8/30 vs.\ 6/30), never recovers context
+pollution or premature action, and raises median time-to-detection by about
+40--50\% (5.6--6.0\,s to 8.3\,s for Gemini; 7.1--7.4\,s to 10.4\,s for GPT). For evaluation design, this means a recovery metric that counts retries
 as recovery attempts will over-credit retry policies unless it also checks
 whether the fault was attributed and the state repaired.
 
@@ -281,7 +309,8 @@ whether the fault was attributed and the state repaired.
 \label{sec:exp3}
 Injecting one fault at stage index 1 of chains of depth 3--7, raw latent
 cascade radius grows from 0.93 [0.88, 0.97] to 1.85, 2.80, 3.63, and 4.67
-[4.42, 4.88] (Figure~\ref{fig:exp3}), while tool faults stay at 0. Normalized by
+[4.42, 4.88] (Figure~\ref{fig:exp3}), while tool faults stay at 0, as do all
+150 no-injection controls (every depth and policy, final success 150/150). Normalized by
 the maximum $d{-}2$, the corrupted fraction is flat: 0.93, 0.93, 0.93, 0.91,
 and 0.93. Deeper chains therefore do not make a latent fault more likely to
 spread; it corrupts nearly every downstream stage at every depth, and absolute
@@ -335,16 +364,18 @@ change.
   real workflows or multi-agent frameworks.
   The domain re-framing changes the prompts but not the computation; the
   finance, HR, and DevOps suites in the harness have not yet been evaluated.
-  \item \textbf{Model coverage.} All results use Claude models; the cross-model
-  check covers three Claude tiers at $n{=}30$ per cell. Non-Claude models are
-  untested.
-  \item \textbf{Missing controls.} We did not run matched no-injection chains,
-  so baseline execution errors are not separated from injected-fault effects.
-  Injection provenance is known by design; the harness does not yet test
-  whether a policy can \emph{infer} which mode and stage failed.
-  \item \textbf{Sample size.} The routing diagnostic has 26 author-labelled cases
-  with no inter-annotator agreement, and it saturates. The policy probe has about
-  12 latent runs per policy, so its interval for the LLM row is wide.
+  \item \textbf{Model coverage.} Experiments~1, 3, and 4 use Claude Sonnet 4.6
+  only. The cross-model check covers five models from three providers, each at
+  one reasoning setting (non-Claude at \texttt{low}, not minimal); the
+  framing, depth, and policy probes were not repeated on non-Claude models.
+  \item \textbf{Controls and attribution.} No-injection controls were run for
+  the Exp~2 and Exp~3 chains and the non-Claude probes, but not for the domain
+  framing or the policy probe. Injection provenance is known by design; the
+  harness does not yet test whether a policy can \emph{infer} which mode and
+  stage failed.
+  \item \textbf{Sample size.} The routing diagnostic has 26 author-written
+  cases (two annotators, $\kappa{=}0.95$), and it saturates. The policy probe
+  has about 12 latent runs per policy, so its interval for the LLM row is wide.
   \item \textbf{Policy semantics.} The LLM-repair policy's access to trusted state is a
   modelling choice; the ablation bounds its effect but a deployable router
   without that access was not evaluated.
@@ -494,10 +525,14 @@ the output exposes sub-results that a planner can delegate, audit, or repair.
 Scenarios are regenerable from fixed seeds. \texttt{scripts/analyze\_measured.py}
 recomputes every Exp~2--4 and policy-probe number in this paper, with bootstrap
 intervals and exact permutation tests, offline from the committed CSVs in
-\texttt{data/measured/}; we re-ran it on October 20, 2026 and all reported values
+\texttt{data/measured/} (the October 2026 control and non-Claude cells are read
+directly from their committed CSVs); we re-ran it on October 20, 2026 and all reported values
 matched. The Exp~1 script regenerates Table~\ref{tab:exp1} from the committed
 gold set (the LLM row requires an API key). A model-agnostic harness re-runs the
-five-mode probe on any model list. Code is Apache-2.0; the test suite (151 tests)
-runs offline on Python 3.10--3.12.
+five-mode probe on any model list, with Anthropic, Gemini, and OpenAI adapters
+and optional raw prompt/response logging; no-injection controls use the same
+scripts with \texttt{--control}. \texttt{scripts/compute\_kappa.py} recomputes
+the inter-annotator agreement from the blind annotation sheet. Code is
+Apache-2.0; the test suite (179 tests) runs offline.
 
 \end{document}

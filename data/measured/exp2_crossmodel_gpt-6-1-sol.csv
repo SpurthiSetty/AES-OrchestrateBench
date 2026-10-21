@@ -1,0 +1,6 @@
+failure_mode,success_gpt-6-1-sol,max_abs_delta
+tool_invocation_error,1.0,nan
+ambiguous_delegation,0.1,nan
+context_pollution,0.0,nan
+conflicting_outputs,0.03333333333333333,nan
+premature_action,0.0,nan
