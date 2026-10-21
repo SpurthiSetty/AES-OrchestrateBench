@@ -98,7 +98,7 @@ it measures:
 An earlier version of this work is available as a preprint
 \citep{chen2026orchestrabench}; this short paper condenses it and tightens its
 claims for an evaluation-methods audience. Code, data, and analysis scripts
-are public.\footnote{\url{https://github.com/anote-ai/research-orchestratebench};
+are public.\footnote{\url{https://github.com/SpurthiSetty/AES-OrchestrateBench};
 dataset: \url{https://huggingface.co/datasets/anote-ai/Orchestratebench}.}
 
 \section{The OrchestraBench Harness}
@@ -535,7 +535,8 @@ gold set (the LLM row requires an API key). A model-agnostic harness re-runs the
 five-mode probe on any model list, with Anthropic, Gemini, and OpenAI adapters
 and optional raw prompt/response logging; no-injection controls use the same
 scripts with \texttt{--control}. \texttt{scripts/compute\_kappa.py} recomputes
-the inter-annotator agreement from the blind annotation sheet. Code is
+the inter-annotator agreement from the committed blind annotation sheet
+(\texttt{data/annotation/}). Code is
 Apache-2.0; the test suite (179 tests) runs offline.
 
 \end{document}
